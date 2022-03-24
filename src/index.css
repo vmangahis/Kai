@@ -8,13 +8,76 @@ body{
   background-color:black;
 }
 
-p{
+p, h1, h2, h3, h4,h5{
   color:white;
+  font-size:200%;
+}
+
+
+p{
   font-family:"ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro",Osaka, "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
 }
 
-.header{
-  display: flex;
-  justify-content: center;
+ul{
+  list-style-type: none;
+  display:flex;
+  flex-direction: column;
+  gap:20px;
 }
+
+
+ul > li {
+  color:white;
+}
+
+
+
+.logo{
+  
+  margin-bottom:50px;
+}
+
+
+.user-image{
+  display:block;
+  margin-left:auto;
+  margin-right:auto;
+  width:150px;
+  height:150px;
+  border-radius: 50%;
+  margin-bottom:20px;
+}
+
+.sidebar{
+  display:flex;
+  flex-direction: column;
+  padding:20px 50px 50px 50px;
+  align-items: center;
+}
+
+.user{
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom:100px;
+}
+
+.card{
+  display:flex;
+  flex-direction: column;
+}
+
+.app{
+  display:flex;
+}
+
+.link-button{
+  background:transparent;
+  color:white;
+  border:none;
+  cursor: pointer;
+  font-size:large;
+}
+
  
