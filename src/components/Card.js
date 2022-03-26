@@ -1,4 +1,4 @@
-function AnimeCard(){
+function Card(){
 
     return (
     <div className="card">
@@ -10,4 +10,4 @@ function AnimeCard(){
     
 }
 
-export default AnimeCard;
+export default Card;
