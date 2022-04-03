@@ -1,0 +1,174 @@
+*{
+  margin:0;
+  padding:0;
+  box-sizing: border-box;
+  
+}
+
+body{
+  background-color:black;
+}
+
+p, h1, h2, h3, h4,h5{
+  color:white;
+  font-size:200%;
+}
+
+
+p{
+  font-family:"ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro",Osaka, "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
+}
+
+ul{
+  list-style-type: none;
+  display:flex;
+  flex-direction: column;
+  gap:35px;
+}
+
+
+ul > li {
+  color:white;
+}
+
+
+.app{
+  display:flex;
+  flex-direction: row;
+  position:relative;
+}
+
+
+
+.logo{ 
+  text-align: center;
+  margin-bottom:25px;
+}
+
+.search-box{
+  padding:20px;
+  outline:none;
+  width:500px;
+  height:70px;
+  font-size:large;
+  border-radius: 40px;
+  transition: all 0.5 linear;
+}
+
+.user-image{
+  display:block;
+  margin-left:auto;
+  margin-right:auto;
+  width:150px;
+  height:150px;
+  border-radius: 50%;
+  margin-bottom:20px;
+  
+}
+
+.main-container{
+  display:flex;
+  flex-direction: column;
+  flex-basis:100%;
+}
+
+.username{
+  font-size:x-large;
+  font-weight:bolder;
+}
+
+.sidebar{
+  display:flex;
+  flex-direction: column;
+  padding:20px 50px 50px 50px;
+  
+  margin-right:200px;
+  height:100vh;
+  position:sticky;
+}
+
+.header{
+  display:flex;
+    justify-content: space-between;
+    width:100%;
+    flex-basis:10%;
+    flex-wrap: wrap;
+    margin:40px 0 0 0;
+}
+
+.page-title{
+  
+}
+
+.search-box{
+  height:50px;
+  margin-right:10px;
+}
+
+.add-watchlist{
+  width:100px;
+  height:50px;
+}
+
+
+
+
+.search-button{
+  
+ vertical-align: middle;
+    border-radius: 50%;
+  border: 2px solid white;
+  padding:15px;
+  cursor: pointer;
+  margin: 0 50px 0 0;
+  
+}
+
+
+
+
+.anime-list{
+  height:90%;
+  
+}
+
+
+.user{
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom:50px;
+}
+
+.line-break > hr{
+  margin-top:30px;
+  margin-bottom:40px;
+  padding: 0 10px;
+  background-color: gray;
+  border-color:gray;
+  width:200%;
+  margin-left: -50%;
+}
+
+.second-nav{
+  margin-top: 20px;
+}
+
+.card{
+  display:flex;
+  flex-direction: column;
+}
+
+.link-button{
+  background:transparent;
+  color:white;
+  border:none;
+  cursor: pointer;
+  font-size:medium;
+}
+
+
+
+
+ 
