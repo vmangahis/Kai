@@ -3,7 +3,7 @@ import Card from './components/Card';
 import Header from './components/Header';
 
 function App() {
-  const arr = ['a', 'b', 'c'];
+  const arr = ['Anime1', 'Anime2', 'Anime3', 'Anime4', 'Anime5', 'Anime5', 'Anime5', 'Anime5', 'Anime5', 'Anime5'];
   return (
     <>
     <div className="app">
@@ -12,12 +12,13 @@ function App() {
         <div className="main-container">
         <Header />
 
-        <div className="anime-list">
+        <div >
+          <ul className="anime-list">
         {arr.map((item, ind) => {
-          return <Card />;
+          return <li><Card title={item}/></li>;
         })
         }
-        
+        </ul>
         </div>
         
         </div>

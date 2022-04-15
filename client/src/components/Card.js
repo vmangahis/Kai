@@ -1,10 +1,11 @@
 import ButtonComponent from "./ButtonComponent";
 
-function Card(){
+function Card(props){
 
     return (
     <div className="card">
-        <h2>Title</h2>
+        <img src="./resources/placeholder-anime.png" className="image-card"  alt="" />
+        <h2>{props.title}</h2>
         <p>Description</p>
         <ButtonComponent label="Add to Watchlist" class="add-watchlist"/>
     </div>

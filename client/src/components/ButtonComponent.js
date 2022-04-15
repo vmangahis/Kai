@@ -1,6 +1,6 @@
 function ButtonComponent(props) {
     return (
-        <button class={props.class}>{props.label}</button>
+        <button className={props.class}  onClick={() => {console.log('helol')}}>{props.label}</button>
     );
 }
 
