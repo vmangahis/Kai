@@ -6,7 +6,6 @@ function Header() {
     return(
         <div className="header">
         <h1 className="page-title">header</h1>
-
         <div className='search-container'>
         <IconContext.Provider value={{ color: "white", className: "search-button", size: "4em"}}>
             <SearchBox />
