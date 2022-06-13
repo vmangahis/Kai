@@ -1,0 +1,41 @@
+a{
+    text-decoration: none !important;
+}
+
+ul{
+    list-style-type: none;
+}
+
+input{
+    max-width: 500px !important;
+    width:100%;
+}
+
+
+.navbar .nav-item {
+    margin-right: 25px;
+    margin-left: 25px;
+}
+
+.navigation-bar{
+    display:flex !important;
+    justify-content: center !important;
+}
+
+.profile-photo{
+    border-radius: 50%;
+}
+
+.dropdown-menu{
+    position: absolute;
+}
+
+.navbar-collapse{
+    display: flex;
+    flex-direction: column;
+}
+
+
+.card{
+    margin-bottom:10px;
+}
