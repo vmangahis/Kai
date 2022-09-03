@@ -1,5 +1,10 @@
+*{
+    margin:0px;
+    box-sizing: border-box;
+}
 a{
     text-decoration: none !important;
+    color: white;
 }
 
 ul{
@@ -21,8 +26,39 @@ button{
     border:0;
 }
 
-main{
-    height:90vh;
+
+body{
+    background-color: #171529;
+    margin:0;
+}
+
+input[type="checkbox"]{
+    width:15px;
+    height:15px;
+}
+
+.login-button{
+    border: 4px solid #060513;
+    width: 175px;
+    padding:25px;
+    color:white;
+    background-color:#424056 !important;
+}
+
+
+.login-container{
+    background:#232132;
+}
+
+.add-to-watchlist{
+    background:#424056;
+    border:5px solid #232131;
+    
+    
+}
+
+.header-navigation{
+    background-color: #171529;
 }
 
 
@@ -40,7 +76,8 @@ main{
     border-radius: 50%;
 }
 
-.profile
+
+
 
 .dropdown-menu{
     position: absolute;
@@ -54,7 +91,49 @@ main{
 
 .card{
     margin-bottom:10px;
+    background:#25203f;
+    padding:25px;
+    border-radius: 30px;
+    z-index:0;
+    box-sizing: border-box;
+    position: relative;
 }
+
+
+.card:before{
+    content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  padding: 5px;
+  border-radius: 15px;
+  background: linear-gradient(to right, #6d3594, #2f717e);
+  -webkit-mask: 
+     linear-gradient(#fff 0 0) content-box, 
+     linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+          mask-composite: exclude;
+}
+
+.featured-title, .search-bar{
+    background:#25203f;
+}
+
+
+
+.search-bar{
+    outline:none;
+    border:0;
+    padding:15px;
+    
+}
+
+
+
+
+
+
 
 .social-media-sites i{
     font-size: 2em;
@@ -80,6 +159,10 @@ main{
 
 .message:hover{
     background-color: red;
+}
+
+.content-text{
+    position: relative;
 }
 
 

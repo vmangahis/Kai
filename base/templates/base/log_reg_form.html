@@ -1,0 +1,53 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+{% if page == 'login' %}
+
+
+<main class="container-fluid login-container p-5 w-50 mt-5 mb-5 rounded-4">
+<h1 class="text-light text-center ">Login to App_Name</h1>
+
+    <form class="form-container d-flex flex-column flex-wrap align-items-center p-5" method="POST" action="">
+        {% csrf_token %}
+
+        <!--- Username login -->
+        <div class="form-floating mb-3">
+            <input type="text" class="username-login form-control" id="username-login" name="username-login" placeholder="Username"/>
+            <label for="username-login text-dark">Username</label>
+        </div>
+
+
+        <!---- Password Login-->
+        <div class="form-floating mb-3">
+            
+            <input type="password"  class="password-login form-control " id="password-login" name="password-login" placeholder="Password"/>
+            <label for="password-login">Password</label>
+        </div>
+
+        <!---- Remmeber me checkbox-->
+        <div class="mb-5 mt-3 d-flex flex-row align-items-center align-self-center">
+            <label for="remember-login" class="text-light remember-me-label me-5">Remember me</label>
+            <input type="checkbox" name="remember-me" id="remember-me" class="ms-5">
+        </div>
+
+
+        <div class="mb-3 ">
+            <button type="button" class="login-button rounded-pill ">Login</button>
+        </div>
+        
+        
+    </form>
+    <a href="#" class="register-text d-block mx-auto text-center">Already have an account?</a>
+</main>
+
+
+
+{% else %}
+
+<h1>Register</h1>
+
+{% endif %}
+
+
+{% endblock %}

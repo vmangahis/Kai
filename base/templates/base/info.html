@@ -1,0 +1,41 @@
+{% extends 'main.html' %}
+
+
+{% block content %}
+<main class="container-fluid mt-5 p-5">
+   
+    <h1 class="text-light">Content Here</h1>
+    <div class="content d-flex flex-row">
+      <img src="https://via.placeholder.com/800" />
+      <div class="content-text d-flex flex-column ms-5">
+  
+        <h1 class="text-light">{{ animeName.title }}</h1>
+        <p class="release text-light">Premiered on {{ animeName.premiere_date }} on CrunchyRoll </p>
+        <p class="text-light">Genre: <span class="text-light">{% for a in animeName.genre.all %}{{  a.name  }}{% if forloop.last %} {% else %}, {% endif %}{% endfor %}</span></p>
+  
+        <h4 class="text-light my-5">Summary</h4>
+        <p class="text-light">Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+          Placeat, voluptatum neque! Exercitationem dicta distinctio quo unde 
+          eaque voluptatum dolor eveniet explicabo atque! Soluta amet enim quae
+           culpa veritatis reprehenderit quas laudantium at maiores, repellat itaque et 
+           iure perspiciatis, explicabo ab praesentium sit architecto id sed. Porro pariatur 
+           obcaecati commodi, ratione dolores nisi eligendi neque quod. Magni vero doloremque 
+           et minima! Fugiat vero vel ullam consectetur deserunt repudiandae recusandae labore maxime ex sapiente nulla consequuntur accusantium, 
+          aperiam illum quidem repellat! In suscipit nisi voluptates expedita, rerum qui natus, placeat dolorum odio sed possimus quisquam eligendi quae, aliquid itaque aspernatur! Obcaecati, repellendus.
+        </p>
+  
+        <p class="text-light mt-5">Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+          Nostrum nisi dolorem quos 
+          laborum dicta voluptatem veritatis voluptates sunt. Natus necessitatibus dicta numquam sapiente voluptate iste! Doloremque similique quisquam corporis libero!</p>
+  
+          <button class="add-to-watchlist text-light me-auto mt-auto p-3 rounded-pill">Add to my watchlist</button>
+      </div>
+      
+  
+      
+    </div>
+  
+    
+</main>
+
+{% endblock %}

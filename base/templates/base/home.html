@@ -4,54 +4,41 @@
 
 <main class="container-fluid mt-5 p-5">
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-7">
 
-            <div class="row">
 
+            <div class="row mb-5">
+
+
+                <!--- Popular Anime-->
                 <div class="d-flex flex-column">
-                    <h3>Popular Anime</h3>
+                    <h3 class="text-light">Popular Anime</h3>
 
-                    <div class="d-flex flex-row">
+                    <div class="d-flex flex-row card-container">
+                        {% for anime in animeOb %}   
+
+                        {% if forloop.first %}
                         
                         <div class="card">
 
-                            <a href="title-page.html">
+                        {% else %}
+                        <div class="card mx-3">
+
+                        {% endif %}
+
+                        <a href="{% url 'AnimPage' anime.id %}">
                             <div class="d-flex flex-column">
-                                    <img src="https://via.placeholder.com/150" alt="Anime name here" class="img-fluid h-auto w-50 rounded p-2" />
+                                    <img src="https://via.placeholder.com/200" alt="Anime name here" class="img-fluid h-auto w-100 rounded p-2 mx-auto" />
                                     <div class="card-body">
-                                        <h5 class="card-title">Anime Title Here</h5>
-                                        <p class="card-text">Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
+                                        <h5 class="card-title text-light">{{ anime.title }}</h5>
+                                        <p class="card-text text-light">Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
                                     </div>
                             </div>
                             </a>
                         </div>
 
-                        <div class="card">
-
-                            <a href="#">
-                            <div class="d-flex flex-column">
-                                    <img src="https://via.placeholder.com/150" alt="Anime name here" class="img-fluid h-auto w-50 rounded p-2" />
-                                    <div class="card-body">
-                                        <h5 class="card-title">Anime Title Here</h5>
-                                        <p class="card-text">Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
-                                    </div>
-                            </div>
-                            </a>
-
-                        </div>
-
-                        <div class="card">
-                            <a href="#">
-                            <div class="d-flex flex-column">
-                                    <img src="https://via.placeholder.com/150" alt="Anime name here" class="img-fluid h-auto w-50 rounded p-2" />
-                                    <div class="card-body">
-                                        <h5 class="card-title">Anime Title Here</h5>
-                                        <p class="card-text">Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
-                                    </div>
-                            </div>
-                            </a>
-                        </div>
-
+                        
+                        {%  endfor %}
                  
 
                         
@@ -61,45 +48,33 @@
 
             </div>
             <!--- Popular Manga -->
-            <div class="row">
+            <div class="row mb-5">
                 
                 <div class="d-flex flex-column">
-                    <h3>Popular Manga</h3>
+                    <h3 class = "text-light">Popular Manga</h3>
+
+                    
 
                     <div class="d-flex flex-row">
-                        
+                    {% for manga in mangaOb %}    
+                        {% if forloop.first %}
                         <div class="card">
-                            <div class="d-flex flex-column">
-                                    <img src="https://via.placeholder.com/150" alt="Anime name here" class="img-fluid h-auto w-50 rounded p-2" />
-                                    <div class="card-body">
-                                        <h5 class="card-title">Anime Title Here</h5>
-                                        <p class="card-text">Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
-                                    </div>
+                        {% else %}
+                        <div class="card mx-3">
+                        {% endif %}
+                        <a href="{% url 'MangPage' manga.id %}">
+                        <div class="d-flex flex-column">
+                            <img src="https://via.placeholder.com/200" alt="Anime name here" class="img-fluid h-auto w-100 rounded p-2 mx-auto" />
+                            <div class="card-body">
+                                <h5 class="card-title text-light">{{ manga.title }}</h5>
+                                <p class="card-text text-light">Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
                             </div>
                         </div>
-
-                        <div class="card">
-                            <div class="d-flex flex-column">
-                                    <img src="https://via.placeholder.com/150" alt="Anime name here" class="img-fluid h-auto w-50 rounded p-2" />
-                                    <div class="card-body">
-                                        <h5 class="card-title">Anime Title Here</h5>
-                                        <p class="card-text">Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
-                                    </div>
-                            </div>
-                        </div>
-
-                        <div class="card">
-                            <div class="d-flex flex-column">
-                                    <img src="https://via.placeholder.com/150" alt="Anime name here" class="img-fluid h-auto w-50 rounded p-2" />
-                                    <div class="card-body">
-                                        <h5 class="card-title">Anime Title Here</h5>
-                                        <p class="card-text">Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
-                                    </div>
-                            </div>
+                        </a>
                         </div>
 
                   
-                        
+                    {% endfor %}
 
                     </div>
                 </div>
@@ -107,38 +82,38 @@
             </div>
 
             <!----- Popular Artist-->
-            <div class="row">
+            <div class="row mb-5">
                 <div class="d-flex flex-column">
-                    <h3>Popular Artist</h3>
+                    <h3 class="text-light">Popular Artist</h3>
 
                     <div class="d-flex flex-row">
                         
                         <div class="card">
                             <div class="d-flex flex-column">
-                                    <img src="https://via.placeholder.com/150" alt="Anime name here" class="img-fluid h-auto w-50 rounded p-2" />
+                                    <img src="https://via.placeholder.com/200" alt="Anime name here" class="img-fluid h-auto w-100 rounded p-2 mx-auto" />
                                     <div class="card-body">
-                                        <h5 class="card-title">Anime Title Here</h5>
-                                        <p class="card-text">Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
+                                        <h5 class="card-title text-light">Anime Title Here</h5>
+                                        <p class="card-text text-light">Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
                                     </div>
                             </div>
                         </div>
 
-                        <div class="card">
+                        <div class="card mx-3">
                             <div class="d-flex flex-column">
-                                    <img src="https://via.placeholder.com/150" alt="Anime name here" class="img-fluid h-auto w-50 rounded p-2" />
+                                    <img src="https://via.placeholder.com/200" alt="Anime name here" class="img-fluid h-auto w-100 rounded p-2" />
                                     <div class="card-body">
-                                        <h5 class="card-title">Anime Title Here</h5>
-                                        <p class="card-text">Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
+                                        <h5 class="card-title text-light">Anime Title Here</h5>
+                                        <p class="card-text text-light">Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
                                     </div>
                             </div>
                         </div>
 
-                        <div class="card">
+                        <div class="card mx-3">
                             <div class="d-flex flex-column">
-                                    <img src="https://via.placeholder.com/150" alt="Anime name here" class="img-fluid h-auto w-50 rounded p-2" />
+                                    <img src="https://via.placeholder.com/200" alt="Anime name here" class="img-fluid h-auto w-100 rounded p-2" />
                                     <div class="card-body">
-                                        <h5 class="card-title">Anime Title Here</h5>
-                                        <p class="card-text">Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
+                                        <h5 class="card-title text-light">Anime Title Here</h5>
+                                        <p class="card-text text-light">Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
                                     </div>
                             </div>
                         </div>
@@ -152,57 +127,40 @@
 
         </div>
 
+        <div class="col-md-1"></div>
 
-        <div class="col-md-4 p-5 border border-dark">
+        
+
+        <!--- Featured Title-->
+        <div class="col-md-4 p-5 border rounded-4 border-dark featured-title">
             <div class="row">
                 <div class="d-flex flex-column">
-                    <p>Featured Titles</p>
+                    <h3 class="mb-5 text-light">Featured Titles</h4>
                     
-
+                    {% for an in animeOb %}
                     <div class="card">
+                        
+                        <a href="{% url 'AnimPage' an.id %}">
                         <div class="row">
+                        
                             <div class="col-md-4 my-auto">
                                 <img src="https://via.placeholder.com/150" alt="Anime name here" class="img-fluid rounded p-2" />
                             </div>
 
                             <div class="col-md-8">
                                 <div class="card-body">
-                                    <h5 class="card-title">Anime Title Here</h5>
-                                    <p class="card-text">Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
+                                    <h5 class="card-title text-light">{{ an.title }}</h5>
+                                    <p class="card-text text-light">Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
                                 </div>
                             </div>
                         </div>
+                        </a>
+
                     </div>
 
-                    <div class="card">
-                        <div class="row">
-                            <div class="col-4 my-auto">
-                                <img src="https://via.placeholder.com/150" alt="Anime name here" class="img-fluid rounded p-2" />
-                            </div>
+                    {% endfor %}
 
-                            <div class="col-md-8">
-                                <div class="card-body">
-                                    <h5 class="card-title">Anime Title Here</h5>
-                                    <p class="card-text">Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <div class="row">
-                            <div class="col-4 my-auto">
-                                <img src="https://via.placeholder.com/150" alt="Anime name here" class="img-fluid rounded p-2" />
-                            </div>
-
-                            <div class="col-md-8">
-                                <div class="card-body">
-                                    <h5 class="card-title">Anime Title Here</h5>
-                                    <p class="card-text">Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                
 
                     
 
@@ -220,7 +178,5 @@
 
 
 
-
-
-
 {% endblock content %}
+
