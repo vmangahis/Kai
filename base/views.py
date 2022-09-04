@@ -70,12 +70,22 @@ def logoutUser(request):
 
 
 def registerUser(request):
-    formObject = UserCreation()
-
     if request.method == 'POST':
-        pass
+        print('POST')
+        formObject = UserCreation(request.POST)
+        if formObject.is_valid():
+            user = formObject.save(commit=False)
+            user.username = user.username.lower()
+
+    
+            
+    else:
+        formObject = UserCreation()
 
 
+
+
+    
     context = {'form' : formObject}
     return render(request, 'base/log_reg_form.html', context)
 

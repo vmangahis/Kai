@@ -1,3 +1,4 @@
+from django import forms
 from django.forms import ModelForm
 from django.contrib.auth.forms import UserCreationForm
 
@@ -26,3 +27,19 @@ class UserCreation(UserCreationForm):
 
         self.fields['password2'].widget.attrs['class']="form-control"
         self.fields['password2'].widget.attrs['placeholder']="Confirm Password"
+
+    def clean_password2(self):
+        password_a = self.cleaned_data.get('password1')
+        password_b = self.cleaned_data.get('password2')
+
+        if password_a != password_b:
+            raise forms.ValidationError('Password does not match to each other')
+
+        return password_a
+
+    def clean_email(self):
+        email = self.cleaned_data['email']
+        if(User.objects.filter(email__iexact=email)).exists():
+            raise forms.ValidationError('Email already exists.')
+
+        return email

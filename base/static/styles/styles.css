@@ -79,7 +79,9 @@ input[type="checkbox"]{
 
 
 
-
+.errorlist{
+    list-style-type:circle;
+}
 
 
 
@@ -173,6 +175,8 @@ input[type="checkbox"]{
 .register-form > div{
     width:100%;
 }
+
+
 
 
 

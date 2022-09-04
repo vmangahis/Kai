@@ -2,17 +2,6 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 
 
-class User(AbstractUser):
-    display_name = models.CharField(max_length=100)
-    username = models.CharField(max_length=50, unique=True)
-    email = models.EmailField(unique=False)
-    intro = models.TextField(null=True)
-
-
-    avatar = models.ImageField(null=True, default='blank-avatar.svg')
-
-    USERNAME_FIELD = 'username'
-    REQUIRED_FIELDS = []
 
 
 class Genre(models.Model):
@@ -37,6 +26,19 @@ class Manga(models.Model):
 
     def __str__(self):
         return self.title
+
+class User(AbstractUser):
+    display_name = models.CharField(max_length=100)
+    username = models.CharField(max_length=50, unique=True)
+    email = models.EmailField(unique=False)
+    intro = models.TextField(null=True)
+
+    watchlist = models.ManyToManyField(Anime)
+    readlist = models.ManyToManyField(Manga)
+    avatar = models.ImageField(null=True, default='blank-avatar.svg')
+
+    USERNAME_FIELD = 'username'
+    REQUIRED_FIELDS = []
 
 
 
