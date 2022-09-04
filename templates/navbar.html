@@ -52,7 +52,9 @@
                 <li class="nav-item user-avatar">     
                     <a class="nav-link" href="#" data-bs-toggle="dropdown" aria-expanded="false">
                       {% if request.user.is_authenticated %}
-                        <img src="https://via.placeholder.com/100" class="profile-photo"/>
+                        <a href="{% url 'Logout' %}">
+                        <img src="https://via.placeholder.com/75" class="profile-photo"/>
+                        </a>
 
 
                       {% else %}

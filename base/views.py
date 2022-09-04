@@ -1,6 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.contrib import messages
+from django.contrib.auth import authenticate,login,logout
 from django.urls import resolve
-from .models import Anime, Manga
+from .forms import UserCreation
+from .models import Anime, Manga, User
 
 
 def home(request):
@@ -30,12 +33,53 @@ def infoAnimeManga(request, pk):
 def loginUser(request):
     current_page = 'login'
 
+    if request.user.is_authenticated:
+        return redirect('Home')
+
+    if request.method == 'POST':
+        uname = request.POST.get('username-login')
+        password = request.POST.get('password-login')
+
+        try:
+            user = User.objects.get(username=uname)
+
+        except:
+            messages.error(request, 'User not found! Please try again')
+
+        user = authenticate(request, username=uname, password=password)
+        
+
+        if user is not None:
+            print('success')
+            login(request, user)
+            return redirect('Home')
+
+        else:
+            print('error')
+            messages.error(request, 'Login error!')
+        
+
     context = {'page' : current_page}
     return render(request, 'base/log_reg_form.html', context)
 
+def logoutUser(request):
+    print('logout')
+    logout(request)
+    return redirect('Home')
+
+
 
 def registerUser(request):
-    return render(request, 'base/log_reg_form.html')
+    formObject = UserCreation()
+
+    if request.method == 'POST':
+        pass
+
+
+    context = {'form' : formObject}
+    return render(request, 'base/log_reg_form.html', context)
+
+
 
 
 

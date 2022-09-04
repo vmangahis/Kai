@@ -1,14 +1,14 @@
 {% extends 'main.html' %}
 
 {% block content %}
-
+<main class="container-fluid login-container p-5 w-50 mt-5 mb-5 rounded-4">
 {% if page == 'login' %}
 
 
-<main class="container-fluid login-container p-5 w-50 mt-5 mb-5 rounded-4">
+
 <h1 class="text-light text-center ">Login to App_Name</h1>
 
-    <form class="form-container d-flex flex-column flex-wrap align-items-center p-5" method="POST" action="">
+    <form class="form-container d-flex flex-column align-items-center p-5" method="POST" action="">
         {% csrf_token %}
 
         <!--- Username login -->
@@ -33,21 +33,33 @@
 
 
         <div class="mb-3 ">
-            <button type="button" class="login-button rounded-pill ">Login</button>
+            <button type="submit" class="login-button rounded-pill ">Login</button>
         </div>
         
         
     </form>
-    <a href="#" class="register-text d-block mx-auto text-center">Already have an account?</a>
-</main>
+    <a href="{% url 'Register' %}" class="register-text d-block mx-auto text-center">Don't have an account?</a>
+
 
 
 
 {% else %}
 
-<h1>Register</h1>
+<h1 class="text-light">Register an Account</h1>
+
+<form action="" method="post" class="register-form d-flex flex-column align-items-center">
+    {% csrf_token %}
+    {% for fr in form %}
+    <div class="form-floating mb-3 w-50 text-dark">
+        
+        {{ fr }}
+        <label for="" class="me-5">{{ fr.label }}</label>
+    </div>
+    {% endfor %}
+
+</form>
 
 {% endif %}
 
-
+</main>
 {% endblock %}
