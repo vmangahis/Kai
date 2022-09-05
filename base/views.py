@@ -29,7 +29,6 @@ def infoAnimeManga(request, pk):
     context = {'animeName':animeMangaOb}
     return render(request, 'base/info.html', context)
 
-
 def loginUser(request):
     current_page = 'login'
 
@@ -67,8 +66,6 @@ def logoutUser(request):
     logout(request)
     return redirect('Home')
 
-
-
 def registerUser(request):
     if request.method == 'POST':
         print('POST')
@@ -76,6 +73,9 @@ def registerUser(request):
         if formObject.is_valid():
             user = formObject.save(commit=False)
             user.username = user.username.lower()
+            user.save()
+            login(request, user)
+            return redirect('Home')
 
     
             
