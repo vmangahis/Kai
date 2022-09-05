@@ -176,6 +176,38 @@ input[type="checkbox"]{
     width:100%;
 }
 
+.watchlist-controllers{
+    display:flex;
+    justify-content: center;
+}
+
+.buttonSwitch{
+    display:inline-block;
+    background:black;
+    width:auto;
+    border-radius: 35px;
+}
+
+.button-switch{
+    padding:10px 30px;
+    color:white;
+    outline:none;
+    border:0;
+    border-radius: 35px;
+}
+
+.watchlist-button, .readlist-button{
+    transition:.5s;
+}
+
+.watchlist-button{
+    background:orange;
+}
+
+
+
+
+
 
 
 

@@ -89,7 +89,11 @@ def registerUser(request):
     context = {'form' : formObject}
     return render(request, 'base/log_reg_form.html', context)
 
+def myWatchList(request):
+    return render(request, 'base/watchlist_readlist.html')
 
+def myReadList(request):
+    return render(request, 'base/watchlist_readlist.html')
 
 
 

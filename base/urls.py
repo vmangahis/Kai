@@ -7,5 +7,7 @@ urlpatterns = [
     path('manga/<str:pk>',views.infoAnimeManga, name='MangPage'),
     path('login/', views.loginUser, name='Login'),
     path('register/', views.registerUser, name='Register'),
-    path('logout/', views.logoutUser, name='Logout')
+    path('logout/', views.logoutUser, name='Logout'),
+    path('watchlist/', views.myWatchList, name='WatchList'),
+    path('readlist', views.myReadList, name='ReadList')
 ]
