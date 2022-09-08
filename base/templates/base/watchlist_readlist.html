@@ -14,9 +14,15 @@
     </div>
 
     <div class="watchlist-card-container">
+            {% for lst in list %}
+            <div class="card"> {{ lst.title }} </div>
 
+
+            {% endfor %}
     </div>
 </main>
+
+
 
 {% endblock %}
 

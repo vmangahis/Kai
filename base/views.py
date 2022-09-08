@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth import authenticate,login,logout
+from django.contrib.auth.decorators import login_required
 from django.urls import resolve
 from .forms import UserCreation
 from .models import Anime, Manga, User
@@ -66,7 +67,7 @@ def logoutUser(request):
     logout(request)
     return redirect('Home')
 
-def registerUser(request):
+def registerUser(request, pk):
     if request.method == 'POST':
         print('POST')
         formObject = UserCreation(request.POST)
@@ -89,11 +90,17 @@ def registerUser(request):
     context = {'form' : formObject}
     return render(request, 'base/log_reg_form.html', context)
 
-def myWatchList(request):
-    return render(request, 'base/watchlist_readlist.html')
 
-def myReadList(request):
-    return render(request, 'base/watchlist_readlist.html')
+@login_required(login_url='Login')
+def personalList(request, pk):
+    pageType = "watchlist"
+    
+    personallist = User.objects.get(id=pk)
+    
+    context = {'list' : personallist.watchlist.all()}
+    
+    return render(request, 'base/watchlist_readlist.html', context)
+
 
 
 

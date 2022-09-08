@@ -39,12 +39,12 @@
                 </li>
             
                 <li class="nav-item">
-                    <a href="{% url 'WatchList' %}" class="nav-link text-light">My Watchlist
+                    <a href="{% url 'WatchList' request.user.id %}" class="nav-link text-light">My Watchlist
                     </a>
                 </li>
 
                 <li class="nav-item">
-                  <a href="{% url 'ReadList' %}" class="nav-link text-light">My Reading List
+                  <a href="{% url 'ReadList' request.user.id %}" class="nav-link text-light">My Reading List
                   </a>
               </li>
 
