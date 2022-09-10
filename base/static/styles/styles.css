@@ -196,11 +196,12 @@ input[type="checkbox"]{
     border-radius: 35px;
 }
 
-.watchlist-button, .readlist-button{
+#watchlist-button, #readlist-button{
     transition:.5s;
 }
 
-.watchlist-button{
+
+.mode-choice{
     background:orange;
 }
 

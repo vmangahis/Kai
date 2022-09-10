@@ -1,10 +1,13 @@
+import json
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.csrf import csrf_exempt
 from django.urls import resolve
 from .forms import UserCreation
 from .models import Anime, Manga, User
+
 
 
 def home(request):
@@ -92,12 +95,25 @@ def registerUser(request, pk):
 
 
 @login_required(login_url='Login')
+@csrf_exempt
 def personalList(request, pk):
-    pageType = "watchlist"
+    usersListObject = User.objects.get(id=pk)
+    if request.method == 'POST':
+        requestBody = json.loads(request.body)
+        if requestBody.get('queryType') == 'watchlist':
+            contextList = usersListObject.watchlist.all()
+
+        elif requestBody.get('queryType') == 'readlist':
+            contextList = usersListObject.readlist.all()
+
+        context = {'list' : contextList}
+        print('returning')
+        return render(request, 'base/watchlist_readlist.html', context)
+        
+
     
-    personallist = User.objects.get(id=pk)
     
-    context = {'list' : personallist.watchlist.all()}
+    context = {'list' : usersListObject.watchlist.all()}
     
     return render(request, 'base/watchlist_readlist.html', context)
 
