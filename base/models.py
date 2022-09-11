@@ -33,8 +33,8 @@ class User(AbstractUser):
     email = models.EmailField(unique=False)
     intro = models.TextField(null=True)
 
-    watchlist = models.ManyToManyField(Anime, null=True, blank=True)
-    readlist = models.ManyToManyField(Manga, null=True, blank=True)
+    watchlist = models.ManyToManyField(Anime,  blank=True)
+    readlist = models.ManyToManyField(Manga,  blank=True)
     avatar = models.ImageField(null=True, default='blank-avatar.svg')
 
     USERNAME_FIELD = 'username'

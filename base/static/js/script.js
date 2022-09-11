@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
         ell.addEventListener('click', (e) => {
             
             
-//            console.log('user is '+ document.getElementById('user_id').textContent);
+
             let url = "";
             let list_type = "";
             if(e.target.id == 'watchlist-button')
@@ -44,9 +44,15 @@ document.addEventListener("DOMContentLoaded", (event) => {
                     })
                     
                 })
-                .then((res) => Response.json(res))
+                .then((res) => res.json())
                 .then((data) => {
-                    console.log('data is' + JSON.stringify(data));
+                    var final = data;
+                    var tag = "";
+                   
+                    final.forEach(elem => {
+                        tag+=`<div class = "card text-light">${elem.title}</div>`;
+                    })
+                    document.getElementById('watchlist-card-container').innerHTML = tag;
                 })
                 .catch((error) => {
                     console.error(error);

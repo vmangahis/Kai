@@ -4,6 +4,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
+from django.http import JsonResponse
 from django.urls import resolve
 from .forms import UserCreation
 from .models import Anime, Manga, User
@@ -101,14 +102,16 @@ def personalList(request, pk):
     if request.method == 'POST':
         requestBody = json.loads(request.body)
         if requestBody.get('queryType') == 'watchlist':
-            contextList = usersListObject.watchlist.all()
+            print('watchlist')
+            contextList = list(usersListObject.watchlist.values())
 
         elif requestBody.get('queryType') == 'readlist':
-            contextList = usersListObject.readlist.all()
+            print('readlist')
+            contextList = list(usersListObject.readlist.values())
 
-        context = {'list' : contextList}
-        print('returning')
-        return render(request, 'base/watchlist_readlist.html', context)
+        #print(contextList)
+        
+        return JsonResponse(contextList, safe=False)
         
 
     

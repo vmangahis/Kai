@@ -1,6 +1,7 @@
 {% extends 'main.html' %}
 
 {% block content %}
+{% load base_extras %}
 {% csrf_token %}
 
 <main class="container-fluid mt-5 p-5">
@@ -12,11 +13,17 @@
             </div>
 
     </div>
+    <h1 class="text-light">{{ request.path }}</h1>    
 
-    <div class="watchlist-card-container">
+    
+    <div class="watchlist-card-container" id="watchlist-card-container">
             {% for lst in list %}
-            <div class="card"> {{ lst.title }} </div>
-
+            
+            {% if request.path == concatenate_url:"/watchlist/"|concatenate_url:lst.id %}
+            <h1>Hello</h1>
+            {% endif %}
+            <a href=""><div class="card text-light"> {{ lst.title }} </div></a>
+            
 
             {% endfor %}
     </div>
