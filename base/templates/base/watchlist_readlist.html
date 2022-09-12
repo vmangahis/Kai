@@ -1,11 +1,10 @@
 {% extends 'main.html' %}
 
 {% block content %}
-{% load base_extras %}
 {% csrf_token %}
 
 <main class="container-fluid mt-5 p-5">
-    <div class="watchlist-controllers">
+    <div class="watchlist-controllers mb-5">
                  
             <div class="buttonSwitch">
                 <button type="button"  id='watchlist-button' class='button-switch'>Watchlist</button>
@@ -13,18 +12,29 @@
             </div>
 
     </div>
-    <h1 class="text-light">{{ request.path }}</h1>    
+    
 
     
-    <div class="watchlist-card-container" id="watchlist-card-container">
+    <div class="container-fluid watchlist-card-container" id="watchlist-card-container">
             {% for lst in list %}
             
-            {% if request.path == concatenate_url:"/watchlist/"|concatenate_url:lst.id %}
-            <h1>Hello</h1>
-            {% endif %}
-            <a href=""><div class="card text-light"> {{ lst.title }} </div></a>
             
-
+            
+            <div class="list-card text-light"> 
+                {% if 'watchlist' in request.path %}
+            <a href="{% url 'AnimPage' lst.id %}">
+            
+            {% elif 'readlist' in request.path %}
+            <a href="{% url 'MangPage' lst.id %}">
+            {% endif %}
+                <img src="https://via.placeholder.com/300x500" alt="{{ lst.title }}" class="list-card-image" />
+            </a>
+                <div class="title-info-text">
+                    <h5 class="text-start">{{ lst.title }}</h5>
+                    <p class="text-start">{% for gn in lst.genre.all %}{{ gn }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
+                </div> 
+            
+            </div>
             {% endfor %}
     </div>
 </main>

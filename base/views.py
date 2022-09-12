@@ -1,13 +1,16 @@
+from http.client import HTTPResponse
 import json
 from django.shortcuts import render, redirect
+from django.core import serializers
 from django.contrib import messages
+from django.http import HttpResponse
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 from django.urls import resolve
 from .forms import UserCreation
-from .models import Anime, Manga, User
+from .models import Anime, Manga, User, Genre
 
 
 
@@ -98,20 +101,34 @@ def registerUser(request, pk):
 @login_required(login_url='Login')
 @csrf_exempt
 def personalList(request, pk):
+    #finding user
     usersListObject = User.objects.get(id=pk)
+
     if request.method == 'POST':
+
+        #get post request from fetch api 
         requestBody = json.loads(request.body)
+        
+        watchl = usersListObject.watchlist.all()
+        print(watchl)
+        
+        # check if user wanted to see read list or watchlist
         if requestBody.get('queryType') == 'watchlist':
+
             print('watchlist')
-            contextList = list(usersListObject.watchlist.values())
+            
+            
 
         elif requestBody.get('queryType') == 'readlist':
             print('readlist')
-            contextList = list(usersListObject.readlist.values())
-
-        #print(contextList)
+            
+            
         
-        return JsonResponse(contextList, safe=False)
+        #contextList = {'testDict' : {genre['id']: genre['name'] for genre in usersListObject.watchlist.genre('id','name')}}
+
+        contextList= {}
+        
+        return HttpResponse(contextList, content_type="application/json")
         
 
     

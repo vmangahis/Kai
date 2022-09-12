@@ -3,6 +3,9 @@ from django.contrib.auth.models import AbstractUser
 
 
 
+class Author(models.Model):
+    pass
+
 
 class Genre(models.Model):
     name = models.CharField(max_length=15, unique=True, default='Test')

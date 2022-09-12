@@ -5,6 +5,11 @@
 a{
     text-decoration: none !important;
     color: white;
+    display:inline-block;
+}
+
+a:hover{
+    color:white;
 }
 
 ul{
@@ -40,6 +45,10 @@ body{
 input[type="checkbox"]{
     width:15px;
     height:15px;
+}
+
+img{
+    display:inline-block;
 }
 
 .login-button{
@@ -132,6 +141,7 @@ input[type="checkbox"]{
 
 
 
+
 .search-bar{
     outline:none;
     border:0;
@@ -208,6 +218,29 @@ input[type="checkbox"]{
 .mode-choice{
     background:orange;
 }
+
+.watchlist-card-container
+{
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 2.5rem;
+}
+
+
+.list-card{
+    display:flex;
+    flex-direction: column;
+
+}
+
+.title-info-text{
+    padding: 20px 0 0 0
+}
+
+
+
 
 
 
