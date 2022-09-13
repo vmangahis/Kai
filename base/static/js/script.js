@@ -1,4 +1,11 @@
 document.addEventListener("DOMContentLoaded", (event) => {
+
+    function concat_tag(){
+
+    }
+
+
+
     let window_location = window.location.pathname.split('/')[1];
     console.log(window_location);
     if(window_location == 'readlist')
@@ -46,24 +53,31 @@ document.addEventListener("DOMContentLoaded", (event) => {
                 .then((data) => {
                     var final = data;
                     var tag = "";
-                    console.log(final);
-                    final.forEach(elemen => {
-                        console.log(elemen.genre);
-                    })
+                    
+                    
                     final.forEach(elem => {
+                        
                         if(list_type == "watchlist")
                         {
-                            tag+=`<div class = "list-card text-light"><a href="http://${window.location.host}/anime/${elem.id}"><img src="https://via.placeholder.com/300x500" alt="${elem.fields.title}" class="list-card-image" />
+                            tag+=`<div class = "list-card text-light"><a href="http://${window.location.host}/anime/${elem.id}"><img src="https://via.placeholder.com/300x500" alt="${elem.title}" class="list-card-image" />
                             </a><div class="title-info-text">
-                            <h5 class="text-start">${elem.fields.title}</h5><p class="text-start">GenrePlaceHolder</p></div></div>`;
+                            <h5 class="text-start">${elem.title}</h5><p class="text-start">${elem.genre.map(genreElement => {
+                                
+                                return  genreElement;
+                            })} </p></div></div>`; //<p class="text-start">GenrePlaceHolder</p></div></div>
                         }
 
                         else if(list_type == "readlist")
                         {
-                            tag+=`<div class = "list-card text-light"><a href="http://${window.location.host}/manga/${elem.id}"><img src="https://via.placeholder.com/300x500" alt="${elem.fields.title}" class="list-card-image" />
+                            tag+=`<div class = "list-card text-light"><a href="http://${window.location.host}/manga/${elem.id}"><img src="https://via.placeholder.com/300x500" alt="${elem.title}" class="list-card-image" />
                             </a><div class="title-info-text">
-                            <h5 class="text-start">${elem.fields.title}</h5><p class="text-start">GenrePlaceHolder</p></div></div>`;
+                            <h5 class="text-start">${elem.title}</h5><p class="text-start"> ${elem.genre.map(genreElement => {
+                                
+                                return  genreElement;
+                            })}</p></div></div>`; //<p class="text-start">GenrePlaceHolder</p></div></div>
                         }
+
+                       
                         
                     })
                     document.getElementById('watchlist-card-container').innerHTML = tag;

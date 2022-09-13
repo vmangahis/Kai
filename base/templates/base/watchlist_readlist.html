@@ -31,7 +31,7 @@
             </a>
                 <div class="title-info-text">
                     <h5 class="text-start">{{ lst.title }}</h5>
-                    <p class="text-start">{% for gn in lst.genre.all %}{{ gn }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
+                    <p class="text-start">{% for gn in lst.genre.all %}{{ gn.name }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
                 </div> 
             
             </div>

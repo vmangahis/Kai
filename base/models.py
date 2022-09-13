@@ -10,8 +10,7 @@ class Author(models.Model):
 class Genre(models.Model):
     name = models.CharField(max_length=15, unique=True, default='Test')
 
-    def __str__(self):
-        return self.name
+    
 
 class Anime(models.Model):
     title = models.CharField(max_length=100, default=None, unique=True)

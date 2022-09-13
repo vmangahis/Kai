@@ -108,27 +108,50 @@ def personalList(request, pk):
 
         #get post request from fetch api 
         requestBody = json.loads(request.body)
-        
-        watchl = usersListObject.watchlist.all()
-        print(watchl)
-        
         # check if user wanted to see read list or watchlist
         if requestBody.get('queryType') == 'watchlist':
-
-            print('watchlist')
+            genrelistObject = usersListObject.watchlist.all()
+           
             
             
 
         elif requestBody.get('queryType') == 'readlist':
-            print('readlist')
-            
-            
-        
-        #contextList = {'testDict' : {genre['id']: genre['name'] for genre in usersListObject.watchlist.genre('id','name')}}
+            genrelistObject = usersListObject.readlist.all()
 
-        contextList= {}
         
-        return HttpResponse(contextList, content_type="application/json")
+        
+        genreList = []
+        context = []
+        
+        for x in genrelistObject.all():
+            for y in x.genre.values():
+                genreList.append(y['name'])
+            #context.append({'title' : x.title, 'premiere_date' : x.premiere_date, 'genre' : []})
+            
+            context.append({'title' : x.title, 'genre' : genreList})
+            genreList = []
+            
+            
+            
+        jsonContext = json.dumps(context,indent=4, sort_keys=True, default=str)
+            
+        
+        
+        
+        
+        
+                
+        
+        
+           
+            
+            
+        
+        
+
+        
+        
+        return HttpResponse(jsonContext, content_type="application/json")
         
 
     
