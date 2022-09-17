@@ -884,4 +884,4 @@ def personalList(request, pk):
 
 
 
-#Enjoy the process.
+# Just enjoy the process.
