@@ -52,8 +52,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
                     let tag = "";
                     if(final.length > 0 )
                     {
-
-                    console.log(final.id);
                     final.forEach(elem => {
                         
                         if(list_type == "watchlist")
@@ -79,11 +77,12 @@ document.addEventListener("DOMContentLoaded", (event) => {
                        
                         
                     }); // end final.forEach
+
                     } // end if(final.length)
 
                     else if(final.length == 0)
                     {
-                        tag = `<div class = "list-card text-light"><h1 class="text-light blank-list">You got nothing to read at the moment.</h1></div>`;
+                        tag = `<div class = "list-card text-light"><h1 class="text-light blank-list">You got nothing to read/watch at the moment.</h1></div>`;
                     }
                     document.getElementById('watchlist-card-container').innerHTML = tag;
                     

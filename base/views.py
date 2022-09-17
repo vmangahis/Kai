@@ -1,16 +1,13 @@
-from http.client import HTTPResponse
 import json
 from django.shortcuts import render, redirect
-from django.core import serializers
 from django.contrib import messages
 from django.http import HttpResponse
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
-from django.http import JsonResponse
 from django.urls import resolve
 from .forms import UserCreation
-from .models import Anime, Manga, User, Genre
+from .models import Anime, Manga, User
 
 
 
@@ -25,6 +22,9 @@ def home(request):
 def infoAnimeManga(request, pk):
 
     pageUrl = resolve(request.path_info).url_name
+    
+
+    usersList = User.objects.get(id=request.user.id)
 
     if pageUrl == 'AnimPage':
         animeMangaOb = Anime.objects.get(id=pk)
@@ -32,9 +32,14 @@ def infoAnimeManga(request, pk):
     elif pageUrl == 'MangPage':
         animeMangaOb = Manga.objects.get(id=pk)
     
-    #print(resolve(request.path_info).url_name)
 
-    context = {'animeName':animeMangaOb}
+    if animeMangaOb in usersList.watchlist.all() or animeMangaOb in usersList.readlist.all():
+        alreadyinList = True
+
+    else:
+        alreadyinList = False
+
+    context = {'animeName':animeMangaOb, 'inList': alreadyinList}
     return render(request, 'base/info.html', context)
 
 def loginUser(request):
