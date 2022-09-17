@@ -3,7 +3,7 @@
 {% block content %}
 {% csrf_token %}
 
-<main class="container-fluid mt-5 p-5">
+<main class="container-fluid mt-5 p-5 watchlist-main-container">
     <div class="watchlist-controllers mb-5">
                  
             <div class="buttonSwitch">
@@ -16,9 +16,9 @@
 
     
     <div class="container-fluid watchlist-card-container" id="watchlist-card-container">
+
+            {% if list %}
             {% for lst in list %}
-            
-            
             
             <div class="list-card text-light"> 
                 {% if 'watchlist' in request.path %}
@@ -36,6 +36,10 @@
             
             </div>
             {% endfor %}
+
+            {% else %}
+            <div class = "list-card text-light"><h1 class="text-light blank-list">You got nothing to read at the moment.</h1></div>
+            {% endif %}
     </div>
 </main>
 

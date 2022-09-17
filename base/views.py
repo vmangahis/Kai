@@ -74,9 +74,8 @@ def logoutUser(request):
     logout(request)
     return redirect('Home')
 
-def registerUser(request, pk):
+def registerUser(request):
     if request.method == 'POST':
-        print('POST')
         formObject = UserCreation(request.POST)
         if formObject.is_valid():
             user = formObject.save(commit=False)
@@ -106,8 +105,10 @@ def personalList(request, pk):
 
     if request.method == 'POST':
 
+        
         #get post request from fetch api 
         requestBody = json.loads(request.body)
+
         # check if user wanted to see read list or watchlist
         if requestBody.get('queryType') == 'watchlist':
             genrelistObject = usersListObject.watchlist.all()
@@ -126,29 +127,14 @@ def personalList(request, pk):
         for x in genrelistObject.all():
             for y in x.genre.values():
                 genreList.append(y['name'])
-            #context.append({'title' : x.title, 'premiere_date' : x.premiere_date, 'genre' : []})
             
-            context.append({'title' : x.title, 'genre' : genreList})
+            
+            context.append({'id': x.id,'title' : x.title, 'genre' : genreList})
             genreList = []
             
             
             
         jsonContext = json.dumps(context,indent=4, sort_keys=True, default=str)
-            
-        
-        
-        
-        
-        
-                
-        
-        
-           
-            
-            
-        
-        
-
         
         
         return HttpResponse(jsonContext, content_type="application/json")
@@ -156,7 +142,13 @@ def personalList(request, pk):
 
     
     
-    context = {'list' : usersListObject.watchlist.all()}
+    elif request.method == 'GET':
+        
+        if 'watchlist' in request.path:
+            context = {'list': usersListObject.watchlist.all()}
+
+        elif 'readlist' in request.path:
+            context = {'list' : usersListObject.readlist.all()}
     
     return render(request, 'base/watchlist_readlist.html', context)
 
