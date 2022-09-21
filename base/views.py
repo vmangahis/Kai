@@ -158,12 +158,21 @@ def personalList(request, pk):
     return render(request, 'base/watchlist_readlist.html', context)
 
 
-def animeList(request):
-    pass
+def catalog(request):
+    context = {}
+    currentUser = User.objects.get(id=request.user.id)
+    
+    if 'mangalist' in request.path:
+        context = {'list' : Manga.objects.all(), 'user_list' : currentUser.readlist.all()}
+
+    elif 'animelist' in request.path:
+        context = {'list' : Anime.objects.all(), 'user_list' : currentUser.watchlist.all()}
+
+    print(context['user_list'])    
+    return render(request, 'base/catalog.html', context)
 
 
-def mangaList(request):
-    pass
+
 
 
 

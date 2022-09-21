@@ -1,0 +1,20 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<main class="container-fluid">
+{% for lst in list %}
+
+<p class="text-light">{{ lst.title }} 
+{% if lst in user_list %}
+    Already in list
+{% endif %}
+
+</p>
+
+
+{% endfor %}
+
+</main>
+
+
+{% endblock %}

@@ -10,6 +10,6 @@ urlpatterns = [
     path('logout/', views.logoutUser, name='Logout'),
     path('watchlist/<str:pk>', views.personalList, name='WatchList'),
     path('readlist/<str:pk>', views.personalList, name='ReadList'),
-    path('animelist/', views.animeList, name='AnimeList'),
-    path('mangalist/', views.mangaList, name='MangaList')
+    path('animelist/', views.catalog, name='AnimeList'),
+    path('mangalist/', views.catalog, name='MangaList')
 ]
