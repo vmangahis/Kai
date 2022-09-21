@@ -157,16 +157,16 @@ def personalList(request, pk):
     
     return render(request, 'base/watchlist_readlist.html', context)
 
-
+@login_required(login_url='Login')
 def catalog(request):
     context = {}
     currentUser = User.objects.get(id=request.user.id)
     
     if 'mangalist' in request.path:
-        context = {'list' : Manga.objects.all(), 'user_list' : currentUser.readlist.all()}
+        context = {'list' : Manga.objects.all(), 'user_list' : currentUser.readlist.all(), 'list_type' : 'manga'}
 
     elif 'animelist' in request.path:
-        context = {'list' : Anime.objects.all(), 'user_list' : currentUser.watchlist.all()}
+        context = {'list' : Anime.objects.all(), 'user_list' : currentUser.watchlist.all(), 'list_type' : 'anime'}
 
     print(context['user_list'])    
     return render(request, 'base/catalog.html', context)

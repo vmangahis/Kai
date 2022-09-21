@@ -1,18 +1,29 @@
 {% extends 'main.html' %}
 
 {% block content %}
-<main class="container-fluid">
+<main class="container-fluid catalog-main-container">
+<h1 class="header text-light mb-5">{% if list_type == 'anime' %}Anime{% elif list_type == 'manga' %}Manga{% endif %}</h1>
+<section class="catalog-container">
 {% for lst in list %}
 
-<p class="text-light">{{ lst.title }} 
-{% if lst in user_list %}
-    Already in list
-{% endif %}
 
-</p>
+<figure>{% if list_type == 'anime' %}
+    <a href="{% url 'AnimPage' lst.id %}"><img src="https://via.placeholder.com/300x500" alt="{{ lst.title }}"/></a>
+
+    {% else %}
+    <a href="{% url 'MangPage' lst.id %}"><img src="https://via.placeholder.com/300x500" alt="{{ lst.title }}"/></a>
+    {% endif %}
+
+
+    <p class="text-light">{{ lst.title }}</p>
+
+</figure>
+
+
 
 
 {% endfor %}
+</section>
 
 </main>
 
