@@ -11,5 +11,6 @@ urlpatterns = [
     path('watchlist/<str:pk>', views.personalList, name='WatchList'),
     path('readlist/<str:pk>', views.personalList, name='ReadList'),
     path('animelist/', views.catalog, name='AnimeList'),
-    path('mangalist/', views.catalog, name='MangaList')
+    path('mangalist/', views.catalog, name='MangaList'),
+    path('search/', views.search, name='Search')
 ]

@@ -6,6 +6,7 @@ from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 from django.urls import resolve
+from django.db.models import Q
 from .forms import UserCreation
 from .models import Anime, Manga, User
 
@@ -141,7 +142,7 @@ def personalList(request, pk):
             
         jsonContext = json.dumps(context,indent=4, sort_keys=True, default=str)
         
-        
+        #Ajax Response 
         return HttpResponse(jsonContext, content_type="application/json")
         
 
@@ -168,12 +169,21 @@ def catalog(request):
     elif 'animelist' in request.path:
         context = {'list' : Anime.objects.all(), 'user_list' : currentUser.watchlist.all(), 'list_type' : 'anime'}
 
-    print(context['user_list'])    
+    
     return render(request, 'base/catalog.html', context)
 
 
 
+def search(request):
+    query = request.GET.get('keyword') if request.GET.get('keyword') != None else ''
 
+    manga = Manga.objects.filter(Q(title__icontains=query))
+    anime = Anime.objects.filter(Q(title__icontains=query))
+
+    print(list(anime))
+    print(list(manga))
+    
+    return HttpResponse('Searched')
 
 
 # Just enjoy the process.

@@ -7,16 +7,18 @@
 {% for lst in list %}
 
 
-<figure>{% if list_type == 'anime' %}
+<figure>
+    {% if list_type == 'anime' %}
     <a href="{% url 'AnimPage' lst.id %}"><img src="https://via.placeholder.com/300x500" alt="{{ lst.title }}"/></a>
 
     {% else %}
     <a href="{% url 'MangPage' lst.id %}"><img src="https://via.placeholder.com/300x500" alt="{{ lst.title }}"/></a>
     {% endif %}
 
-
-    <p class="text-light">{{ lst.title }}</p>
-
+    <div class="title-info-text">
+    <h5 class="text-light">{{ lst.title }}</h5>
+    <p class="text-light">{% for gn in lst.genre.all %}{{ gn.name }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
+    </div>
 </figure>
 
 

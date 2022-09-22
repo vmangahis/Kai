@@ -7,8 +7,8 @@
     <h1 class="mx-5 text-light"><a href="{% url 'Home' %}" class="navbar-brand">Logo
     </a></h1>
 
-    <form action ="" method="GET" class="w-100">
-        <input type="text" name="search" id="" class="form-control fa-thin fa-magnifying-glass search-bar w-50" placeholder="&#xf002 Search anime,manga or artist here..." style="font-family:Arial, FontAwesome"  />
+    <form action ="{% url 'Search' %}" method="GET" class="w-100">
+        <input type="text" name="keyword" id="" class="form-control fa-thin fa-magnifying-glass search-bar w-50" placeholder="&#xf002 Search anime,manga or artist here..." style="font-family:Arial, FontAwesome"  />
     </form>
     </div>
     </div>
