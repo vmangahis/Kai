@@ -1,7 +1,7 @@
 import json
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
@@ -17,7 +17,7 @@ def home(request):
     anime = Anime.objects.all()
     manga = Manga.objects.all()
     
-    context = {'animeOb': anime[:3], 'mangaOb' : manga, 'header' : page}
+    context = {'animeOb': anime[:3], 'mangaOb' : manga, 'header' : page, 'featured_title' : anime}
     return render(request, 'base/home.html', context)
 
 def infoAnimeManga(request, pk):
@@ -180,10 +180,14 @@ def search(request):
     manga = Manga.objects.filter(Q(title__icontains=query))
     anime = Anime.objects.filter(Q(title__icontains=query))
 
-    print(list(anime))
-    print(list(manga))
+    context = {'animeList' : anime, 'mangaList' : manga}
+
+    if query == '':
+        print('no search')
+        return redirect('Home')
+
     
-    return HttpResponse('Searched')
+    return render(request, 'base/search.html', context)
 
 
 # Just enjoy the process.

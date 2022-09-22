@@ -8,11 +8,9 @@
         <div class="col-md-7">
 
 
-            <div class="row mb-5">
-
-
-                <!--- Popular Anime-->
-                <div class="d-flex flex-column">
+        <!--- Popular Anime-->
+        <div class="row mb-5">
+            <div class="d-flex flex-column">
                     <h3 class="text-light">Popular Anime</h3>
 
                     <div class="d-flex flex-row card-container">
@@ -47,17 +45,17 @@
                     </div>
                 </div>
 
-            </div>
-            <!--- Popular Manga -->
-            <div class="row mb-5">
-                
+        </div>
+
+        <!--- Popular Manga -->
+        <div class="row mb-5">
                 <div class="d-flex flex-column">
                     <h3 class = "text-light">Popular Manga</h3>
 
                     
 
                     <div class="d-flex flex-row">
-                    {% for manga in mangaOb %}    
+                        {% for manga in mangaOb %}    
                         {% if forloop.first %}
                         <div class="card">
                         {% else %}
@@ -75,15 +73,15 @@
                         </div>
 
                   
-                    {% endfor %}
+                        {% endfor %}
 
                     </div>
                 </div>
 
-            </div>
-
-            <!----- Popular Artist-->
-            <div class="row mb-5">
+        </div>
+        
+        <!----- Popular Artist-->
+        <div class="row mb-5">
                 <div class="d-flex flex-column">
                     <h3 class="text-light">Popular Artist</h3>
 
@@ -124,21 +122,67 @@
 
                     </div>
                 </div>
-            </div>
-
         </div>
 
+        <!--- Popular Studios -->
+        <div class="row mb-5">
+            <div class="d-flex flex-column">
+                <h3 class="text-light">Popular Studio</h3>
+
+                <div class="d-flex flex-row">
+                    
+                    <div class="card">
+                        <div class="d-flex flex-column">
+                                <img src="https://via.placeholder.com/200" alt="Anime name here" class="img-fluid h-auto w-100 rounded p-2 mx-auto" />
+                                <div class="card-body">
+                                    <h5 class="card-title text-light">Anime Title Here</h5>
+                                    <p class="card-text text-light">Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
+                                </div>
+                        </div>
+                    </div>
+
+                    <div class="card mx-3">
+                        <div class="d-flex flex-column">
+                                <img src="https://via.placeholder.com/200" alt="Anime name here" class="img-fluid h-auto w-100 rounded p-2" />
+                                <div class="card-body">
+                                    <h5 class="card-title text-light">Anime Title Here</h5>
+                                    <p class="card-text text-light">Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
+                                </div>
+                        </div>
+                    </div>
+
+                    <div class="card mx-3">
+                        <div class="d-flex flex-column">
+                                <img src="https://via.placeholder.com/200" alt="Anime name here" class="img-fluid h-auto w-100 rounded p-2" />
+                                <div class="card-body">
+                                    <h5 class="card-title text-light">Anime Title Here</h5>
+                                    <p class="card-text text-light">Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
+                                </div>
+                        </div>
+                    </div>
+
+
+                    
+
+                </div>
+            </div>
+        </div>
+
+        </div>
+        
+
+        <!--- Gap -->
         <div class="col-md-1"></div>
 
         
 
         <!--- Featured Title-->
-        <div class="col-md-4 p-5 border rounded-4 border-dark featured-title">
+        <div class="col-md-4 p-5 border rounded-4 border-dark featured-title h-75">
             <div class="row">
                 <div class="d-flex flex-column">
                     <h3 class="mb-5 text-light">Featured Titles</h4>
                     
-                    {% for an in animeOb %}
+                    {% for an in featured_title %}
                     <div class="card">
                         
                         <a href="{% url 'AnimPage' an.id %}">
@@ -169,12 +213,7 @@
 
             </div>
         </div>
-
-    </div>
-
-
-
-
+</div>
 </main>
 
 

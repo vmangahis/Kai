@@ -3,8 +3,7 @@ from django.contrib.auth.models import AbstractUser
 
 
 
-class Author(models.Model):
-    pass
+
 
 
 class Genre(models.Model):
@@ -24,11 +23,16 @@ class Anime(models.Model):
 
 class Manga(models.Model):
     title = models.CharField(max_length=100, default=None)
-    author = models.CharField(max_length=50)
+    
+    author = models.ForeignKey('Author', on_delete=models.CASCADE, blank=True, null=True)
     genre = models.ManyToManyField(Genre)
 
     def __str__(self):
         return self.title
+
+class Author(models.Model):
+    name = models.CharField(max_length=50, unique=True, default='John Doe' ,blank=True, null=True)
+    works = models.ForeignKey(Manga, on_delete=models.CASCADE, related_name='author_work', blank=True, null=True)
 
 class User(AbstractUser):
     display_name = models.CharField(max_length=100)
