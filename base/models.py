@@ -3,6 +3,12 @@ from django.contrib.auth.models import AbstractUser
 
 
 
+class StudioCompany(models.Model):
+    studio_name = models.CharField(max_length=60)
+    anime_works = models.ManyToManyField('Anime', blank=True)
+
+    def __str__(self):
+        return self.studio_name
 
 
 
@@ -32,7 +38,7 @@ class Manga(models.Model):
 
 class Author(models.Model):
     name = models.CharField(max_length=50, unique=True, default='John Doe' ,blank=True, null=True)
-    works = models.ForeignKey(Manga, on_delete=models.CASCADE, related_name='author_work', blank=True, null=True)
+    works = models.ManyToManyField(Manga, related_name='author_work', blank=True)
 
 class User(AbstractUser):
     display_name = models.CharField(max_length=100)
