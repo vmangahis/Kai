@@ -17,7 +17,7 @@ def home(request):
     anime = Anime.objects.all()
     manga = Manga.objects.all()
     
-    context = {'animeOb': anime[:3], 'mangaOb' : manga, 'header' : page, 'featured_title' : anime}
+    context = {'animeOb': anime[:3], 'mangaOb' : manga, 'header' : page, 'featured_title' : anime[:5]}
     return render(request, 'base/home.html', context)
 
 def infoAnimeManga(request, pk):

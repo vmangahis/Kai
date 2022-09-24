@@ -1,4 +1,5 @@
 from django.db import models
+from import_export import resources
 from django.contrib.auth.models import AbstractUser
 
 
@@ -20,11 +21,14 @@ class Genre(models.Model):
 
 class Anime(models.Model):
     title = models.CharField(max_length=100, default=None, unique=True)
-    premiere_date = models.DateField(default=None)
-    genre = models.ManyToManyField(Genre)
+    premiere_date = models.DateField(default=None, null=True)
+    genre = models.ManyToManyField(Genre, default=None)
 
     def __str__(self):
-        return self.title
+        return str(self.title)
+
+
+
 
 
 class Manga(models.Model):
