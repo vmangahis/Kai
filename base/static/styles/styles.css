@@ -61,6 +61,8 @@ main{
     flex: 1 1 auto;
 }
 
+
+
 .watchlist-main-container{
     display:flex;
     flex-direction: column;
@@ -269,6 +271,10 @@ main{
     padding: 20px 0 0 0
 }
 
+.title-info-text > *{
+    width:300px;
+}
+
 .catalog-main-container{
     display:flex;
     justify-content: center;
@@ -276,14 +282,17 @@ main{
     align-items: center;
     margin-top: 3rem;
     
+    
 }
 
 .catalog-container{
     display:flex;
-    gap:5%;
+    gap:10%;
     justify-content: center;
     align-items: center;
+    flex-wrap: wrap;
 }
+
 
 /* Enjoy the process. */
 

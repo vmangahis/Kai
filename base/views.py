@@ -1,7 +1,9 @@
+from doctest import master
 import json
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse
+from django.core.paginator import Paginator
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
@@ -163,11 +165,21 @@ def catalog(request):
     context = {}
     currentUser = User.objects.get(id=request.user.id)
     
+    
     if 'mangalist' in request.path:
-        context = {'list' : Manga.objects.all(), 'user_list' : currentUser.readlist.all(), 'list_type' : 'manga'}
+        masterList = Manga.objects.all()[:100]
+
+        context = {'list' : [], 'user_list' : currentUser.readlist.all(), 'list_type' : 'manga'}
 
     elif 'animelist' in request.path:
-        context = {'list' : Anime.objects.all(), 'user_list' : currentUser.watchlist.all(), 'list_type' : 'anime'}
+        masterList = Anime.objects.all()[:100]
+        animeListPaginator = Paginator(masterList, 20)
+
+        page_number = request.GET.get('page')
+        print(page_number)
+        page_object = animeListPaginator.get_page(page_number)
+        
+        context = {'list' : page_object, 'user_list' : currentUser.watchlist.all(), 'list_type' : 'anime'}
 
     
     return render(request, 'base/catalog.html', context)
