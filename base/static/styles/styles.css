@@ -272,7 +272,10 @@ main{
 }
 
 .title-info-text > *{
-    width:300px;
+    width:250px;
+    
+    margin:0;
+    height:75px;
 }
 
 .catalog-main-container{

@@ -1,4 +1,4 @@
-from doctest import master
+import string
 import json
 from django.shortcuts import render, redirect
 from django.contrib import messages
@@ -164,12 +164,14 @@ def personalList(request, pk):
 def catalog(request):
     context = {}
     currentUser = User.objects.get(id=request.user.id)
-    
+    randomSeed = list(string.ascii_lowercase)
+    randomSeed.append(string.ascii_uppercase)
+    randomSeed.append(string.hexdigits)
     
     if 'mangalist' in request.path:
         masterList = Manga.objects.all()[:100]
 
-        context = {'list' : [], 'user_list' : currentUser.readlist.all(), 'list_type' : 'manga'}
+        context = {'list' : [], 'user_list' : currentUser.readlist.all(), 'list_type' : 'manga', 'seed' : randomSeed}
 
     elif 'animelist' in request.path:
         masterList = Anime.objects.all()[:100]
@@ -179,7 +181,7 @@ def catalog(request):
         print(page_number)
         page_object = animeListPaginator.get_page(page_number)
         
-        context = {'list' : page_object, 'user_list' : currentUser.watchlist.all(), 'list_type' : 'anime'}
+        context = {'list' : page_object, 'user_list' : currentUser.watchlist.all(), 'list_type' : 'anime', 'seed': randomSeed}
 
     
     return render(request, 'base/catalog.html', context)

@@ -23,6 +23,7 @@ class Anime(models.Model):
     title = models.CharField(max_length=100, default=None, unique=True)
     premiere_date = models.DateField(default=None, null=True)
     genre = models.ManyToManyField(Genre, default=None)
+    thumbnail = models.URLField(max_length=200, default=None, null=True)
 
     def __str__(self):
         return str(self.title)

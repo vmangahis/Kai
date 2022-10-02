@@ -8,7 +8,7 @@ from import_export import resources
 class AnimeResource(resources.ModelResource):
     class Meta:
         model = Anime
-        field = ('id', 'title')
+        field = ('id', 'title', 'thumbnail')
 
 class AnimeResourceAdmin(ImportExportModelAdmin):
 
