@@ -27,7 +27,7 @@
 
                         <a href="{% url 'AnimPage' anime.id %}">
                             <div class="d-flex flex-column">
-                                    <img src="https://via.placeholder.com/200" alt="Anime name here" class="img-fluid h-auto w-100 rounded p-2 mx-auto" />
+                                    <img src="{{ anime.large_image }}" alt="Anime name here" class="img-fluid  rounded p-2 mx-auto home-thumbnail" />
                                     <div class="card-body">
                                         <h5 class="card-title text-light">{{ anime.title }}</h5>
                                         <p class="card-text text-light">Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
@@ -63,7 +63,7 @@
                         {% endif %}
                         <a href="{% url 'MangPage' manga.id %}">
                         <div class="d-flex flex-column">
-                            <img src="https://via.placeholder.com/200" alt="Anime name here" class="img-fluid h-auto w-100 rounded p-2 mx-auto" />
+                            <img src="{{ manga.large_image }}" alt="Anime name here" class="img-fluid rounded p-2 mx-auto home-thumbnail" />
                             <div class="card-body">
                                 <h5 class="card-title text-light">{{ manga.title }}</h5>
                                 <p class="card-text text-light">Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
