@@ -34,9 +34,11 @@ class Anime(models.Model):
 
 class Manga(models.Model):
     title = models.CharField(max_length=100, default=None)
-    
     author = models.ForeignKey('Author', on_delete=models.CASCADE, blank=True, null=True)
     genre = models.ManyToManyField(Genre)
+    large_image = models.URLField(max_length=200, default="https://picsum.photos/seed/picsum/500/500")
+    thumbnail = models.URLField(max_length=200, default="https://picsum.photos/seed/picsum/300/500")
+
 
     def __str__(self):
         return self.title

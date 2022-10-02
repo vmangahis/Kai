@@ -27,7 +27,9 @@
             {% elif 'readlist' in request.path %}
             <a href="{% url 'MangPage' lst.id %}">
             {% endif %}
+                
                 <img src="https://via.placeholder.com/300x500" alt="{{ lst.title }}" class="list-card-image" />
+                
             </a>
                 <div class="title-info-text">
                     <h5 class="text-start">{{ lst.title }}</h5>

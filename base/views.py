@@ -42,6 +42,8 @@ def infoAnimeManga(request, pk):
     else:
         alreadyinList = False
 
+    
+
     context = {'animeName':animeMangaOb, 'inList': alreadyinList}
     return render(request, 'base/info.html', context)
 
@@ -169,9 +171,12 @@ def catalog(request):
     randomSeed.append(string.hexdigits)
     
     if 'mangalist' in request.path:
-        masterList = Manga.objects.all()[:100]
+        masterList = Manga.objects.all()
+        mangaListPaginator = Paginator(masterList, 20)
+        page_number = request.GET.get('page')
 
-        context = {'list' : [], 'user_list' : currentUser.readlist.all(), 'list_type' : 'manga', 'seed' : randomSeed}
+        page_object = mangaListPaginator.get_page(page_number)
+        context = {'list' : page_object , 'user_list' : currentUser.readlist.all(), 'list_type' : 'manga', 'seed' : randomSeed}
 
     elif 'animelist' in request.path:
         masterList = Anime.objects.all()[:100]
