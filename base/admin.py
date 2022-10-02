@@ -9,7 +9,7 @@ from import_export import resources, widgets, fields
 class AnimeResource(resources.ModelResource):
     class Meta:
         model = Anime
-        field = ('id', 'title', 'thumbnail')
+        exclude = ('premiere_date', 'genre')
 
 class AnimeResourceAdmin(ImportExportModelAdmin):
     resource_class = AnimeResource

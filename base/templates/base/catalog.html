@@ -7,7 +7,7 @@
 {% for lst in list %}
 <figure class="content-card">
     {% if list_type == 'anime' %}
-    <a href="{% url 'AnimPage' lst.id %}"><img src="https://picsum.photos/seed/{{ seed|random }}/300/500" alt="{{ lst.title }}"/></a>
+    <a href="{% url 'AnimPage' lst.id %}"><img class="thumbnail-catalog" src="{{ lst.large_image }}" alt="{{ lst.title }}"/></a>
 
     {% else %}
     <a href="{% url 'MangPage' lst.id %}"><img class="thumbnail-catalog" src="{{ lst.large_image }}" alt="{{ lst.title }}"/></a>
