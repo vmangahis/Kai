@@ -11,8 +11,6 @@ class StudioCompany(models.Model):
     def __str__(self):
         return self.studio_name
 
-
-
 class AnimeGenre(models.Model):
     name = models.CharField(max_length=15, unique=True, default='Test')
 

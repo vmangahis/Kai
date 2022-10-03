@@ -11,6 +11,7 @@ from django.urls import resolve
 from django.db.models import Q
 from .forms import UserCreation
 from .models import Anime, Manga, User
+from .forms import UserEditForm
 
 
 
@@ -208,9 +209,27 @@ def search(request):
 
 def profile(request):
     myUser = User.objects.get(id=request.user.id)
-    print(myUser)
+    
     context =  {'userProfileObject' : myUser}
     return render(request, "base/profile.html", context)
+
+def editProfile(request):
+    userProfile = User.objects.get(id=request.user.id)
+    formObject =  UserEditForm(instance=userProfile)
+
+    if request.method == 'POST':
+        
+        formObject = UserEditForm(request.POST, request.FILES, instance=userProfile)
+        if formObject.is_valid():
+            formObject.save()
+            return redirect('SelfProfile')
+
+        else:
+            print(formObject.errors)
+    
+    context = {'user' : userProfile , 'form' : formObject}
+    return render(request, 'base/edit_profile.html', context)
+
 
 
 # Just enjoy the process.

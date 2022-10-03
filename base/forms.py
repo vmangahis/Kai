@@ -7,6 +7,7 @@ from .models import User
 
 class UserCreation(UserCreationForm):
 
+
     tos = forms.BooleanField(required=False, label=mark_safe("I agree to <a href='#'><u>Terms of Service</u></a> "))
     class Meta:
         model = User
@@ -58,5 +59,29 @@ class UserCreation(UserCreationForm):
         return tosCheck
 
 
+class UserEditForm(ModelForm):
     
+    class Meta:
+        model = User
+        fields = ['display_name', 'intro', 'avatar']
+    
+    def __init__(self, *args, **kwargs):
+        super(UserEditForm, self).__init__(*args, **kwargs)
+        self.fields['display_name'].required = True
+        self.fields['intro'].required = False
+
+    def clean_display_name(self):
+        dName = self.cleaned_data['display_name']
+        return dName
+
+    def clean_intro(self):
+        bio = self.cleaned_data['intro']
+        if bio == "" or bio.isspace():
+            bio = "No summary."
+
+        return bio
+
+
+
+
     

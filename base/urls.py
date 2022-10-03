@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+from .cloudinary_config import runConfig
 
 urlpatterns = [
     path('', views.home, name='Home'),
@@ -13,5 +14,8 @@ urlpatterns = [
     path('animelist/', views.catalog, name='AnimeList'),
     path('mangalist/', views.catalog, name='MangaList'),
     path('search/', views.search, name='Search'),
-    path('profile/', views.profile, name='SelfProfile')
+    path('profile/', views.profile, name='SelfProfile'),
+    path('profile/edit', views.editProfile, name='EditProfile')
 ]
+
+runConfig()
