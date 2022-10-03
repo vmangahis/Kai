@@ -51,13 +51,21 @@
                 
 
                 <li class="nav-item user-avatar dropdown">     
+                  {% if request.user.is_authenticated %}
                     <button class="" data-bs-toggle="dropdown" type="button">
                       <img src="https://via.placeholder.com/75" alt="avatar" class="profile-photo" />
                     </button>
-                    <ul class="dropdown-menu dropdown-menu-end" role="profile-menu">
-                      <li role="presentation" tabindex="-1"><a href="{% url 'WatchList' request.user.id %}" class="dropdown-item">Watchlist</a></li>
-                      <li role="presentation" tabindex="-1"><a class="dropdown-item" href="#">Test1</a></li>
+                    <ul class="dropdown-menu dropdown-menu-end profile-menu-dropdown" role="profile-menu">
+                      <li role="presentation" tabindex="-1"><a class="dropdown-item text-light" href="{% url 'SelfProfile' %}">My Profile</a></li>
+                      <li role="presentation" tabindex="-1"><a href="{% url 'WatchList' request.user.id %}" class="dropdown-item text-light">My Watchlist</a></li>
+                      <li><hr class="dropdown-divider text-light" /></li>
+                      <li role="presentation" tabindex="-1"><a href="{% url 'Logout' %}" class="dropdown-item text-light">Logout</a></li>
                     </ul>
+                    
+
+                  {% else %}
+                  <p class ="text-light">Guest</p>
+                  {% endif %}
                 </li>
             
                 </ul>

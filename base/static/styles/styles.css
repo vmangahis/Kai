@@ -131,9 +131,6 @@ main{
 
 
 
-.dropdown-menu{
-    position: absolute;
-}
 
 .navbar-collapse{
     display: flex;
@@ -172,7 +169,7 @@ main{
     font-size:1rem;
 }
 
-.featured-title, .search-bar{
+.featured-title, .search-bar, .dropdown-menu{
     background:#25203f;
 }
 
@@ -192,7 +189,10 @@ main{
     
 }
 
-
+.dropdown-item:hover{
+    background-color:#0E0C1F;
+    border-radius: 10px;
+}
 
 
 

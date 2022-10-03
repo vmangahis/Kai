@@ -27,25 +27,22 @@ class MangaGenre(models.Model):
 
 class Anime(models.Model):
     title = models.CharField(max_length=100, default=None, unique=True, null=True)
-    premiere_date = models.DateField(default=None, null=True)
-    
+    premiere_date = models.DateField(default=None, blank=True, null=True)
+    summary = models.TextField(default="No summary")
+    genre = models.ManyToManyField(AnimeGenre)
     thumbnail = models.URLField(max_length=200, default="https://picsum.photos/seed/picsum/300/500", null=True)
     large_image = models.URLField(max_length=200, default="https://picsum.photos/seed/picsum/500/500", null=True)
 
     def __str__(self):
         return str(self.title)
 
-
-
-
-
 class Manga(models.Model):
     title = models.CharField(max_length=100, default=None)
     author = models.ForeignKey('Author', on_delete=models.CASCADE, blank=True, null=True)
-    
+    summary = models.TextField(default="No summary")
     large_image = models.URLField(max_length=200, default="https://picsum.photos/seed/picsum/500/500")
     thumbnail = models.URLField(max_length=200, default="https://picsum.photos/seed/picsum/300/500")
-
+    genre = models.ManyToManyField(MangaGenre)
 
     def __str__(self):
         return self.title

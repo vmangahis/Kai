@@ -25,9 +25,10 @@ def home(request):
 def infoAnimeManga(request, pk):
 
     pageUrl = resolve(request.path_info).url_name
-    
+    alreadyinList = False
+    if request.user.is_authenticated:
+        usersList = User.objects.get(id=request.user.id)
 
-    usersList = User.objects.get(id=request.user.id)
 
     if pageUrl == 'AnimPage':
         animeMangaOb = Anime.objects.get(id=pk)
@@ -35,12 +36,12 @@ def infoAnimeManga(request, pk):
     elif pageUrl == 'MangPage':
         animeMangaOb = Manga.objects.get(id=pk)
     
+    if request.user.is_authenticated:
+        if animeMangaOb in usersList.watchlist.all() or animeMangaOb in usersList.readlist.all():
+            alreadyinList = True
 
-    if animeMangaOb in usersList.watchlist.all() or animeMangaOb in usersList.readlist.all():
-        alreadyinList = True
-
-    else:
-        alreadyinList = False
+        else:
+            alreadyinList = False
 
     
 
@@ -183,15 +184,12 @@ def catalog(request):
         animeListPaginator = Paginator(masterList, 20)
 
         page_number = request.GET.get('page')
-        print(page_number)
         page_object = animeListPaginator.get_page(page_number)
         
         context = {'list' : page_object, 'user_list' : currentUser.watchlist.all(), 'list_type' : 'anime', 'seed': randomSeed}
 
     
     return render(request, 'base/catalog.html', context)
-
-
 
 def search(request):
     query = request.GET.get('keyword') if request.GET.get('keyword') != None else ''
@@ -207,6 +205,12 @@ def search(request):
 
     
     return render(request, 'base/search.html', context)
+
+def profile(request):
+    myUser = User.objects.get(id=request.user.id)
+    print(myUser)
+    context =  {'userProfileObject' : myUser}
+    return render(request, "base/profile.html", context)
 
 
 # Just enjoy the process.
