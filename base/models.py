@@ -13,7 +13,13 @@ class StudioCompany(models.Model):
 
 
 
-class Genre(models.Model):
+class AnimeGenre(models.Model):
+    name = models.CharField(max_length=15, unique=True, default='Test')
+
+    def __str__(self):
+        return self.name
+
+class MangaGenre(models.Model):
     name = models.CharField(max_length=15, unique=True, default='Test')
 
     def __str__(self):
@@ -22,7 +28,7 @@ class Genre(models.Model):
 class Anime(models.Model):
     title = models.CharField(max_length=100, default=None, unique=True, null=True)
     premiere_date = models.DateField(default=None, null=True)
-    genre = models.ManyToManyField(Genre, default=None)
+    
     thumbnail = models.URLField(max_length=200, default="https://picsum.photos/seed/picsum/300/500", null=True)
     large_image = models.URLField(max_length=200, default="https://picsum.photos/seed/picsum/500/500", null=True)
 
@@ -36,7 +42,7 @@ class Anime(models.Model):
 class Manga(models.Model):
     title = models.CharField(max_length=100, default=None)
     author = models.ForeignKey('Author', on_delete=models.CASCADE, blank=True, null=True)
-    genre = models.ManyToManyField(Genre)
+    
     large_image = models.URLField(max_length=200, default="https://picsum.photos/seed/picsum/500/500")
     thumbnail = models.URLField(max_length=200, default="https://picsum.photos/seed/picsum/300/500")
 

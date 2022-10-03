@@ -123,6 +123,8 @@ main{
 
 
 
+
+
 .errorlist{
     list-style-type:circle;
 }
@@ -172,6 +174,11 @@ main{
 
 .featured-title, .search-bar{
     background:#25203f;
+}
+
+.featured-title-img{
+    width:150px;
+    height:150px;
 }
 
 
