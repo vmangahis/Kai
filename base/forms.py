@@ -74,8 +74,11 @@ class UserEditForm(ModelForm):
         dName = self.cleaned_data['display_name']
         return dName
 
+    
     def clean_intro(self):
         bio = self.cleaned_data['intro']
+
+        # in case user inputs blank bio
         if bio == "" or bio.isspace():
             bio = "No summary."
 
