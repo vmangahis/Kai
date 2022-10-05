@@ -1,4 +1,7 @@
-{% extends 'main.html' %} {% block content %}
+{% extends 'main.html' %} 
+{% load static %}
+{% block content %}
+{% include 'modal.html' %}
 <main class="container-fluid mt-5 p-5">
   <div class="content d-flex flex-row">
     <img src="{{ animeName.large_image }}" class="big-img" />
@@ -38,7 +41,7 @@
       <button
         class="add-to-watchlist text-light me-auto mt-auto p-3 rounded-pill btn"
         type="button"
-        data-bs-toggle="#addtoWatchlistModal"
+        data-bs-toggle="modal" data-bs-target="#addtoWatchlistModal"
       >
         Add to my watchlist
       </button>
@@ -54,9 +57,14 @@
     </div>
   </div>
 </main>
-<script>
-  document.getElementById("login-watchlist").addEventListener("click", (ev) => {
-    document.location.href = "/login/";
-  });
-</script>
-{% endblock %}
+
+{{ request.user.is_authenticated|json_script:"authenticated" }}
+{{ jsonObject | json_script:"data" }}
+
+
+
+ {% endblock %}
+ {% block page_script %}
+ <script type="text/javascript" src="{% static 'js/catalog_info.js' %}">
+ </script>
+ {% endblock %}

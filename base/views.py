@@ -4,6 +4,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.http import HttpResponse
 from django.core.paginator import Paginator
+from django.core.serializers import serialize
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
@@ -45,7 +46,7 @@ def infoAnimeManga(request, pk):
             alreadyinList = False
 
     
-
+    
     context = {'animeName':animeMangaOb, 'inList': alreadyinList}
     return render(request, 'base/info.html', context)
 
@@ -230,6 +231,8 @@ def editProfile(request):
     context = {'user' : userProfile , 'form' : formObject}
     return render(request, 'base/edit_profile.html', context)
 
+def addtoMyList(request):
+    pass
 
 
 # Just enjoy the process.

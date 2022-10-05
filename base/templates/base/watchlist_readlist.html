@@ -1,5 +1,5 @@
 {% extends 'main.html' %}
-
+{% load static %}
 {% block content %}
 {% csrf_token %}
 
@@ -48,6 +48,12 @@
 
 
 {{  request.user.id|json_script:'user_id'  }}
+
+{% endblock %}
+
+{% block page_script %}
+
+<script type="text/javascript" src="{% static 'js/personal_list.js' %}"></script>
 
 {% endblock %}
 

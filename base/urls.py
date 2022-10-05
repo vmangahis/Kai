@@ -15,7 +15,8 @@ urlpatterns = [
     path('mangalist/', views.catalog, name='MangaList'),
     path('search/', views.search, name='Search'),
     path('profile/', views.profile, name='SelfProfile'),
-    path('profile/edit', views.editProfile, name='EditProfile')
+    path('profile/edit', views.editProfile, name='EditProfile'),
+    path('addtolist/', views.addtoMyList, name='addtolist')
 ]
 
 runConfig()
