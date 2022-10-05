@@ -1,4 +1,6 @@
 {% if animeName %}
+<form method = "POST">
+  {% csrf_token %}
 <div
   class="modal fade"
   id="addtoWatchlistModal"
@@ -22,9 +24,10 @@
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
           Close
         </button>
-        <button type="button" class="btn btn-primary addtoList" id="addtoList">Add</button>
+        <button type="submit" class="btn btn-primary addtoList" id="addtoList">Add</button>
       </div>
     </div>
   </div>
 </div>
+</form>
 {% endif %}

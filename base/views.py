@@ -231,7 +231,7 @@ def editProfile(request):
     context = {'user' : userProfile , 'form' : formObject}
     return render(request, 'base/edit_profile.html', context)
 
-def addtoMyList(request):
+def addtoMyList(request, name):
     pass
 
 
