@@ -8,7 +8,7 @@ if (!authenticated) {
 }
 
 let addtoList = document.getElementById('addtoList');
-/*addtoList.addEventListener('click', ev => {
+addtoList.addEventListener('click', ev => {
     fetch('addtolist/',
 
         {
@@ -16,4 +16,4 @@ let addtoList = document.getElementById('addtoList');
 
         }
     )
-});*/
+});
