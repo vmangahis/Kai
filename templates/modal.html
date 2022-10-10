@@ -1,5 +1,5 @@
 {% if animeName %}
-<form method = "POST">
+<form method = "POST" action="{% url 'addtolist'  animeName.id  %}">
   {% csrf_token %}
 <div
   class="modal fade"
@@ -11,7 +11,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Add {{ animeName.title }}?</h1>
         <button
           type="button"
           class="btn-close"

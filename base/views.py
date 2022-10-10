@@ -231,8 +231,17 @@ def editProfile(request):
     context = {'user' : userProfile , 'form' : formObject}
     return render(request, 'base/edit_profile.html', context)
 
-def addtoMyList(request, name):
-    pass
+def addtoMyList(request, pk):
+
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            if request.user.is_authenticated:
+                userObject = User.objects.get(id=request.user.id)
+                userObject.watchlist.add(Anime.objects.get(id=pk))
+                userObject.save()
+                return redirect('AnimeList')
+        
+    
 
 
 # Just enjoy the process.

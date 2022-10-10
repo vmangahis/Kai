@@ -59,12 +59,13 @@
 </main>
 
 {{ request.user.is_authenticated|json_script:"authenticated" }}
-
+" }}
 
 
 
  {% endblock %}
  {% block page_script %}
+ 
  <script type="text/javascript" src="{% static 'js/catalog_info.js' %}">
  </script>
  {% endblock %}

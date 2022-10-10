@@ -7,6 +7,7 @@ if (!authenticated) {
     });
 }
 
+
 let addtoList = document.getElementById('addtoList');
 addtoList.addEventListener('click', ev => {
     fetch('addtolist/',
