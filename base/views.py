@@ -236,11 +236,15 @@ def addtoMyList(request,type,pk):
 
             if type == 'anime':
                 userObject.watchlist.add(Anime.objects.get(id=pk))
+                userObject.save()
+                return redirect('AnimeList')
 
             elif type == 'manga':
                 userObject.readlist.add(Manga.objects.get(id=pk))
+                userObject.save()
+                return redirect('MangaList')
             
-            userObject.save()
+            
 
     else:
         return redirect('Login')
