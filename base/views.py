@@ -169,9 +169,7 @@ def personalList(request, pk):
 def catalog(request):
     context = {}
     currentUser = User.objects.get(id=request.user.id)
-    randomSeed = list(string.ascii_lowercase)
-    randomSeed.append(string.ascii_uppercase)
-    randomSeed.append(string.hexdigits)
+    
     
     if 'mangalist' in request.path:
         masterList = Manga.objects.all()
@@ -179,7 +177,7 @@ def catalog(request):
         page_number = request.GET.get('page')
 
         page_object = mangaListPaginator.get_page(page_number)
-        context = {'list' : page_object , 'user_list' : currentUser.readlist.all(), 'list_type' : 'manga', 'seed' : randomSeed}
+        context = {'list' : page_object , 'user_list' : currentUser.readlist.all(), 'list_type' : 'manga'}
 
     elif 'animelist' in request.path:
         masterList = Anime.objects.all()[:100]
@@ -188,7 +186,7 @@ def catalog(request):
         page_number = request.GET.get('page')
         page_object = animeListPaginator.get_page(page_number)
         
-        context = {'list' : page_object, 'user_list' : currentUser.watchlist.all(), 'list_type' : 'anime', 'seed': randomSeed}
+        context = {'list' : page_object, 'user_list' : currentUser.watchlist.all(), 'list_type' : 'anime'}
 
     
     return render(request, 'base/catalog.html', context)

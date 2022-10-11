@@ -258,10 +258,24 @@ main {
   height: 75px;
 }
 
-.thumbnail-catalog {
+.thumbnail-image {
   width: 300px;
   height: 500px;
+  background-repeat:no-repeat;
+  background-position: center center;
+  background-size:cover;
+  
 }
+
+.existed{
+  
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+
 
 .big-img {
   width: 800px;
@@ -283,5 +297,7 @@ main {
   align-items: center;
   flex-wrap: wrap;
 }
+
+
 
 /* Enjoy the process. */

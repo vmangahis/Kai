@@ -49,14 +49,14 @@ document.addEventListener("DOMContentLoaded", (event) => {
                         final.forEach(elem => {
 
                             if (list_type == "watchlist") {
-                                tag += `<div class = "list-card text-light"><a href="http://${window.location.host}/anime/${elem.id}"><img src="${elem.thumbnail}" alt="${elem.title}" class="list-card-image thumbnail-catalog" />
+                                tag += `<div class = "list-card text-light"><a href="http://${window.location.host}/anime/${elem.id}"><img src="${elem.thumbnail}" alt="${elem.title}" class="list-card-image thumbnail-image" />
                         </a><div class="title-info-text">
                         <h5 class="text-start">${elem.title}</h5><p class="text-start">${elem.genre.map(genreElement => {
                             
                             return  genreElement;
                         }).join(', ')} </p></div></div>`;
                             } else if (list_type == "readlist") {
-                                tag += `<div class = "list-card text-light"><a href="http://${window.location.host}/manga/${elem.id}"><img src="${elem.thumbnail}" alt="${elem.title}" class="list-card-image thumbnail-catalog" />
+                                tag += `<div class = "list-card text-light"><a href="http://${window.location.host}/manga/${elem.id}"><img src="${elem.thumbnail}" alt="${elem.title}" class="list-card-image thumbnail-image" />
                         </a><div class="title-info-text">
                         <h5 class="text-start">${elem.title}</h5><p class="text-start"> ${elem.genre.map((genreElement) => {
                             

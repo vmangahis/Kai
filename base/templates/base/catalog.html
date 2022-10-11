@@ -7,10 +7,21 @@
 {% for lst in list %}
 <figure class="content-card">
     {% if list_type == 'anime' %}
-    <a href="{% url 'AnimPage' lst.id %}"><img class="thumbnail-catalog" src="{{ lst.large_image }}" alt="{{ lst.title }}"/></a>
-
+    
+        {% if lst in user_list %}
+            <a href="{% url 'AnimPage' lst.id %}" class="thumbnail-image existed" style="background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url({{ lst.large_image }});"><h4>Already in your list!</h4></a>
+        {% else %}
+            <a href="{% url 'AnimPage' lst.id %}" class="thumbnail-image" style="background-image: url({{ lst.large_image }});"></a>
+        {% endif %}
+    
     {% else %}
-    <a href="{% url 'MangPage' lst.id %}"><img class="thumbnail-catalog" src="{{ lst.large_image }}" alt="{{ lst.title }}"/></a>
+
+        {% if lst in user_list %}
+            <a href="{% url 'MangPage' lst.id %}" class="thumbnail-image existed" style="background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url({{ lst.large_image }});"><h4>Already in your list!</h4></a>
+
+        {% else %}
+            <a href="{% url 'MangPage' lst.id %}" class="thumbnail-image" style="background-image: url({{ lst.large_image }});"></a>
+        {% endif %}
     {% endif %}
 
     <div class="title-info-text">
