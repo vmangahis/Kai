@@ -16,6 +16,10 @@ urlpatterns = [
     path('search/', views.search, name='Search'),
     path('profile/', views.profile, name='SelfProfile'),
     path('profile/edit', views.editProfile, name='EditProfile'),
-    path('addtolist/<str:pk>', views.addtoMyList, name='addtolist')
+    path('addtolist/<str:type>/<str:pk>', views.addtoMyList, name='addtolist'),
+    
 ]
+
+
+
 

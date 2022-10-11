@@ -6,15 +6,3 @@ if (!authenticated) {
         document.location.href = "/login/";
     });
 }
-
-
-let addtoList = document.getElementById('addtoList');
-addtoList.addEventListener('click', ev => {
-    fetch('addtolist/',
-
-        {
-            method: "POST",
-
-        }
-    )
-});

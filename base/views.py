@@ -142,7 +142,7 @@ def personalList(request, pk):
                 genreList.append(y['name'])
             
             
-            context.append({'id': x.id,'title' : x.title, 'genre' : genreList})
+            context.append({'id': x.id,'title' : x.title, 'genre' : genreList, 'thumbnail' : x.large_image})
             genreList = []
             
             
@@ -231,15 +231,26 @@ def editProfile(request):
     context = {'user' : userProfile , 'form' : formObject}
     return render(request, 'base/edit_profile.html', context)
 
-def addtoMyList(request, pk):
-
+def addtoMyList(request,type,pk):
     if request.user.is_authenticated:
         if request.method == 'POST':
-            if request.user.is_authenticated:
-                userObject = User.objects.get(id=request.user.id)
+            userObject = User.objects.get(id=request.user.id)
+
+            if type == 'anime':
                 userObject.watchlist.add(Anime.objects.get(id=pk))
-                userObject.save()
-                return redirect('AnimeList')
+
+            elif type == 'manga':
+                userObject.readlist.add(Manga.objects.get(id=pk))
+            
+            userObject.save()
+
+    else:
+        return redirect('Login')
+                
+            
+
+
+        
         
     
 

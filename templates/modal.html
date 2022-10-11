@@ -1,5 +1,9 @@
 {% if animeName %}
-<form method = "POST" action="{% url 'addtolist'  animeName.id  %}">
+{% if 'anime' in request.path %}
+<form method = "POST" action="{% url 'addtolist'  'anime' animeName.id  %}">
+{% elif 'manga' in request.path %}
+<form method = "POST" action="{% url 'addtolist'  'manga' animeName.id  %}">
+{% endif %}
   {% csrf_token %}
 <div
   class="modal fade"

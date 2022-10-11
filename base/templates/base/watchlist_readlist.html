@@ -28,7 +28,7 @@
             <a href="{% url 'MangPage' lst.id %}">
             {% endif %}
                 
-                <img src="https://via.placeholder.com/300x500" alt="{{ lst.title }}" class="list-card-image" />
+                <img src="{{ lst.large_image }}" alt="{{ lst.title }}" class="list-card-image thumbnail-catalog" />
                 
             </a>
                 <div class="title-info-text">
