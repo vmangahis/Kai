@@ -1,6 +1,7 @@
 * {
   margin: 0px;
   box-sizing: border-box;
+  
 }
 a {
   text-decoration: none !important;
@@ -245,6 +246,7 @@ main {
 .list-card {
   display: flex;
   flex-direction: column;
+  position:relative;
 }
 
 .title-info-text {
@@ -258,9 +260,15 @@ main {
   height: 75px;
 }
 
-.thumbnail-image {
+.thumbnail-image, .edit-watchlist-controller{
   width: 300px;
   height: 500px;
+}
+
+.thumbnail-image {
+  
+  
+  
   background-repeat:no-repeat;
   background-position: center center;
   background-size:cover;
@@ -297,6 +305,63 @@ main {
   align-items: center;
   flex-wrap: wrap;
 }
+
+
+.personal-list{
+  
+  z-index:9;
+}
+
+.personal-list:hover .list-controller{
+  opacity:1;
+
+}
+
+.list-controller{
+  
+  position:absolute;
+  top:0;
+  right:0;
+  z-index:10;
+  opacity:0;
+  border-radius:50%;
+  background-color: black;
+  margin:15px 15px 0 0;
+}
+
+
+
+.edit-watchlist-controller{
+  background:linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7));
+  position: absolute;
+  top:0;
+  bottom:0;
+  left:0;
+  right:0;
+  z-index:9;
+  
+  display:none;
+  align-items: center;
+  justify-content: center;
+}
+
+
+
+.edit-watchlist-menu{
+  
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap:50px;
+}
+
+
+
+
+
+
+
 
 
 

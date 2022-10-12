@@ -1,6 +1,14 @@
 document.addEventListener("DOMContentLoaded", (event) => {
 
     let window_location = window.location.pathname.split('/')[1];
+    let controller_button = document.querySelectorAll('.list-controller');
+    let personal_lists = document.querySelectorAll('.personal-list');
+
+    personal_lists.forEach(element =>{
+        element.addEventListener('click' , e =>{
+            console.log('controller');
+        })
+    })
 
     if (window_location == 'readlist') {
         document.getElementById('readlist-button').classList.add('mode-choice');
@@ -92,6 +100,8 @@ document.addEventListener("DOMContentLoaded", (event) => {
                 })
         })
     });
+
+
 
 
 });

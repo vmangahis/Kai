@@ -21,15 +21,29 @@
             
             <div class="list-card text-light"> 
                 {% if 'watchlist' in request.path %}
-            <a href="{% url 'AnimPage' lst.id %}" class="list-card-image thumbnail-image" style="background-image: url({{lst.large_image}});">
+            <a href="{% url 'AnimPage' lst.id %}" class="list-card-image thumbnail-image personal-list" style="background-image: url({{lst.large_image}});">
             
             {% elif 'readlist' in request.path %}
-            <a href="{% url 'MangPage' lst.id %}" class="list-card-image thumbnail-image" style="background-image: url({{lst.large_image}});">
+            <a href="{% url 'MangPage' lst.id %}" class="list-card-image thumbnail-image personal-list" style="background-image: url({{lst.large_image}});">
             {% endif %}
+            
                 
-                
+        
+            
+            
+            
+
+            
                 
             </a>
+            <button id="boot-icon" class="bi bi-three-dots-vertical list-controller" style="font-size: 2rem; color: rgb(255, 0, 0);">
+            </button>
+            <div class="edit-watchlist-controller">
+                <ul class="edit-watchlist-menu">
+                    <li><a href="#">Move to plan to watch</a></li>
+                    <li><a href="#">Remove from my list</a></li>
+                </ul>
+            </div>
                 <div class="title-info-text">
                     <h5 class="text-start">{{ lst.title }}</h5>
                     <p class="text-start">{% for gn in lst.genre.all %}{{ gn.name }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
