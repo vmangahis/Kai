@@ -307,28 +307,39 @@ main {
 }
 
 
-.personal-list{
-  
-  z-index:9;
-}
-
-.personal-list:hover .list-controller{
-  opacity:1;
-
-}
 
 .list-controller{
+  opacity:0;
+}
+
+.list-controller, .list-controller-close{
   
   position:absolute;
   top:0;
   right:0;
   z-index:10;
-  opacity:0;
+  
   border-radius:50%;
   background-color: black;
   margin:15px 15px 0 0;
 }
 
+.list-controller-close{
+  opacity:1;
+}
+
+
+.personal-list {
+  position: relative;
+  z-index:9;
+}
+
+.personal-list:hover + .list-controller, .list-controller:hover{
+  opacity: 1;
+ }
+
+
+ 
 
 
 .edit-watchlist-controller{
@@ -348,13 +359,15 @@ main {
 
 
 .edit-watchlist-menu{
-  
   display:flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   gap:50px;
 }
+
+
+
 
 
 

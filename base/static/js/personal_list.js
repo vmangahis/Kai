@@ -2,13 +2,57 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
     let window_location = window.location.pathname.split('/')[1];
     let controller_button = document.querySelectorAll('.list-controller');
-    let personal_lists = document.querySelectorAll('.personal-list');
+    
 
-    personal_lists.forEach(element =>{
+    let active_menu;
+    let active_controller;
+
+    
+
+    
+    
+
+    controller_button.forEach((element,index) =>{
+        
         element.addEventListener('click' , e =>{
-            console.log('controller');
+            
+            if(active_menu && active_controller)
+            {
+                if(active_controller != e.target && active_menu != document.querySelectorAll('.edit-watchlist-controller')[index])
+                {
+                    active_menu.style.display="none";
+                    active_controller.className = "bi bi-three-dots-vertical list-controller";
+                }
+                
+            }
+
+
+            if(e.target.className == "bi bi-three-dots-vertical list-controller")
+            {   
+                e.target.className = "bi bi-x-lg list-controller-close";
+                document.querySelectorAll('.edit-watchlist-controller')[index].style.display = "flex";
+            }
+            else{
+                e.target.className= "bi bi-three-dots-vertical list-controller";
+                document.querySelectorAll('.edit-watchlist-controller')[index].style.display = "none";
+            }
+
+            
+            active_controller =  e.target;
+            active_menu = document.querySelectorAll('.edit-watchlist-controller')[index];
+                
+
+
+            
         })
     })
+
+    
+
+
+
+
+    
 
     if (window_location == 'readlist') {
         document.getElementById('readlist-button').classList.add('mode-choice');
