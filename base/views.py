@@ -1,4 +1,3 @@
-import string
 import json
 from django.shortcuts import render, redirect
 from django.contrib import messages
@@ -238,6 +237,7 @@ def addtoMyList(request,type,pk):
                 userObject.watchlist.add(Anime.objects.get(id=pk))
                 userObject.save()
                 return redirect('AnimeList')
+                
 
             elif type == 'manga':
                 userObject.readlist.add(Manga.objects.get(id=pk))

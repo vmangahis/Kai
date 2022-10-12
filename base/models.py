@@ -55,8 +55,15 @@ class User(AbstractUser):
     email = models.EmailField(unique=False)
     intro = models.TextField(null=True)
 
-    watchlist = models.ManyToManyField(Anime,  blank=True)
-    readlist = models.ManyToManyField(Manga,  blank=True)
+    watchlist = models.ManyToManyField(Anime,  blank=True, related_name = 'watchlist')
+    plan_watchlist = models.ManyToManyField(Anime, blank=True, related_name = 'plantowatch')
+    dropped_watchlist = models.ManyToManyField(Anime, blank=True, related_name='droppedlist_watch')
+
+
+    readlist = models.ManyToManyField(Manga,  blank=True, related_name = 'readlist')
+    plan_readlist = models.ManyToManyField(Manga, blank=True, related_name = 'plantoread')
+    dropped_readlist = models.ManyToManyField(Manga, blank=True, related_name = 'droppedlist_read')
+
     avatar = models.ImageField(null=True, default='blank-avatar.svg')
 
     USERNAME_FIELD = 'username'
