@@ -248,7 +248,9 @@ def addtoMyList(request,type,pk):
 
     else:
         return redirect('Login')
-                
+
+def addtoDroppedList(request, type, pk):
+    print(pk)
             
 
 
