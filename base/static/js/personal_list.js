@@ -6,47 +6,53 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
     let active_menu;
     let active_controller;
-
     
-
-    
-    
-
-    controller_button.forEach((element,index) =>{
+    const reinvokeButtonListeners = (cont) => {
+        cont.forEach((element,index) =>{
         
-        element.addEventListener('click' , e =>{
-            
-            if(active_menu && active_controller)
-            {
-                if(active_controller != e.target && active_menu != document.querySelectorAll('.edit-watchlist-controller')[index])
+            element.addEventListener('click' , e =>{
+                
+                if(active_menu && active_controller)
                 {
-                    active_menu.style.display="none";
-                    active_controller.className = "bi bi-three-dots-vertical list-controller";
+                    if(active_controller != e.target && active_menu != document.querySelectorAll('.edit-watchlist-controller')[index])
+                    {
+                        active_menu.style.display="none";
+                        active_controller.className = "bi bi-three-dots-vertical list-controller";
+                    }
+                    
                 }
+    
+    
+                if(e.target.className == "bi bi-three-dots-vertical list-controller")
+                {   
+                    e.target.className = "bi bi-x-lg list-controller-close";
+                    document.querySelectorAll('.edit-watchlist-controller')[index].style.display = "flex";
+                }
+                else{
+                    e.target.className= "bi bi-three-dots-vertical list-controller";
+                    document.querySelectorAll('.edit-watchlist-controller')[index].style.display = "none";
+                }
+    
                 
-            }
-
-
-            if(e.target.className == "bi bi-three-dots-vertical list-controller")
-            {   
-                e.target.className = "bi bi-x-lg list-controller-close";
-                document.querySelectorAll('.edit-watchlist-controller')[index].style.display = "flex";
-            }
-            else{
-                e.target.className= "bi bi-three-dots-vertical list-controller";
-                document.querySelectorAll('.edit-watchlist-controller')[index].style.display = "none";
-            }
-
-            
-            active_controller =  e.target;
-            active_menu = document.querySelectorAll('.edit-watchlist-controller')[index];
+                active_controller =  e.target;
+                active_menu = document.querySelectorAll('.edit-watchlist-controller')[index];
+                    
+    
+    
                 
+            })
+        });
+
+        
+    }
 
 
-            
-        })
-    })
+    reinvokeButtonListeners(controller_button);
 
+    
+    
+
+    
     
 
 
@@ -94,22 +100,41 @@ document.addEventListener("DOMContentLoaded", (event) => {
                 .then((res) => res.json())
                 .then((data) => {
                     let final = data;
-
                     let urlState = "";
                     let tag = "";
                     if (final.length > 0) {
                         final.forEach(elem => {
 
                             if (list_type == "watchlist") {
-                                tag += `<div class = "list-card text-light"><a href="http://${window.location.host}/anime/${elem.id}"><img src="${elem.thumbnail}" alt="${elem.title}" class="list-card-image thumbnail-image" />
-                        </a><div class="title-info-text">
+                                tag += `<div class = "list-card text-light"><a href="http://${window.location.host}/anime/${elem.id}" class="list-card-image thumbnail-image personal-list" style="background-image: url(${elem.thumbnail})">
+                        </a>
+                        <button id="boot-icon" class="bi bi-three-dots-vertical list-controller" style="font-size: 2rem; color: rgb(255, 0, 0);">
+                        </button>
+                        <div class="edit-watchlist-controller">
+                            <ul class="edit-watchlist-menu">
+                                <li><a href="#">Move to plan to watch</a></li>
+                                <li><a href="#">Remove from my list</a></li>
+                            </ul>
+                        </div>
+                        <div class="title-info-text">
                         <h5 class="text-start">${elem.title}</h5><p class="text-start">${elem.genre.map(genreElement => {
-                            
                             return  genreElement;
                         }).join(', ')} </p></div></div>`;
                             } else if (list_type == "readlist") {
-                                tag += `<div class = "list-card text-light"><a href="http://${window.location.host}/manga/${elem.id}"><img src="${elem.thumbnail}" alt="${elem.title}" class="list-card-image thumbnail-image" />
-                        </a><div class="title-info-text">
+                                tag += `<div class = "list-card text-light"><a href="http://${window.location.host}/manga/${elem.id}" class="list-card-image thumbnail-image personal-list" style="background-image: url(${elem.thumbnail})">
+                        </a>
+
+                        <button id="boot-icon" class="bi bi-three-dots-vertical list-controller" style="font-size: 2rem; color: rgb(255, 0, 0);">
+                        </button>
+                        <div class="edit-watchlist-controller">
+                            <ul class="edit-watchlist-menu">
+                                <li><a href="#">Move to plan to watch</a></li>
+                                <li><a href="#">Remove from my list</a></li>
+                            </ul>
+                        </div>
+                        
+                        
+                        <div class="title-info-text">
                         <h5 class="text-start">${elem.title}</h5><p class="text-start"> ${elem.genre.map((genreElement) => {
                             
                             return genreElement;
@@ -137,13 +162,25 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
 
                     window.history.replaceState(null, null, urlState);
-
+                    controller_button = document.querySelectorAll('.list-controller');
+                    reinvokeButtonListeners(controller_button);
                 })
                 .catch((error) => {
                     console.error(error);
                 })
         })
+
+
+        
+        
+        
     });
+
+    
+
+
+    
+
 
 
 
