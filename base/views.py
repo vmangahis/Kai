@@ -123,13 +123,13 @@ def personalList(request, pk):
 
         # check if user wanted to see read list or watchlist
         if requestBody.get('queryType') == 'watchlist':
-            genrelistObject = usersListObject.watchlist.all()
+            genrelistObject = usersListObject.watchlist.all() | usersListObject.plan_watchlist.all()
            
             
             
 
         elif requestBody.get('queryType') == 'readlist':
-            genrelistObject = usersListObject.readlist.all()
+            genrelistObject = usersListObject.readlist.all() | usersListObject.plan_readlist.all()
 
         
         
@@ -157,10 +157,10 @@ def personalList(request, pk):
     elif request.method == 'GET':
         
         if 'watchlist' in request.path:
-            context = {'list': usersListObject.watchlist.all()}
+            context = {'list': usersListObject.watchlist.all() | usersListObject.plan_watchlist.all()}
 
         elif 'readlist' in request.path:
-            context = {'list' : usersListObject.readlist.all()}
+            context = {'list' : usersListObject.readlist.all() | usersListObject.plan_readlist.all()}
     
     return render(request, 'base/watchlist_readlist.html', context)
 
