@@ -34,8 +34,54 @@
             </button>
             <div class="edit-watchlist-controller">
                 <ul class="edit-watchlist-menu">
-                    <li><a href="#">Move to plan to watch</a></li>
-                    <li><a href="#">Remove from my list</a></li>
+
+                    <li>
+                        {% if 'watchlist' in request.path %}
+                        <form method="POST" action="{% url 'plan' 'anime' lst.id %}">
+                        {% csrf_token %}
+                        <button type="submit" class="list-controller-button text-light">Move to plan to watch</button>
+
+                        {% elif 'readlist' in request.path %}
+                        <form method="POST" action="{% url 'plan' 'manga' lst.id %}">
+                            {% csrf_token %}
+                        <button type="submit" class="list-controller-button text-light">Move to plan to read</button>
+                        {% endif %}
+                        </form>
+                    </li>
+
+                    <li>
+                        
+                        {% if 'watchlist' in request.path %}
+                        <form method="POST" action="{% url 'finish' 'anime' lst.id %}">
+                            {% csrf_token %}
+                        <button type="submit" class="list-controller-button text-light">Move to completed list</button>
+
+                        {% elif 'readlist' in request.path %}
+                        <form method="POST" action="{% url 'finish' 'manga' lst.id %}">
+                            {% csrf_token %}
+                        <button type="submit" class="list-controller-button text-light">Remove from my list</button>
+                        {% endif %}
+
+                        </form>
+                    </li>
+
+                    <li>
+                        
+                        {% if 'watchlist' in request.path %}
+                        <form method="POST" action="{% url 'dropentry' 'anime' lst.id %}">
+                            {% csrf_token %}
+                        <button type="submit" class="list-controller-button text-light">Remove from my list</button>
+
+                        {% elif 'readlist' in request.path %}
+                        <form method="POST" action="{% url 'dropentry' 'manga' lst.id %}">
+                            {% csrf_token %}
+                        <button type="submit" class="list-controller-button text-light">Remove from my list</button>
+                        {% endif %}
+
+                        </form>
+                    </li>
+
+                    
                 </ul>
             </div>
                 <div class="title-info-text">

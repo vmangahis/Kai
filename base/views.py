@@ -249,8 +249,39 @@ def addtoMyList(request,type,pk):
     else:
         return redirect('Login')
 
-def addtoDroppedList(request, type, pk):
-    print(pk)
+def dropEntry(request, type, pk):
+    return HttpResponse('dropped', type)
+
+def movetoPlan(request,type, pk):
+    current_user = User.objects.get(id=request.user.id)
+    if type == "manga":
+        entry_object = Manga.objects.get(id=pk)
+        current_user.readlist.remove(entry_object)
+        current_user.plan_readlist.add(entry_object)
+        current_user.save()
+        return redirect('ReadList', pk=request.user.id)
+
+    elif type == "anime":
+        entry_object = Anime.objects.get(id=pk)
+        current_user.watchlist.remove(entry_object)
+        current_user.plan_watchlist.add(entry_object)
+        current_user.save()
+        return redirect('WatchList', pk=request.user.id)
+
+    
+
+    
+
+    
+        
+
+    
+
+
+
+def movetoFinish(request, type, pk):
+    return HttpResponse('finished', type)
+
             
 
 

@@ -17,7 +17,9 @@ urlpatterns = [
     path('profile/', views.profile, name='SelfProfile'),
     path('profile/edit', views.editProfile, name='EditProfile'),
     path('addtolist/<str:type>/<str:pk>', views.addtoMyList, name='addtolist'),
-    path('addtodropped/<str:type>/<str:pk>', views.addtoDroppedList, name='addtodroppedlist')
+    path('drop/<str:type>/<str:pk>', views.dropEntry, name='dropentry'),
+    path('plan/<str:type>/<str:pk>', views.movetoPlan, name='plan'),
+    path('finish/<str:type>/<str:pk>', views.movetoFinish, name='finish')
 ]
 
 
