@@ -117,13 +117,17 @@ def personalList(request, pk):
 
     if request.method == 'POST':
 
-        
+        plan_context = []
         #get post request from fetch api 
         requestBody = json.loads(request.body)
 
         # check if user wanted to see read list or watchlist
         if requestBody.get('queryType') == 'watchlist':
             genrelistObject = usersListObject.watchlist.all() | usersListObject.plan_watchlist.all()
+
+            for pl in usersListObject.plan_watchlist.all():
+                plan_context.append(pl)
+
             
            
             
@@ -131,6 +135,8 @@ def personalList(request, pk):
 
         elif requestBody.get('queryType') == 'readlist':
             genrelistObject = usersListObject.readlist.all() | usersListObject.plan_readlist.all()
+            for pl in usersListObject.plan_readlist.all():
+                plan_context.append(pl)
             
 
         
@@ -143,11 +149,15 @@ def personalList(request, pk):
                 genreList.append(y['name'])
             
             
-            context.append({'id': x.id,'title' : x.title, 'genre' : genreList, 'thumbnail' : x.large_image})
+            context.append({'id': x.id,'title' : x.title, 'genre' : genreList, 'thumbnail' : x.large_image, 'plan_list': plan_context})
             genreList = []
             
             
-            
+        
+
+        
+        
+        print(context)
         jsonContext = json.dumps(context,indent=4, sort_keys=True, default=str)
         
         

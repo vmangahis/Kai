@@ -102,12 +102,18 @@ document.addEventListener("DOMContentLoaded", (event) => {
                     let final = data;
                     let urlState = "";
                     let tag = "";
+                    console.log(final);
                     if (final.length > 0) {
                         final.forEach(elem => {
 
                             if (list_type == "watchlist") {
+
+                                if(elem.plan_list.includes(elem.title))
+                                {
+                                    console.log(elem.title + 'in your plan');
+                                }
                                 
-                                tag += `<div class = "list-card text-light"><a href="http://${window.location.host}/anime/${elem.id}" class="list-card-image thumbnail-image personal-list" style="background-image: url(${elem.thumbnail})">
+                                tag += `<div class = "list-card text-light"><a href="http://${window.location.host}/anime/${elem.id}" class="list-card-image thumbnail-image personal-list ${elem.plan_list.includes(elem.title) ? "plan" : ""} " style="background-image: url(${elem.thumbnail})">
                         </a>
                         <button id="boot-icon" class="bi bi-three-dots-vertical list-controller" style="font-size: 2rem; color: rgb(255, 0, 0);">
                         </button>
