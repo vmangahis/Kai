@@ -53,4 +53,3 @@ admin.site.register(MangaGenre, MangaGenreResourceAdmin)
 admin.site.register(Manga, MangaResourceAdmin)
 admin.site.register(Author)
 admin.site.register(StudioCompany)
-

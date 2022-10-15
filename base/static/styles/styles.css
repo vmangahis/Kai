@@ -339,7 +339,9 @@ main {
  }
 
 
- 
+ .plan{
+  border: 2px solid red;
+ }
 
 
 .edit-watchlist-controller{

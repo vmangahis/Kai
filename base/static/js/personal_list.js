@@ -106,6 +106,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
                         final.forEach(elem => {
 
                             if (list_type == "watchlist") {
+                                
                                 tag += `<div class = "list-card text-light"><a href="http://${window.location.host}/anime/${elem.id}" class="list-card-image thumbnail-image personal-list" style="background-image: url(${elem.thumbnail})">
                         </a>
                         <button id="boot-icon" class="bi bi-three-dots-vertical list-controller" style="font-size: 2rem; color: rgb(255, 0, 0);">
@@ -120,7 +121,9 @@ document.addEventListener("DOMContentLoaded", (event) => {
                         <h5 class="text-start">${elem.title}</h5><p class="text-start">${elem.genre.map(genreElement => {
                             return  genreElement;
                         }).join(', ')} </p></div></div>`;
-                            } else if (list_type == "readlist") {
+                            } 
+                            
+                            else if (list_type == "readlist") {
                                 tag += `<div class = "list-card text-light"><a href="http://${window.location.host}/manga/${elem.id}" class="list-card-image thumbnail-image personal-list" style="background-image: url(${elem.thumbnail})">
                         </a>
 

@@ -30,6 +30,7 @@ class Anime(models.Model):
     genre = models.ManyToManyField(AnimeGenre)
     thumbnail = models.URLField(max_length=200, default="https://picsum.photos/seed/picsum/300/500", null=True)
     large_image = models.URLField(max_length=200, default="https://picsum.photos/seed/picsum/500/500", null=True)
+    
 
     def __str__(self):
         return str(self.title)
@@ -41,6 +42,7 @@ class Manga(models.Model):
     large_image = models.URLField(max_length=200, default="https://picsum.photos/seed/picsum/500/500")
     thumbnail = models.URLField(max_length=200, default="https://picsum.photos/seed/picsum/300/500")
     genre = models.ManyToManyField(MangaGenre)
+    
 
     def __str__(self):
         return self.title
@@ -49,6 +51,7 @@ class Author(models.Model):
     name = models.CharField(max_length=50, unique=True, default='John Doe' ,blank=True, null=True)
     works = models.ManyToManyField(Manga, related_name='author_work', blank=True)
 
+
 class User(AbstractUser):
     display_name = models.CharField(max_length=100)
     username = models.CharField(max_length=50, unique=True)
@@ -56,12 +59,11 @@ class User(AbstractUser):
     intro = models.TextField(null=True)
 
     watchlist = models.ManyToManyField(Anime,  blank=True, related_name = 'watchlist')
-    plan_watchlist = models.ManyToManyField(Anime, blank=True, related_name = 'plantowatch')
-    
-
+    plan_watchlist = models.ManyToManyField(Anime, blank=True, related_name='plan_watchlist')
 
     readlist = models.ManyToManyField(Manga,  blank=True, related_name = 'readlist')
-    plan_readlist = models.ManyToManyField(Manga, blank=True, related_name = 'plantoread')
+    plan_readlist = models.ManyToManyField(Manga,  blank=True, related_name = 'plan_readlist')
+    
     
 
     avatar = models.ImageField(null=True, default='blank-avatar.svg')

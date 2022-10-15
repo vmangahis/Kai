@@ -124,12 +124,14 @@ def personalList(request, pk):
         # check if user wanted to see read list or watchlist
         if requestBody.get('queryType') == 'watchlist':
             genrelistObject = usersListObject.watchlist.all() | usersListObject.plan_watchlist.all()
+            
            
             
             
 
         elif requestBody.get('queryType') == 'readlist':
             genrelistObject = usersListObject.readlist.all() | usersListObject.plan_readlist.all()
+            
 
         
         
@@ -148,6 +150,7 @@ def personalList(request, pk):
             
         jsonContext = json.dumps(context,indent=4, sort_keys=True, default=str)
         
+        
         #Ajax Response 
         return HttpResponse(jsonContext, content_type="application/json")
         
@@ -157,11 +160,11 @@ def personalList(request, pk):
     elif request.method == 'GET':
         
         if 'watchlist' in request.path:
-            context = {'list': usersListObject.watchlist.all() | usersListObject.plan_watchlist.all()}
+            context = {'list': usersListObject.watchlist.all() | usersListObject.plan_watchlist.all(), 'planned_list' : usersListObject.plan_watchlist.all()}
 
         elif 'readlist' in request.path:
-            context = {'list' : usersListObject.readlist.all() | usersListObject.plan_readlist.all()}
-    
+            context = {'list' : usersListObject.readlist.all() | usersListObject.plan_readlist.all(), 'planned_list' : usersListObject.plan_readlist.all()}
+     
     return render(request, 'base/watchlist_readlist.html', context)
 
 @login_required(login_url='Login')
@@ -176,7 +179,7 @@ def catalog(request):
         page_number = request.GET.get('page')
 
         page_object = mangaListPaginator.get_page(page_number)
-        context = {'list' : page_object , 'user_list' : currentUser.readlist.all(), 'list_type' : 'manga'}
+        context = {'list' : page_object , 'user_list' : currentUser.readlist.all(), 'list_type' : 'manga', 'plan_list' : currentUser.plan_readlist.all()}
 
     elif 'animelist' in request.path:
         masterList = Anime.objects.all()[:100]
@@ -185,7 +188,7 @@ def catalog(request):
         page_number = request.GET.get('page')
         page_object = animeListPaginator.get_page(page_number)
         
-        context = {'list' : page_object, 'user_list' : currentUser.watchlist.all(), 'list_type' : 'anime'}
+        context = {'list' : page_object, 'user_list' : currentUser.watchlist.all(), 'list_type' : 'anime', 'plan_list' : currentUser.plan_watchlist.all()}
 
     
     return render(request, 'base/catalog.html', context)

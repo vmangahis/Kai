@@ -21,8 +21,15 @@
             
             <div class="list-card text-light"> 
                 {% if 'watchlist' in request.path %}
-            <a href="{% url 'AnimPage' lst.id %}" class="list-card-image thumbnail-image personal-list" style="background-image: url({{lst.large_image}});">
+                {% if lst in planned_list %}
+                <a href="{% url 'AnimPage' lst.id %}" class="list-card-image thumbnail-image personal-list plan" style="background-image: url({{lst.large_image}});">
+                
+                {% else %}
+                <a href="{% url 'AnimPage' lst.id %}" class="list-card-image thumbnail-image personal-list" style="background-image: url({{lst.large_image}});">
+                {% endif %}
             
+            
+                
             {% elif 'readlist' in request.path %}
             <a href="{% url 'MangPage' lst.id %}" class="list-card-image thumbnail-image personal-list" style="background-image: url({{lst.large_image}});">
             {% endif %}
