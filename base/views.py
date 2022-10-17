@@ -38,7 +38,7 @@ def infoAnimeManga(request, pk):
         animeMangaOb = Manga.objects.get(id=pk)
     
     if request.user.is_authenticated:
-        if animeMangaOb in usersList.watchlist.all() or animeMangaOb in usersList.readlist.all():
+        if animeMangaOb in usersList.watchlist.all() or animeMangaOb in usersList.readlist.all() or animeMangaOb in usersList.plan_watchlist.all() or animeMangaOb in usersList.plan_readlist.all():
             alreadyinList = True
 
         else:
@@ -280,15 +280,6 @@ def movetoPlan(request,type, pk):
         current_user.plan_watchlist.add(entry_object)
         current_user.save()
         return redirect('WatchList', pk=request.user.id)
-
-    
-
-    
-
-    
-        
-
-    
 
 
 

@@ -119,8 +119,21 @@ document.addEventListener("DOMContentLoaded", (event) => {
                         </button>
                         <div class="edit-watchlist-controller">
                             <ul class="edit-watchlist-menu">
-                                <li><a href="#">Move to plan to watch</a></li>
-                                <li><a href="#">Remove from my list</a></li>
+                                
+                                <li>
+                                <form method="POST" action="http://${window.location.host}/plan/anime/${elem.id}" >
+                                <input type="hidden" name=csrfmiddlewaretoken value=${document.getElementsByName('csrf-token')[0].content} />
+                                <button type="submit" class="list-controller-button text-light">Move to plan to watch</button>
+                                </form>
+                                </li>
+
+                                
+
+
+
+                                <li>
+                                <a href="#">Remove from my list</a>
+                                </li>
                             </ul>
                         </div>
                         <div class="title-info-text">
@@ -136,10 +149,21 @@ document.addEventListener("DOMContentLoaded", (event) => {
                         <button id="boot-icon" class="bi bi-three-dots-vertical list-controller" style="font-size: 2rem; color: rgb(255, 0, 0);">
                         </button>
                         <div class="edit-watchlist-controller">
+
                             <ul class="edit-watchlist-menu">
-                                <li><a href="#">Move to plan to watch</a></li>
-                                <li><a href="#">Remove from my list</a></li>
+
+                                 <li>
+                                <form method="POST" action="http://${window.location.host}/plan/manga/${elem.id}" >
+                                <input type="hidden" name=csrfmiddlewaretoken value=${document.getElementsByName('csrf-token')[0].content} />
+                                <button type="submit" class="list-controller-button text-light">Move to plan to watch</button>
+                                </form>
+                                </li>
+
+                                <li>
+                                <a href="#">Remove from my list</a>
+                                </li>
                             </ul>
+
                         </div>
                         
                         

@@ -2,11 +2,10 @@
 
 {% block content %}
 
-<main class="container-fluid">
-
+<main class="container-fluid profile-layout">
+<img src="{{userProfileObject.avatar}}" />
 <h1 class="text-light">{{ userProfileObject.display_name }}</h1>
 <p class="text-light">{{ userProfileObject.intro }}</p>
-
 <a href="{% url 'EditProfile' %}">Edit Profile</a>
 </main>
 

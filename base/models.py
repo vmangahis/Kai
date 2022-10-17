@@ -31,6 +31,7 @@ class Anime(models.Model):
     thumbnail = models.URLField(max_length=200, default="https://picsum.photos/seed/picsum/300/500", null=True)
     large_image = models.URLField(max_length=200, default="https://picsum.photos/seed/picsum/500/500", null=True)
     
+     
 
     def __str__(self):
         return str(self.title)

@@ -66,7 +66,7 @@
                         {% elif 'readlist' in request.path %}
                         <form method="POST" action="{% url 'finish' 'manga' lst.id %}">
                             {% csrf_token %}
-                        <button type="submit" class="list-controller-button text-light">Remove from my list</button>
+                        <button type="submit" class="list-controller-button text-light">Move to completed list</button>
                         {% endif %}
 
                         </form>

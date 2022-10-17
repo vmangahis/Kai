@@ -369,6 +369,12 @@ main {
   gap:50px;
 }
 
+.profile-layout{
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
 
 
 
