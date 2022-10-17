@@ -31,7 +31,7 @@ class Anime(models.Model):
     thumbnail = models.URLField(max_length=200, default="https://picsum.photos/seed/picsum/300/500", null=True)
     large_image = models.URLField(max_length=200, default="https://picsum.photos/seed/picsum/500/500", null=True)
     
-     
+    watchers = models.ForeignKey('User', on_delete=models.CASCADE, blank=True, default=None, null=True)
 
     def __str__(self):
         return str(self.title)
@@ -48,6 +48,17 @@ class Manga(models.Model):
     def __str__(self):
         return self.title
 
+class UserWatchlist(models.Model):
+    user_id = models.ForeignKey('User', on_delete=models.CASCADE)
+    anime_id = models.ForeignKey(Anime, on_delete=models.CASCADE)
+    status = models.ForeignKey('WatchlistStatus', on_delete=models.CASCADE)
+
+class WatchlistStatus(models.Model):
+    status_type = models.CharField(max_length=20)
+
+    def __str__(self):
+        return self.status_type
+
 class Author(models.Model):
     name = models.CharField(max_length=50, unique=True, default='John Doe' ,blank=True, null=True)
     works = models.ManyToManyField(Manga, related_name='author_work', blank=True)
@@ -59,11 +70,11 @@ class User(AbstractUser):
     email = models.EmailField(unique=False)
     intro = models.TextField(null=True)
 
-    watchlist = models.ManyToManyField(Anime,  blank=True, related_name = 'watchlist')
-    plan_watchlist = models.ManyToManyField(Anime, blank=True, related_name='plan_watchlist')
+    
+    
+    
 
-    readlist = models.ManyToManyField(Manga,  blank=True, related_name = 'readlist')
-    plan_readlist = models.ManyToManyField(Manga,  blank=True, related_name = 'plan_readlist')
+    
     
     
 

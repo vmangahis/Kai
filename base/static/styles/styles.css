@@ -343,6 +343,10 @@ main {
   border: 2px solid red;
  }
 
+ .ongoing{
+  border:2px solid green;
+ }
+
 
 .edit-watchlist-controller{
   background:linear-gradient(rgba(6,5,19,0.9), rgba(6,5,19,0.9));

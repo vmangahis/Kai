@@ -25,7 +25,7 @@
                 <a href="{% url 'AnimPage' lst.id %}" class="list-card-image thumbnail-image personal-list plan" style="background-image: url({{lst.large_image}});">
                 
                 {% else %}
-                <a href="{% url 'AnimPage' lst.id %}" class="list-card-image thumbnail-image personal-list" style="background-image: url({{lst.large_image}});">
+                <a href="{% url 'AnimPage' lst.id %}" class="list-card-image thumbnail-image personal-list ongoing" style="background-image: url({{lst.large_image}});">
                 {% endif %}
             
             

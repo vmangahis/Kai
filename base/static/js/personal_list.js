@@ -113,7 +113,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
                                     console.log(elem.title + 'in your plan');
                                 }
                                 
-                                tag += `<div class = "list-card text-light"><a href="http://${window.location.host}/anime/${elem.id}" class="list-card-image thumbnail-image personal-list ${elem.plan_list.includes(elem.title) ? "plan" : ""} " style="background-image: url(${elem.thumbnail})">
+                                tag += `<div class = "list-card text-light"><a href="http://${window.location.host}/anime/${elem.id}" class="list-card-image thumbnail-image personal-list ${elem.plan_list.includes(elem.title) ? "plan" : "ongoing"} " style="background-image: url(${elem.thumbnail})">
                         </a>
                         <button id="boot-icon" class="bi bi-three-dots-vertical list-controller" style="font-size: 2rem; color: rgb(255, 0, 0);">
                         </button>
@@ -143,7 +143,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
                             } 
                             
                             else if (list_type == "readlist") {
-                                tag += `<div class = "list-card text-light"><a href="http://${window.location.host}/manga/${elem.id}" class="list-card-image thumbnail-image personal-list" style="background-image: url(${elem.thumbnail})">
+                                tag += `<div class = "list-card text-light"><a href="http://${window.location.host}/manga/${elem.id}" class="list-card-image thumbnail-image personal-list ${elem.plan_list.includes(elem.title) ? "plan" : "ongoing"}" style="background-image: url(${elem.thumbnail})">
                         </a>
 
                         <button id="boot-icon" class="bi bi-three-dots-vertical list-controller" style="font-size: 2rem; color: rgb(255, 0, 0);">
