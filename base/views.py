@@ -10,7 +10,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.urls import resolve
 from django.db.models import Q
 from .forms import UserCreation
-from .models import Anime, Manga, User
+from .models import Anime, Manga, User, UserWatchlist
 from .forms import UserEditForm
 
 
@@ -183,22 +183,38 @@ def catalog(request):
     currentUser = User.objects.get(id=request.user.id)
     
     
+    
+    
     if 'mangalist' in request.path:
         masterList = Manga.objects.all()
         mangaListPaginator = Paginator(masterList, 20)
         page_number = request.GET.get('page')
+        
 
         page_object = mangaListPaginator.get_page(page_number)
-        context = {'list' : page_object , 'user_list' : currentUser.readlist.all(), 'list_type' : 'manga', 'plan_list' : currentUser.plan_readlist.all()}
+        context = {'list' : page_object , 'user_list' : currentUser.readlist.all(), 'list_type' : 'manga'}
 
     elif 'animelist' in request.path:
         masterList = Anime.objects.all()[:100]
         animeListPaginator = Paginator(masterList, 20)
+        
+        userWatchListObject = UserWatchlist.objects.filter(user=request.user.id)
+        userWatchlist = []
+        
+            
+        
+        for counter in userWatchListObject:
+            userWatchlist.append(counter.anime)
+        
 
+
+        
         page_number = request.GET.get('page')
         page_object = animeListPaginator.get_page(page_number)
+
         
-        context = {'list' : page_object, 'user_list' : currentUser.watchlist.all(), 'list_type' : 'anime', 'plan_list' : currentUser.plan_watchlist.all()}
+        
+        context = {'list' : page_object, 'user_list' : userWatchlist, 'list_type' : 'anime'}
 
     
     return render(request, 'base/catalog.html', context)

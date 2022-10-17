@@ -49,9 +49,13 @@ class Manga(models.Model):
         return self.title
 
 class UserWatchlist(models.Model):
-    user_id = models.ForeignKey('User', on_delete=models.CASCADE)
-    anime_id = models.ForeignKey(Anime, on_delete=models.CASCADE)
+    user = models.ForeignKey('User', on_delete=models.CASCADE)
+    anime = models.ForeignKey(Anime, on_delete=models.CASCADE)
     status = models.ForeignKey('WatchlistStatus', on_delete=models.CASCADE)
+
+    def __str__(self):
+        return str(self.userid.username + ' ' + self.animeid.title + ' STATUS:' + self.status.status_type)
+
 
 class WatchlistStatus(models.Model):
     status_type = models.CharField(max_length=20)
