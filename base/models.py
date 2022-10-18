@@ -56,8 +56,22 @@ class UserWatchlist(models.Model):
     def __str__(self):
         return str(self.user.username + ' ' + self.anime.title + ' STATUS:' + self.status.status_type)
 
+class UserReadList(models.Model):
+    user = models.ForeignKey('User', on_delete=models.CASCADE)
+    anime = models.ForeignKey(Manga, on_delete=models.CASCADE)
+    status = models.ForeignKey('ReadlistStatus', on_delete=models.CASCADE)
+
+    def __str__(self):
+        return str(self.user.username + ' ' + self.anime.title + ' STATUS:' + self.status.status_type)
+
 
 class WatchlistStatus(models.Model):
+    status_type = models.CharField(max_length=20)
+
+    def __str__(self):
+        return self.status_type
+
+class ReadlistStatus(models.Model):
     status_type = models.CharField(max_length=20)
 
     def __str__(self):

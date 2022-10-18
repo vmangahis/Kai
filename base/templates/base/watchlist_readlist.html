@@ -44,7 +44,7 @@
 
                     <li>
                         {% if 'watchlist' in request.path %}
-                        <form method="POST" action="{% url 'plan' 'anime' lst.id %}">
+                        <form method="POST" action="{% url 'plan' 'anime' lst.anime.id %}">
                         {% csrf_token %}
                         <button type="submit" class="list-controller-button text-light">Move to plan to watch</button>
 
@@ -59,7 +59,7 @@
                     <li>
                         
                         {% if 'watchlist' in request.path %}
-                        <form method="POST" action="{% url 'finish' 'anime' lst.id %}">
+                        <form method="POST" action="{% url 'finish' 'anime' lst.anime.id %}">
                             {% csrf_token %}
                         <button type="submit" class="list-controller-button text-light">Move to completed list</button>
 
@@ -75,7 +75,7 @@
                     <li>
                         
                         {% if 'watchlist' in request.path %}
-                        <form method="POST" action="{% url 'dropentry' 'anime' lst.id %}">
+                        <form method="POST" action="{% url 'dropentry' 'anime' lst.anime.id %}">
                             {% csrf_token %}
                         <button type="submit" class="list-controller-button text-light">Remove from my list</button>
 
@@ -92,7 +92,7 @@
                 </ul>
             </div>
                 <div class="title-info-text">
-                    <h5 class="text-start">{{ lst.title }}</h5>
+                    <h5 class="text-start">{{ lst.anime.title }}</h5>
                     <p class="text-start">{% for gn in lst.genre.all %}{{ gn.name }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
                 </div> 
             

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import StudioCompany, User, Anime, AnimeGenre, Manga, MangaGenre, Author, UserWatchlist, WatchlistStatus
+from .models import StudioCompany, User, Anime, AnimeGenre, Manga, MangaGenre, Author, UserWatchlist, WatchlistStatus, ReadlistStatus, UserReadList
 from import_export.admin import ImportExportModelAdmin
 from import_export import resources
 
@@ -55,3 +55,5 @@ admin.site.register(Author)
 admin.site.register(StudioCompany)
 admin.site.register(UserWatchlist)
 admin.site.register(WatchlistStatus)
+admin.site.register(ReadlistStatus)
+admin.site.register(UserReadList)

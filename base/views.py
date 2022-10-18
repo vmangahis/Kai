@@ -126,31 +126,31 @@ def registerUser(request):
 @login_required(login_url='Login')
 @csrf_exempt
 def personalList(request, pk):
-
-    
-    usersListObject = UserWatchlist.objects.filter(user=pk)
-
-
+    context = {}
     #if user toggles between watchlist to readlist and vice versa
     if request.method == 'POST':
-
-        plan_context = []
+        context = []
         #get post request from fetch api 
         requestBody = json.loads(request.body)
 
+
         # check if user wanted to see read list or watchlist
         if requestBody.get('queryType') == 'watchlist':
-            genrelistObject = usersListObject.anime.all()
+            userlist = UserWatchlist.objects.filter(user=pk)
 
         elif requestBody.get('queryType') == 'readlist':
             pass
             
 
         
+        for anList in userlist:
+            context.append({'id' : anList.anime.id, 'title': anList.anime.title, 'thumbnail' : anList.anime.large_image})
         
-        print(context)
+        
+        
         jsonContext = json.dumps(context,indent=4, sort_keys=True, default=str)
         
+        print(jsonContext)
         
         #Ajax Response 
         return HttpResponse(jsonContext, content_type="application/json")
@@ -159,6 +159,7 @@ def personalList(request, pk):
     
     #if user opened his watchlist from menu
     elif request.method == 'GET':
+        usersListObject = UserWatchlist.objects.filter(user=pk)
         if 'watchlist' in request.path:
             context = {'list': usersListObject}
 
