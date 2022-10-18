@@ -10,7 +10,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.urls import resolve
 from django.db.models import Q
 from .forms import UserCreation
-from .models import Anime, Manga, User, UserWatchlist
+from .models import Anime, Manga, User, UserWatchlist, UserReadlist, WatchlistStatus, ReadlistStatus
 from .forms import UserEditForm
 
 
@@ -26,15 +26,9 @@ def home(request):
 
 #implement manga 
 def infoAnimeManga(request, pk):
-
     pageUrl = resolve(request.path_info).url_name
     alreadyinList = False
-    
         
-        
-        
-
-    
     # Check if page is in anime page
     if pageUrl == 'AnimPage':
 
@@ -50,16 +44,20 @@ def infoAnimeManga(request, pk):
 
     
     elif pageUrl == 'MangPage':
-        pass
+        animeMangaOb = Manga.objects.get(id=pk)
+
+        try:
+            user = UserReadlist.objects.get(user=request.user.id, manga=pk)
+
+        
+        except:
+            user = None
+        
 
     
     if user != None:
         alreadyinList = True
 
-    
-
-    
-    
     context = {'animeName': animeMangaOb, 'inList': alreadyinList}
     return render(request, 'base/info.html', context)
 
@@ -133,18 +131,21 @@ def personalList(request, pk):
         #get post request from fetch api 
         requestBody = json.loads(request.body)
 
-
+        
         # check if user wanted to see read list or watchlist
         if requestBody.get('queryType') == 'watchlist':
             userlist = UserWatchlist.objects.filter(user=pk)
+            for anList in userlist:
+                context.append({'id' : anList.anime.id, 'title': anList.anime.title, 'thumbnail' : anList.anime.large_image})
 
         elif requestBody.get('queryType') == 'readlist':
-            pass
+            userlist = UserReadlist.objects.filter(user=pk)
+            for mnList in userlist:
+                context.append({'id' : mnList.manga.id, 'title' : mnList.manga.title, 'thumbnail': mnList.manga.large_image})
             
 
         
-        for anList in userlist:
-            context.append({'id' : anList.anime.id, 'title': anList.anime.title, 'thumbnail' : anList.anime.large_image})
+        
         
         
         
@@ -159,12 +160,13 @@ def personalList(request, pk):
     
     #if user opened his watchlist from menu
     elif request.method == 'GET':
-        usersListObject = UserWatchlist.objects.filter(user=pk)
         if 'watchlist' in request.path:
+            usersListObject = UserWatchlist.objects.filter(user=pk)
             context = {'list': usersListObject}
 
         elif 'readlist' in request.path:
-            context = {'list' : usersListObject.readlist.all() | usersListObject.plan_readlist.all(), 'planned_list' : usersListObject.plan_readlist.all()}
+            usersListObject = UserReadlist.objects.filter(user=pk)
+            context = {'list' : usersListObject}
      
     return render(request, 'base/watchlist_readlist.html', context)
 
@@ -178,12 +180,18 @@ def catalog(request):
     
     if 'mangalist' in request.path:
         masterList = Manga.objects.all()
+        userReadlistObject = UserReadlist.objects.filter(user=request.user.id)
         mangaListPaginator = Paginator(masterList, 20)
         page_number = request.GET.get('page')
+        userReadlist = []
+
+        for counter in userReadlistObject:
+            userReadlist.append(counter.manga)
+
         
 
         page_object = mangaListPaginator.get_page(page_number)
-        context = {'list' : page_object , 'user_list' : currentUser.readlist.all(), 'list_type' : 'manga'}
+        context = {'list' : page_object , 'user_list' : userReadlist, 'list_type' : 'manga'}
 
     elif 'animelist' in request.path:
         masterList = Anime.objects.all()[:100]
@@ -251,16 +259,16 @@ def editProfile(request):
 def addtoMyList(request,type,pk):
     if request.user.is_authenticated:
         if request.method == 'POST':
-            userObject = User.objects.get(id=request.user.id)
+            
 
             if type == 'anime':
-                userObject.watchlist.add(Anime.objects.get(id=pk))
+                userObject = UserWatchlist(user=User.objects.get(id=request.user.id), anime=Anime.objects.get(id=pk),status=WatchlistStatus.objects.get(id=3))
                 userObject.save()
                 return redirect('AnimeList')
                 
 
             elif type == 'manga':
-                userObject.readlist.add(Manga.objects.get(id=pk))
+                userObject = UserReadlist(user=User.objects.get(id=request.user.id), manga=Manga.objects.get(id=pk),status=ReadlistStatus.objects.get(id=2))
                 userObject.save()
                 return redirect('MangaList')
             
