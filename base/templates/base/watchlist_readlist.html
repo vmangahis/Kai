@@ -21,7 +21,7 @@
             
             <div class="list-card text-light"> 
                 {% if 'watchlist' in request.path %}
-                {% if lst in planned_list %}
+                {% if lst.status.status_type == "PLAN TO WATCH"  %}
                 <a href="{% url 'AnimPage' lst.anime.id %}" class="list-card-image thumbnail-image personal-list plan" style="background-image: url({{lst.anime.large_image}});">
                 
                 {% else %}

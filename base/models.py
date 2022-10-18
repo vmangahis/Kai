@@ -69,13 +69,13 @@ class WatchlistStatus(models.Model):
     status_type = models.CharField(max_length=20)
 
     def __str__(self):
-        return self.status_type
+        return f'{self.id} ->  {self.status_type}'
 
 class ReadlistStatus(models.Model):
     status_type = models.CharField(max_length=20)
 
     def __str__(self):
-        return self.status_type
+        return f'{self.id} -> {self.status_type}'
 
 class Author(models.Model):
     name = models.CharField(max_length=50, unique=True, default='John Doe' ,blank=True, null=True)

@@ -136,12 +136,12 @@ def personalList(request, pk):
         if requestBody.get('queryType') == 'watchlist':
             userlist = UserWatchlist.objects.filter(user=pk)
             for anList in userlist:
-                context.append({'id' : anList.anime.id, 'title': anList.anime.title, 'thumbnail' : anList.anime.large_image})
+                context.append({'id' : anList.anime.id, 'title': anList.anime.title, 'thumbnail' : anList.anime.large_image, 'status' : anList.status.status_type})
 
         elif requestBody.get('queryType') == 'readlist':
             userlist = UserReadlist.objects.filter(user=pk)
             for mnList in userlist:
-                context.append({'id' : mnList.manga.id, 'title' : mnList.manga.title, 'thumbnail': mnList.manga.large_image})
+                context.append({'id' : mnList.manga.id, 'title' : mnList.manga.title, 'thumbnail': mnList.manga.large_image, 'status' : mnList.status.status_type})
             
 
         
