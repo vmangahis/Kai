@@ -54,7 +54,7 @@ class UserWatchlist(models.Model):
     status = models.ForeignKey('WatchlistStatus', on_delete=models.CASCADE)
 
     def __str__(self):
-        return str(self.userid.username + ' ' + self.animeid.title + ' STATUS:' + self.status.status_type)
+        return str(self.user.username + ' ' + self.anime.title + ' STATUS:' + self.status.status_type)
 
 
 class WatchlistStatus(models.Model):

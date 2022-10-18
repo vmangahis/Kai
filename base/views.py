@@ -23,30 +23,44 @@ def home(request):
     context = {'animeOb': anime[:3], 'mangaOb' : manga[:3], 'header' : page, 'featured_title' : anime[:5]}
     return render(request, 'base/home.html', context)
 
+
+#implement manga 
 def infoAnimeManga(request, pk):
 
     pageUrl = resolve(request.path_info).url_name
     alreadyinList = False
-    if request.user.is_authenticated:
-        usersList = User.objects.get(id=request.user.id)
+    
+        
+        
+        
 
-
+    
+    # Check if page is in anime page
     if pageUrl == 'AnimPage':
+
+        # Get anime from DB
         animeMangaOb = Anime.objects.get(id=pk)
 
+        #Try to find anime in user's watchlist, otherwise return None
+        try:    
+            user = UserWatchlist.objects.get(user=request.user.id, anime=pk)
+
+        except:
+            user = None
+
+    
     elif pageUrl == 'MangPage':
-        animeMangaOb = Manga.objects.get(id=pk)
-    
-    if request.user.is_authenticated:
-        if animeMangaOb in usersList.watchlist.all() or animeMangaOb in usersList.readlist.all() or animeMangaOb in usersList.plan_watchlist.all() or animeMangaOb in usersList.plan_readlist.all():
-            alreadyinList = True
-
-        else:
-            alreadyinList = False
+        pass
 
     
+    if user != None:
+        alreadyinList = True
+
     
-    context = {'animeName':animeMangaOb, 'inList': alreadyinList}
+
+    
+    
+    context = {'animeName': animeMangaOb, 'inList': alreadyinList}
     return render(request, 'base/info.html', context)
 
 def loginUser(request):
@@ -112,9 +126,12 @@ def registerUser(request):
 @login_required(login_url='Login')
 @csrf_exempt
 def personalList(request, pk):
-    #finding user
-    usersListObject = User.objects.get(id=pk)
 
+    
+    usersListObject = UserWatchlist.objects.filter(user=pk)
+
+
+    #if user toggles between watchlist to readlist and vice versa
     if request.method == 'POST':
 
         plan_context = []
@@ -123,37 +140,11 @@ def personalList(request, pk):
 
         # check if user wanted to see read list or watchlist
         if requestBody.get('queryType') == 'watchlist':
-            genrelistObject = usersListObject.watchlist.all() | usersListObject.plan_watchlist.all()
-
-            for pl in usersListObject.plan_watchlist.all():
-                plan_context.append(pl)
-
-            
-           
-            
-            
+            genrelistObject = usersListObject.anime.all()
 
         elif requestBody.get('queryType') == 'readlist':
-            genrelistObject = usersListObject.readlist.all() | usersListObject.plan_readlist.all()
-            for pl in usersListObject.plan_readlist.all():
-                plan_context.append(pl)
+            pass
             
-
-        
-        
-        genreList = []
-        context = []
-        
-        for x in genrelistObject.all():
-            for y in x.genre.values():
-                genreList.append(y['name'])
-            
-            
-            context.append({'id': x.id,'title' : x.title, 'genre' : genreList, 'thumbnail' : x.large_image, 'plan_list': plan_context})
-            genreList = []
-            
-            
-        
 
         
         
@@ -166,11 +157,10 @@ def personalList(request, pk):
         
 
     
-    
+    #if user opened his watchlist from menu
     elif request.method == 'GET':
-        
         if 'watchlist' in request.path:
-            context = {'list': usersListObject.watchlist.all() | usersListObject.plan_watchlist.all(), 'planned_list' : usersListObject.plan_watchlist.all()}
+            context = {'list': usersListObject}
 
         elif 'readlist' in request.path:
             context = {'list' : usersListObject.readlist.all() | usersListObject.plan_readlist.all(), 'planned_list' : usersListObject.plan_readlist.all()}
