@@ -179,7 +179,7 @@ def catalog(request):
     
     
     if 'mangalist' in request.path:
-        masterList = Manga.objects.all()
+        masterList = Manga.objects.all().order_by('id')
         userReadlistObject = UserReadlist.objects.filter(user=request.user.id)
         mangaListPaginator = Paginator(masterList, 20)
         page_number = request.GET.get('page')
@@ -278,7 +278,21 @@ def addtoMyList(request,type,pk):
         return redirect('Login')
 
 def dropEntry(request, type, pk):
-    return HttpResponse('dropped', type)
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            
+            if type == 'anime':
+                userObject = UserWatchlist.objects.get(user=request.user.id, anime=pk)
+                userObject.delete()
+                return redirect('AnimeList')
+
+            elif type == 'manga':
+                userObject = UserReadlist.objects.get(user=request.user.id, manga=pk)
+                userObject.delete()
+                return redirect('MangaList')
+
+
+    
 
 def movetoPlan(request,type, pk):
     current_user = User.objects.get(id=request.user.id)

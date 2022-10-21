@@ -67,7 +67,7 @@ class UserReadlist(models.Model):
 
 class WatchlistStatus(models.Model):
     status_type = models.CharField(max_length=20)
-
+    
     def __str__(self):
         return f'{self.id} ->  {self.status_type}'
 

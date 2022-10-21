@@ -91,13 +91,13 @@
                     
                 </ul>
             </div>
-                <div class="title-info-text">
+            <div class="title-info-text">
                     {% if 'watchlist' in request.path %}
                     <h5 class="text-start">{{ lst.anime.title }}</h5>
                     {% elif 'readlist' in request.path %}
                     <h5 class="text-start">{{ lst.manga.title }}</h5>
                     {% endif %}
-                </div> 
+            </div> 
             
             </div>
             {% endfor %}

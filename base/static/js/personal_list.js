@@ -124,12 +124,21 @@ document.addEventListener("DOMContentLoaded", (event) => {
                                 </form>
                                 </li>
 
-                                
+                                <li>
+                                <form method="POST" action="http://${window.location.host}/finish/anime/${elem.id}">
+                                <input type="hidden" name=csrfmiddlewaretoken value=${document.getElementsByName('csrf-token')[0].content} />
+                                    <button type="submit" class="list-controller-button text-light">Move to completed list</button>
+                                </form>
+                                </li>                                
 
 
 
                                 <li>
-                                <a href="#">Remove from my list</a>
+                                
+                                <form method="POST" action="http://${window.location.host}/drop/anime/${elem.id}">
+                                <input type="hidden" name=csrfmiddlewaretoken value=${document.getElementsByName('csrf-token')[0].content} />
+                                    <button type="submit" class="list-controller-button text-light">Move to completed list</button>
+                                </form>
                                 </li>
                             </ul>
                         </div>
@@ -155,7 +164,18 @@ document.addEventListener("DOMContentLoaded", (event) => {
                                 </li>
 
                                 <li>
-                                <a href="#">Remove from my list</a>
+                                <form method="POST" action="http://${window.location.host}/finish/manga/${elem.id}">
+                                <input type="hidden" name=csrfmiddlewaretoken value=${document.getElementsByName('csrf-token')[0].content} />
+                                    <button type="submit" class="list-controller-button text-light">Move to completed list</button>
+                                </form>
+                                </li>   
+
+                                <li>
+                                <form method="POST" action="http://${window.location.host}/drop/manga/${elem.id}">
+                                <input type="hidden" name=csrfmiddlewaretoken value=${document.getElementsByName('csrf-token')[0].content} />
+                                    <button type="submit" class="list-controller-button text-light">Remove from my list</button>
+                                </form>
+                                
                                 </li>
                             </ul>
 
