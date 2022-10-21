@@ -24,14 +24,24 @@
                 {% if lst.status.status_type == "PLAN TO WATCH"  %}
                 <a href="{% url 'AnimPage' lst.anime.id %}" class="list-card-image thumbnail-image personal-list plan" style="background-image: url({{lst.anime.large_image}});">
                 
-                {% else %}
+                {% elif lst.status.status_type == "WATCHING" %}
                 <a href="{% url 'AnimPage' lst.anime.id %}" class="list-card-image thumbnail-image personal-list ongoing" style="background-image: url({{lst.anime.large_image}});">
+
+                {% elif ls.status.status_type == "COMPLETED" %}
+                <a href="{% url 'AnimPage' lst.anime.id %}" class="list-card-image thumbnail-image personal-list finished" style="background-image: url({{lst.anime.large_image}});">
                 {% endif %}
             
             
                 
             {% elif 'readlist' in request.path %}
-            <a href="{% url 'MangPage' lst.manga.id %}" class="list-card-image thumbnail-image personal-list" style="background-image: url({{lst.manga.large_image}});">
+            {% if lst.status.status_type == "READING" %}
+            <a href="{% url 'MangPage' lst.manga.id %}" class="list-card-image thumbnail-image personal-list ongoing" style="background-image: url({{lst.manga.large_image}});">
+                {% elif lst.status.status_type == "PLAN TO READ" %}
+                <a href="{% url 'MangPage' lst.manga.id %}" class="list-card-image thumbnail-image personal-list plan" style="background-image: url({{lst.manga.large_image}});">
+
+                {% elif lst.status.status_type == "COMPLETED" %}
+                <a href="{% url 'MangPage' lst.manga.id %}" class="list-card-image thumbnail-image personal-list finished" style="background-image: url({{lst.manga.large_image}});">
+            {% endif %}
             {% endif %}
             
                 

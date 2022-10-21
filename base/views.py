@@ -125,7 +125,8 @@ def registerUser(request):
 @csrf_exempt
 def personalList(request, pk):
     context = {}
-    #if user toggles between watchlist to readlist and vice versa
+
+    #if user toggles between watchlist to readlist and vice versa (FETCH API CALL)
     if request.method == 'POST':
         context = []
         #get post request from fetch api 

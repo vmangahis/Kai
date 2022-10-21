@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
     let window_location = window.location.pathname.split('/')[1];
     let controller_button = document.querySelectorAll('.list-controller');
     
-
+    
     let active_menu;
     let active_controller;
     
@@ -44,6 +44,40 @@ document.addEventListener("DOMContentLoaded", (event) => {
         });
 
         
+    }
+
+    const watchlist_status = (ws) => {
+        if(ws == "WATCHING")
+        {
+            return "ongoing";
+        }
+
+        else if(ws == "PLAN TO WATCH")
+        {
+            return "plan";
+        }
+
+        else if(ws == "COMPLETED")
+        {
+            return "finished";
+        }
+    }
+
+    const readlist_status = (rs) => {
+        if(rs == "READING")
+        {
+            return "ongoing";
+        }
+
+        else if(rs == "PLAN TO WATCH")
+        {
+            return "plan";
+        }
+        
+        else if(rs == "COMPLETED")
+        {
+            return "finished";
+        }
     }
 
 
@@ -102,15 +136,15 @@ document.addEventListener("DOMContentLoaded", (event) => {
                     let final = data;
                     let urlState = "";
                     let tag = "";
-                    console.log(final);
+                    
                     if (final.length > 0) {
                         final.forEach(elem => {
 
                             if (list_type == "watchlist") {
 
                                 
-                                
-                                tag += `<div class = "list-card text-light"><a href="http://${window.location.host}/anime/${elem.id}" class="list-card-image thumbnail-image personal-list ${elem.status == "WATCHING" ? "ongoing" : ""}" style="background-image: url(${elem.thumbnail})">
+                                console.log(elem.status);
+                                tag += `<div class = "list-card text-light"><a href="http://${window.location.host}/anime/${elem.id}" class="list-card-image thumbnail-image personal-list ${watchlist_status(elem.status)}" style="background-image: url(${elem.thumbnail})">
                         </a>
                         <button id="boot-icon" class="bi bi-three-dots-vertical list-controller" style="font-size: 2rem; color: rgb(255, 0, 0);">
                         </button>
@@ -129,7 +163,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
                                 <input type="hidden" name=csrfmiddlewaretoken value=${document.getElementsByName('csrf-token')[0].content} />
                                     <button type="submit" class="list-controller-button text-light">Move to completed list</button>
                                 </form>
-                                </li>                                
+                                </li>
 
 
 
@@ -147,7 +181,8 @@ document.addEventListener("DOMContentLoaded", (event) => {
                             } 
                             
                             else if (list_type == "readlist") {
-                                tag += `<div class = "list-card text-light"><a href="http://${window.location.host}/manga/${elem.id}" class="list-card-image thumbnail-image personal-list" style="background-image: url(${elem.thumbnail})">
+                                
+                                tag += `<div class = "list-card text-light"><a href="http://${window.location.host}/manga/${elem.id}" class="list-card-image thumbnail-image personal-list ${readlist_status(elem.status)}" style="background-image: url(${elem.thumbnail})">
                         </a>
 
                         <button id="boot-icon" class="bi bi-three-dots-vertical list-controller" style="font-size: 2rem; color: rgb(255, 0, 0);">
