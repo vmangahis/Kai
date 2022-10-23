@@ -71,6 +71,10 @@ class WatchlistStatus(models.Model):
     def __str__(self):
         return f'{self.id} ->  {self.status_type}'
 
+
+class Friendship(models.Model):
+    pass
+
 class ReadlistStatus(models.Model):
     status_type = models.CharField(max_length=20)
 

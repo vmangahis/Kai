@@ -308,7 +308,7 @@ def movetoPlan(request,type, pk):
         current_user = UserWatchlist.objects.get(user=request.user.id, anime=pk)
         current_user.status = WatchlistStatus.objects.get(id=3)
         #current_user.status = 3
-        current_user.save
+        current_user.save()
         return redirect('WatchList', pk=request.user.id)
 
 

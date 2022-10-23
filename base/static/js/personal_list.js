@@ -64,12 +64,13 @@ document.addEventListener("DOMContentLoaded", (event) => {
     }
 
     const readlist_status = (rs) => {
+        
         if(rs == "READING")
         {
             return "ongoing";
         }
 
-        else if(rs == "PLAN TO WATCH")
+        else if(rs == "PLAN TO READ")
         {
             return "plan";
         }
