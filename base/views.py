@@ -269,7 +269,7 @@ def addtoMyList(request,type,pk):
                 
 
             elif type == 'manga':
-                userObject = UserReadlist(user=User.objects.get(id=request.user.id), manga=Manga.objects.get(id=pk),status=ReadlistStatus.objects.get(id=2))
+                userObject = UserReadlist(user=User.objects.get(id=request.user.id), manga=Manga.objects.get(id=pk),status=ReadlistStatus.objects.get(id=1))
                 userObject.save()
                 return redirect('MangaList')
             
@@ -296,19 +296,19 @@ def dropEntry(request, type, pk):
     
 
 def movetoPlan(request,type, pk):
-    current_user = User.objects.get(id=request.user.id)
+    
     if type == "manga":
-        entry_object = Manga.objects.get(id=pk)
-        current_user.readlist.remove(entry_object)
-        current_user.plan_readlist.add(entry_object)
+        current_user = UserReadlist.objects.get(user=request.user.id, manga=pk)
+        current_user.status = ReadlistStatus.objects.get(id=2)
+        #current_user.status = 2
         current_user.save()
         return redirect('ReadList', pk=request.user.id)
 
     elif type == "anime":
-        entry_object = Anime.objects.get(id=pk)
-        current_user.watchlist.remove(entry_object)
-        current_user.plan_watchlist.add(entry_object)
-        current_user.save()
+        current_user = UserWatchlist.objects.get(user=request.user.id, anime=pk)
+        current_user.status = WatchlistStatus.objects.get(id=3)
+        #current_user.status = 3
+        current_user.save
         return redirect('WatchList', pk=request.user.id)
 
 
