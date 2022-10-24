@@ -340,11 +340,15 @@ main {
 
 
  .plan{
-  border: 2px solid red;
+  border: 3px solid blue;
  }
 
  .ongoing{
-  border:2px solid green;
+  border:3px solid greenyellow;
+ }
+
+ .finished{
+  border:3px solid  red;
  }
 
 

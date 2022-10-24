@@ -266,15 +266,23 @@ def addtoMyList(request,type,pk):
                 userObject, alreadyExists = UserWatchlist.objects.get_or_create(user=User.objects.get(id=request.user.id), anime=Anime.objects.get(id=pk))
                 userObject.status = WatchlistStatus.objects.get(id=2)
                 userObject.save()
-                return redirect('AnimeList')
+
+                if alreadyExists:
+                    return redirect('WatchList', pk=request.user.id)
+
+                else:
+                    return redirect('AnimeList')
                 
 
             elif type == 'manga':
                 userObject, alreadyExists = UserReadlist.objects.get_or_create(user=User.objects.get(id=request.user.id), manga=Manga.objects.get(id=pk))
                 userObject.status = ReadlistStatus.objects.get(id=1)
                 userObject.save()
-
-                return redirect('MangaList')
+                if alreadyExists:
+                    return redirect('ReadList', pk=request.user.id)
+                
+                else:
+                    return redirect('MangaList')
             
             
 
@@ -288,12 +296,12 @@ def dropEntry(request, type, pk):
             if type == 'anime':
                 userObject = UserWatchlist.objects.get(user=request.user.id, anime=pk)
                 userObject.delete()
-                return redirect('AnimeList')
+                return redirect('WatchList', pk=request.user.id)
 
             elif type == 'manga':
                 userObject = UserReadlist.objects.get(user=request.user.id, manga=pk)
                 userObject.delete()
-                return redirect('MangaList')
+                return redirect('ReadList', pk=request.user.id)
 
 
     
@@ -317,7 +325,20 @@ def movetoPlan(request,type, pk):
 
 
 def movetoFinish(request, type, pk):
-    return HttpResponse('finished', type)
+    
+    if type == "manga":
+        current_user = UserReadlist.objects.get(user=request.user.id, manga=pk)
+        current_user.status = ReadlistStatus.objects.get(id=3)
+        current_user.save()
+
+        return redirect('ReadList', pk=request.user.id)
+
+    elif type == "anime":
+        current_user = UserWatchlist.objects.get(user=request.user.id, anime=pk)
+        current_user.status = WatchlistStatus.objects.get(id=1)
+        current_user.save()
+
+        return redirect('WatchList', pk=request.user.id)
 
             
 
