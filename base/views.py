@@ -263,14 +263,17 @@ def addtoMyList(request,type,pk):
             
 
             if type == 'anime':
-                userObject = UserWatchlist(user=User.objects.get(id=request.user.id), anime=Anime.objects.get(id=pk),status=WatchlistStatus.objects.get(id=3))
+                userObject, alreadyExists = UserWatchlist.objects.get_or_create(user=User.objects.get(id=request.user.id), anime=Anime.objects.get(id=pk))
+                userObject.status = WatchlistStatus.objects.get(id=2)
                 userObject.save()
                 return redirect('AnimeList')
                 
 
             elif type == 'manga':
-                userObject = UserReadlist(user=User.objects.get(id=request.user.id), manga=Manga.objects.get(id=pk),status=ReadlistStatus.objects.get(id=1))
+                userObject, alreadyExists = UserReadlist.objects.get_or_create(user=User.objects.get(id=request.user.id), manga=Manga.objects.get(id=pk))
+                userObject.status = ReadlistStatus.objects.get(id=1)
                 userObject.save()
+
                 return redirect('MangaList')
             
             
@@ -300,14 +303,14 @@ def movetoPlan(request,type, pk):
     if type == "manga":
         current_user = UserReadlist.objects.get(user=request.user.id, manga=pk)
         current_user.status = ReadlistStatus.objects.get(id=2)
-        #current_user.status = 2
+        
         current_user.save()
         return redirect('ReadList', pk=request.user.id)
 
     elif type == "anime":
         current_user = UserWatchlist.objects.get(user=request.user.id, anime=pk)
         current_user.status = WatchlistStatus.objects.get(id=3)
-        #current_user.status = 3
+        
         current_user.save()
         return redirect('WatchList', pk=request.user.id)
 

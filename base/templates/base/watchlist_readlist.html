@@ -18,7 +18,8 @@
     <div class="container-fluid watchlist-card-container" id="watchlist-card-container">
             {% if list %}
             {% for lst in list %}
-            
+
+            <!--- Image -->
             <div class="list-card text-light"> 
                 {% if 'watchlist' in request.path %}
                 {% if lst.status.status_type == "PLAN TO WATCH"  %}
@@ -48,22 +49,63 @@
             
                 
             </a>
-            
             <button id="boot-icon" class="bi bi-three-dots-vertical list-controller" style="font-size: 2rem; color: rgb(255, 0, 0);">
             </button>
             <div class="edit-watchlist-controller">
+                <!--- Menu -->
                 <ul class="edit-watchlist-menu">
 
                     <li>
                         {% if 'watchlist' in request.path %}
+
+                        {% if lst.status.status_type == "WATCHING"  %}
+                        <h5 class="text-light">You are currently watching this.</h5>
+
+                        {% else %}
+                        <form method="POST" action="{% url 'addtolist' 'anime' lst.anime.id %}">
+                        {% csrf_token %}
+                        <button type="submit" class="list-controller-button text-light">Add to currently watching</button>
+                        </form>
+                        {% endif %}
+
+                        {% elif 'readlist' in request.path %}
+
+                        {% if lst.status.status_type == "READING"  %}
+                        <h5 class="text-light">You are already reading this</h5>
+                        {% else %}
+                        <form method="POST" action="{% url 'addtolist' 'manga' lst.manga.id %}">
+                            {% csrf_token %}
+                        <button type="submit" class="list-controller-button text-light">Add to currently reading</button>
+                        {% endif %}
+                        
+                        {% endif %}
+                        </form>
+                    </li>
+
+
+                    <li>
+                        {% if 'watchlist' in request.path %}
+
+                        {% if lst.status.status_type == "PLAN TO WATCH"  %}
+                        <h5 class="text-light">Already in your plan list</h5>
+
+                        {% else %}
                         <form method="POST" action="{% url 'plan' 'anime' lst.anime.id %}">
                         {% csrf_token %}
                         <button type="submit" class="list-controller-button text-light">Move to plan to watch</button>
+                        </form>
+                        {% endif %}
 
                         {% elif 'readlist' in request.path %}
+
+                        {% if lst.status.status_type == "PLAN TO READ"  %}
+                        <h5 class="text-light">Already in your plan list</h5>
+                        {% else %}
                         <form method="POST" action="{% url 'plan' 'manga' lst.manga.id %}">
                             {% csrf_token %}
                         <button type="submit" class="list-controller-button text-light">Move to plan to read</button>
+                        {% endif %}
+
                         {% endif %}
                         </form>
                     </li>
