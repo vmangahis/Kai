@@ -27,7 +27,7 @@
 
     <div class="title-info-text">
     <h5 class="text-light content-title">{{ lst.title }}</h5>
-    <p class="text-light">{% for gn in lst.genre.all %}{{ gn.name }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
+    <h5 class="text-light viewer-count">Watched by: {{ lst.userwatchlist_set.count }}</h5>
     </div>
 </figure>
 {% endfor %}
