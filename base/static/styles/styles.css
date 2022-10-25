@@ -251,11 +251,11 @@ main {
 
 .title-info-text {
   padding: 20px 0 0 0;
+ 
 }
 
 .title-info-text > * {
   width: 250px;
-
   margin: 0;
   height: 75px;
 }
@@ -349,6 +349,10 @@ main {
 
  .finished{
   border:3px solid  red;
+ }
+
+ .viewer-count{
+
  }
 
 

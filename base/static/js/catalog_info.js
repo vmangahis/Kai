@@ -6,3 +6,4 @@ if (!authenticated) {
         document.location.href = "/login/";
     });
 }
+
