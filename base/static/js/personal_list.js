@@ -36,9 +36,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
                 
                 active_controller =  e.target;
                 active_menu = document.querySelectorAll('.edit-watchlist-controller')[index];
-                    
-    
-    
                 
             })
         });

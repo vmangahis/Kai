@@ -21,7 +21,3 @@ urlpatterns = [
     path('plan/<str:type>/<str:pk>', views.movetoPlan, name='plan'),
     path('finish/<str:type>/<str:pk>', views.movetoFinish, name='finish')
 ]
-
-
-
-
