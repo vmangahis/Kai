@@ -1,0 +1,15 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<main>
+    <h1>{{pageType}}</h1>
+    {% for lst in list %}
+
+    {{lst.title}}
+    {% endfor %}
+</main>
+
+
+
+{% endblock %}
