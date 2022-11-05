@@ -228,7 +228,6 @@ def search(request):
     context = {'animeList' : anime, 'mangaList' : manga}
 
     if query == '':
-        print('no search')
         return redirect('Home')
 
     
