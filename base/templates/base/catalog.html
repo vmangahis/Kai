@@ -17,7 +17,6 @@
         {% endif %}
     
     {% else %}
-
         {% if lst in user_list or lst in plan_list %}
             <a href="{% url 'MangPage' lst.id %}"  class="thumbnail-image existed" style="background-image: linear-gradient(rgba(6,5,19,0.9), rgba(6,5,19,0.9)), url({{ lst.large_image }});"><h4>Already in your list!</h4></a>
             
@@ -30,6 +29,7 @@
     <h5 class="text-light content-title">{{ lst.title }}</h5>
     </div>
 </figure>
+
 {% endfor %}
 </section>
 

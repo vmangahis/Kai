@@ -221,11 +221,24 @@ def catalog(request):
 
 def search(request):
     query = request.GET.get('keyword') if request.GET.get('keyword') != None else ''
-
+    context = {}
     manga = Manga.objects.filter(Q(title__icontains=query))
     anime = Anime.objects.filter(Q(title__icontains=query))
+    
+    if anime.count() > 5:
+        context.update({'animeList' : anime[:5]})
 
-    context = {'animeList' : anime, 'mangaList' : manga}
+    else:
+        context.update({'animeList' : anime})
+
+
+    if manga.count() > 5:
+        context.update({'mangaList' : manga[:5]})
+
+    else:
+        context.update({'mangaList' : manga})
+
+    
 
     if query == '':
         return redirect('Home')
