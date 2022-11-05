@@ -226,14 +226,14 @@ def search(request):
     anime = Anime.objects.filter(Q(title__icontains=query))
     
     if anime.count() > 5:
-        context.update({'animeList' : anime[:5]})
+        context.update({'animeList' : anime[:5], 'viewAllAnime' : True})
 
     else:
         context.update({'animeList' : anime})
 
 
     if manga.count() > 5:
-        context.update({'mangaList' : manga[:5]})
+        context.update({'mangaList' : manga[:5], 'viewAllManga' : True})
 
     else:
         context.update({'mangaList' : manga})
