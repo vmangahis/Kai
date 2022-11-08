@@ -14,6 +14,7 @@ urlpatterns = [
     path('animelist/', views.catalog, name='AnimeList'),
     path('mangalist/', views.catalog, name='MangaList'),
     path('search/', views.search, name='Search'),
+    path('search/<str:type>/', views.fullResult, name='FullResult'),
     path('profile/', views.profile, name='SelfProfile'),
     path('profile/edit', views.editProfile, name='EditProfile'),
     path('addtolist/<str:type>/<str:pk>', views.addtoMyList, name='addtolist'),

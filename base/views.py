@@ -229,14 +229,14 @@ def search(request):
         context.update({'animeList' : anime[:5], 'viewAllAnime' : True})
 
     else:
-        context.update({'animeList' : anime})
+        context.update({'animeList' : anime, 'viewAllAnime' : False})
 
 
     if manga.count() > 5:
         context.update({'mangaList' : manga[:5], 'viewAllManga' : True})
 
     else:
-        context.update({'mangaList' : manga})
+        context.update({'mangaList' : manga , 'viewAllManga' : False})
 
     
 
@@ -245,6 +245,19 @@ def search(request):
 
     
     return render(request, 'base/search.html', context)
+
+def fullResult(request, type):
+    key = request.GET.get('keyword')
+    context = {}
+    if type == "manga":
+        resultObject = Manga.objects.filter(Q(title__icontains=key))
+        
+    elif type == 'anime':
+        resultObject = Anime.objects.filter(Q(title__icontains=key))
+
+    context.update({'list' : resultObject, 'pageType' : type})
+    return render(request, "base/full_result.html", context)
+
 
 def profile(request):
     myUser = User.objects.get(id=request.user.id)
