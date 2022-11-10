@@ -199,6 +199,24 @@ main {
   position: relative;
 }
 
+.fa-eye-slash, .fa-eye{
+  cursor:pointer;
+  background-color: white;
+  /*transform: translate(-25px);*/
+  position:absolute;
+  z-index:100;
+  top:30%;
+  right:5%;
+  height:auto;
+  
+}
+
+.password-input-container{
+  position:relative;
+  
+}
+
+
 .register-form > div {
   width: 100%;
 }
@@ -385,10 +403,35 @@ main {
   flex-direction: column;
 }
 
+@media (max-width:1140px){
+  .form-container input[type=text], .form-container input[type=password]{
+    max-width:182px;
+  }
+}
+
+@media(max-width:1325px)
+{
+  .remember-me-label{
+    margin:0 !important;
+  }
+}
+
+@media(max-width:780px)
+{
+  #remember-me{
+    margin-left: 10px !important;
+  }
+}
 
 
-
-
+@media(max-width:1040px)
+{
+  .login-button{
+    width: 100%;
+    height:auto;
+    padding:20px;
+  }
+}
 
 
 

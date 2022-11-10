@@ -12,21 +12,26 @@
         {% csrf_token %}
 
         <!--- Username login -->
-        <div class="form-floating w-50 mb-3">
-            <input type="text" class="username-login form-control" id="username-login" name="username-login" placeholder="Username"/>
-            <label for="username-login text-dark">Username</label>
+        <div class="w-50 mb-3">
+            <label for="username-login" class="form-label text-light">Username</label>
+            <input type="text" class="username-login form-control p-2" id="username-login" name="username-login" placeholder=""/>
+            
         </div>
 
 
         <!---- Password Login-->
-        <div class="form-floating w-50 mb-3">
-            
-            <input type="password"  class="password-login form-control" id="password-login" name="password-login" placeholder="Password"/>
-            <label for="password-login">Password</label>
+        <div class="w-50 mb-3">
+            <label for="password-login" class='form-label text-light'>Password</label>
+
+            <div class="password-input-container">
+            <input type="password"  class="password-login form-control p-2" id="password-login" name="password-login" />  
+            <i class="fa-solid fa-eye text-dark"></i>
+            </div>
+
         </div>
 
         <!---- Remmeber me checkbox-->
-        <div class="mb-5 mt-3 ms-0 d-flex flex-row align-items-center align-self-center ">
+        <div class="mb-5 mt-3 ms-0 d-flex flex-row align-items-center align-self-center remember-checkbox">
             <label for="remember-login" class="text-light remember-me-label me-5">Remember me</label>
             <input type="checkbox" name="remember-me" id="remember-me" class="ms-5">
         </div>
