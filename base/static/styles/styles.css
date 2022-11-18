@@ -371,6 +371,12 @@ main {
   border:3px solid  red;
  }
 
+ .password-login{
+  border-top-right-radius: .375rem !important;
+  border-bottom-right-radius: .375rem !important;
+ }
+ 
+
 
 
 .edit-watchlist-controller{

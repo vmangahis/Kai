@@ -1,5 +1,5 @@
 {% extends 'main.html' %}
-
+{% load static %}
 {% block content %}
 <main class="container-fluid login-container p-5 w-50 mt-5 mb-5 rounded-4">
 {% if page == 'login' %}
@@ -23,9 +23,9 @@
         <div class="w-50 mb-3">
             <label for="password-login" class='form-label text-light'>Password</label>
 
-            <div class="password-input-container">
-            <input type="password"  class="password-login form-control p-2" id="password-login" name="password-login" />  
-            <i class="fa-solid fa-eye text-dark"></i>
+            <div class="password-input-container input-group">
+            <input type="password"  id="password-field" class="password-login form-control p-2" id="password-login" name="password-login" />  
+            <div class="input-group-append"><i class="fa-solid fa-eye text-dark eye-password" id="show-password"></i></div>
             </div>
 
         </div>
@@ -96,4 +96,8 @@
 {% endif %}
 
 </main>
+{% endblock %}
+
+{% block page_script %}
+<script type="text/javascript" src={% static 'js/login.js'%}></script>
 {% endblock %}
