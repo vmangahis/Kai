@@ -174,7 +174,7 @@ def personalList(request, pk):
 @login_required(login_url='Login')
 def catalog(request):
     context = {}
-    currentUser = User.objects.get(id=request.user.id)
+    
     
     
     
