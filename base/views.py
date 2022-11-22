@@ -1,4 +1,5 @@
 import json
+import cloudinary
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.http import HttpResponse
@@ -266,14 +267,24 @@ def profile(request):
     return render(request, "base/profile.html", context)
 
 def editProfile(request):
+    #Get current user
     userProfile = User.objects.get(id=request.user.id)
+
+    #Initialize form with the current user's data
     formObject =  UserEditForm(instance=userProfile)
 
+
+    #Upon submission of form
     if request.method == 'POST':
         
         formObject = UserEditForm(request.POST, request.FILES, instance=userProfile)
+
+        #Validation of edit form
         if formObject.is_valid():
             formObject.save()
+            photo = formObject.cleaned_data['avatar']
+            upload = cloudinary.uploader.upload(formObject.cleaned_data['avatar'],folder=f"user/{userProfile.id}/" , unique_filename=True )
+            
             return redirect('SelfProfile')
 
         else:
