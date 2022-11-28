@@ -1,5 +1,5 @@
 from django import forms
-from django.forms import ModelForm
+from django.forms import ModelForm, FileInput
 from django.contrib.auth.forms import UserCreationForm
 from django.utils.safestring import mark_safe
 
@@ -64,15 +64,21 @@ class UserEditForm(ModelForm):
     class Meta:
         model = User
         fields = ['display_name', 'intro', 'avatar']
+        widgets = {
+            'avatar': FileInput
+            }
     
     def __init__(self, *args, **kwargs):
         super(UserEditForm, self).__init__(*args, **kwargs)
         self.fields['display_name'].required = True
         self.fields['intro'].required = False
+        
 
     def clean_display_name(self):
         dName = self.cleaned_data['display_name']
         return dName
+
+    #def clean_avatar
 
     
     def clean_intro(self):

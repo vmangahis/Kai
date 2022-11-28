@@ -4,6 +4,9 @@ from django.contrib.auth.models import AbstractUser
 
 
 
+
+
+
 class StudioCompany(models.Model):
     studio_name = models.CharField(max_length=60)
     anime_works = models.ManyToManyField('Anime', blank=True)
@@ -87,10 +90,12 @@ class Author(models.Model):
 
 
 
-def user_path(instance, file_name):
-    return f'u_{instance.id}/{file_name}'
+
 
 class User(AbstractUser):
+
+    
+
     display_name = models.CharField(max_length=100)
     username = models.CharField(max_length=50, unique=True)
     email = models.EmailField(unique=False)
@@ -99,7 +104,7 @@ class User(AbstractUser):
     
     
 
-    avatar = models.ImageField(null=True, default='blank-avatar.svg', upload_to=user_path)
+    avatar = models.ImageField(null=True, default='blank-avatar.jpg')
     avatar_url = models.URLField(null=True)
 
     USERNAME_FIELD = 'username'

@@ -281,10 +281,13 @@ def editProfile(request):
 
         #Validation of edit form
         if formObject.is_valid():
+            upload = cloudinary.uploader.upload(formObject.cleaned_data['avatar'],folder=f"user/{userProfile.id}/", unique_filename=True)
+
+            userProfile.avatar_url = upload['secure_url']
+            userProfile.avatar = f'/{upload["public_id"]}.{upload["format"]}'
             formObject.save()
-            photo = formObject.cleaned_data['avatar']
-            upload = cloudinary.uploader.upload(formObject.cleaned_data['avatar'],folder=f"user/{userProfile.id}/" , )
-            print(upload['secure_url'])
+            
+            
             return redirect('SelfProfile')
 
         else:
