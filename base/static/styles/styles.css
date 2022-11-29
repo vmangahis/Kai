@@ -419,6 +419,22 @@ main {
   height:200px;
 }
 
+.user-edit-form{
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.image-container > input {
+  display:none;
+}
+
+
+
+
+
+
+
 @media (max-width:1140px){
   .form-container input[type=text], .form-container input[type=password]{
     max-width:182px;
