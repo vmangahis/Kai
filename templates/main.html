@@ -19,6 +19,9 @@
       src="https://kit.fontawesome.com/507922c5bc.js"
       crossorigin="anonymous"
     ></script>
+    {% block css %}
+    
+    {% endblock %}
   </head>
   <body>
     {% include 'navbar.html' %} {% block content %} {% endblock %} 
@@ -38,5 +41,7 @@
     {% block page_script %}
     
     {% endblock %}
+
+
   </body>
 </html>
