@@ -283,7 +283,14 @@ def editProfile(request):
         if formObject.is_valid():
             upload = cloudinary.uploader.upload(formObject.cleaned_data['avatar'],folder=f"user/{userProfile.id}/", unique_filename=True)
 
+            #Check if user has previous image
+            if userProfile.avatar_public_id is not None:
+                delete_image_id = userProfile.avatar_public_id
+                deleteimage = cloudinary.uploader.destroy(delete_image_id, invalidate=True)
+                
+
             userProfile.avatar_url = upload['secure_url']
+            userProfile.avatar_public_id = upload['public_id']
             userProfile.avatar = f'/{upload["public_id"]}.{upload["format"]}'
             formObject.save()
             
