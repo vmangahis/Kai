@@ -1,4 +1,0 @@
-.env
-/ignore
-db.sqlite3
-base/__pycache__/
