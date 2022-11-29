@@ -1,9 +1,53 @@
-{% extends 'main.html' %} {% block content %}
+{% extends 'main.html' %} 
+
+{% block css %}
+ <style> 
+
+  .avatar-label{
+    width:200px;
+    height:200px;
+    background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0)), url({{request.user.avatar_url}});
+    background-size: 100% 100%;
+    background-position: 50% 50%;
+    background-repeat: no-repeat no-repeat;
+    border-radius: 50%;
+    cursor: pointer;
+    border:5px solid transparent;
+  }
+
+    .avatar-label:hover{
+      border: 5px solid red;
+      background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url({{request.user.avatar_url}});
+      background-size: 100% 100%;
+      background-position: 50% 50%;
+      background-repeat: no-repeat no-repeat;
+      
+    }
+ </style>
+{% endblock %}
+
+{% block content %}
 
 <main class="container-fluid edit-form">
   <form class="user-edit-form" method="POST" enctype="multipart/form-data">
     {% csrf_token %} 
-{{form.as_p}}
+
+    <div class="image-container">
+      
+      <label for="id_avatar"  class="avatar-label">
+        
+      </label>
+
+      <input type="file" name="avatar" accept="image/*" id="id_avatar" class="upload-avatar" />
+      <i class="fa-solid fa-pen-to-square text-light"></i>
+    </div>
+
+    <div class="info-fields">
+
+
+    </div>
+
+    {{ form.as_p}}
   <!--- <div>
     <label for="">{{ form.display_name.label }}</label>
      {{ form.display_name }}
@@ -18,4 +62,6 @@
   </form>
 </main>
 
+
 {% endblock %}
+
