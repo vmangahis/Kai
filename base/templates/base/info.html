@@ -1,0 +1,71 @@
+{% extends 'main.html' %} 
+{% load static %}
+{% block content %}
+{% include 'modal.html' %}
+<main class="container-fluid mt-5 p-5">
+  <div class="content d-flex flex-row">
+    <img src="{{ animeName.large_image }}" class="big-img" />
+    <div class="content-text d-flex flex-column ms-5">
+      <h1 class="text-light">{{ animeName.title }}</h1>
+      <p class="release text-light">
+        Premiered on {{ animeName.premiere_date }} on CrunchyRoll
+      </p>
+      <p class="text-light">
+        Genre:
+        <span class="text-light"
+          >{% for a in animeName.genre.all %}{{ a.name }}{% if forloop.last %}
+          {% else %}, {% endif %}{% endfor %}</span
+        >
+      </p>
+
+      <h4 class="text-light my-5">Summary</h4>
+      <p class="text-light">{{ animeName.summary }}</p>
+
+      <p class="text-light mt-5">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum nisi
+        dolorem quos laborum dicta voluptatem veritatis voluptates sunt. Natus
+        necessitatibus dicta numquam sapiente voluptate iste! Doloremque
+        similique quisquam corporis libero!
+      </p>
+
+      {% if request.user.is_authenticated %} {% if inList %}
+      <button
+        class="add-to-watchlist text-light me-auto mt-auto p-3 rounded-pill btn"
+        type="button"
+        disabled
+      >
+        Already in your list!
+      </button>
+
+      {% else%}
+      <button
+        class="add-to-watchlist text-light me-auto mt-auto p-3 rounded-pill btn"
+        type="button"
+        data-bs-toggle="modal" data-bs-target="#addtoWatchlistModal"
+      >
+        Add to my watchlist
+      </button>
+      {% endif %} {% else %}
+      <button
+        class="add-to-watchlist text-light me-auto mt-auto p-3 rounded-pill btn"
+        type="button"
+        id="login-watchlist"
+      >
+        Login to add to your watchlist
+      </button>
+      {% endif %}
+    </div>
+  </div>
+</main>
+
+{{ request.user.is_authenticated|json_script:"authenticated" }}
+
+
+
+
+ {% endblock %}
+ {% block page_script %}
+ 
+ <script type="text/javascript" src="{% static 'js/catalog_info.js' %}">
+ </script>
+ {% endblock %}
