@@ -106,6 +106,8 @@ class User(AbstractUser):
 
     avatar = models.ImageField(null=True, default='blank-avatar.jpg')
     avatar_url = models.URLField(null=True)
+    avatar_public_id = models.CharField(default=None, null=True, max_length=100)
+
 
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = []
