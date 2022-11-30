@@ -1,4 +1,5 @@
 {% extends 'main.html' %} 
+{% load static %}
 
 {% block css %}
  <style> 
@@ -21,10 +22,13 @@
       background-size: 100% 100%;
       background-position: 50% 50%;
       background-repeat: no-repeat no-repeat;
-      
+      cursor: pointer;
     }
  </style>
 {% endblock %}
+
+
+
 
 {% block content %}
 
@@ -34,8 +38,7 @@
 
     <div class="image-container">
       
-      <label for="id_avatar"  class="avatar-label">
-        
+      <label for="id_avatar"  class="avatar-label" id="avatar-label">
       </label>
 
       <input type="file" name="avatar" accept="image/*" id="id_avatar" class="upload-avatar" />
@@ -63,5 +66,9 @@
 </main>
 
 
+{% endblock %}
+
+{% block page_script %}
+<script type="text/javascript" src="{% static 'js/profile_edit.js' %}"></script>
 {% endblock %}
 
