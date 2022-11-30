@@ -339,11 +339,16 @@ main {
 
 .catalog-container {
   display: flex;
-  gap: 10%;
+  flex-direction: row;
+  gap:5%;
   justify-content: center;
-  align-items: center;
+  align-content: flex-start ;
   flex-wrap: wrap;
 }
+
+
+
+
 
 
 
