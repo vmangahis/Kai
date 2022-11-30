@@ -70,8 +70,17 @@ class UserEditForm(ModelForm):
     
     def __init__(self, *args, **kwargs):
         super(UserEditForm, self).__init__(*args, **kwargs)
+        self.label_suffix = ""
         self.fields['display_name'].required = True
         self.fields['intro'].required = False
+        self.fields['intro'].label = "Introduction"
+        self.fields['display_name'].label = "Display Name"
+        self.fields['display_name'].widget.attrs.update({
+            'class': 'form-control displayname-input-edit'
+        })
+        self.fields['intro'].widget.attrs.update({
+            'class': 'form-control bio-textarea'
+        })
         
 
     def clean_display_name(self):
