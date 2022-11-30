@@ -1,4 +1,5 @@
 {% extends 'main.html' %}
+
 {% load static %}
 {% block content %}
 <main class="container-fluid catalog-main-container">
@@ -11,7 +12,7 @@
     {% if list_type == 'anime' %}
     
      {% if lst in user_list or lst in plan_list %}
-            <a href="{% url 'AnimPage' lst.id %}" data-bs-toggle="tooltip" data-bs-html=true data-bs-placement="right" data-bs-title="test" class="thumbnail-image existed" style="background-image: linear-gradient(rgba(6,5,19,0.9), rgba(6,5,19,0.9)), url({{ lst.large_image }});"><h4>Already in your list!</h4></a>
+            <a href="{% url 'AnimPage' lst.id %}" data-bs-toggle="tooltip" data-bs-html=true  data-bs-placement="right" data-bs-title="{% include 'catalog_tooltip.html' %}" class="thumbnail-image existed" style="background-image: linear-gradient(rgba(6,5,19,0.9), rgba(6,5,19,0.9)), url({{ lst.large_image }});"><h4>Already in your list!</h4></a>
         {% else %}
             <a href="{% url 'AnimPage' lst.id %}" class="thumbnail-image" style="background-image: url({{ lst.large_image }});"></a>
         {% endif %}
@@ -25,9 +26,7 @@
         {% endif %}
     {% endif %}
 
-    <div class="title-info-text">
-    <h5 class="text-light content-title">{{ lst.title }}</h5>
-    </div>
+    
 </figure>
 
 {% endfor %}
