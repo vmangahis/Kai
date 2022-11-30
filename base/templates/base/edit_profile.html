@@ -13,17 +13,25 @@
     background-repeat: no-repeat no-repeat;
     border-radius: 50%;
     cursor: pointer;
-    border:5px solid transparent;
+    border:5px solid #262343;
+    position:relative;
   }
 
-    .avatar-label:hover{
-      border: 5px solid red;
+   .image-container:hover > .avatar-label{
+      border: 5px solid #4A4488;
       background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url({{request.user.avatar_url}});
       background-size: 100% 100%;
       background-position: 50% 50%;
       background-repeat: no-repeat no-repeat;
       cursor: pointer;
     }
+
+    .image-container:hover > .fa-pen-to-square{
+      visibility:visible;
+    }
+
+    
+   
  </style>
 {% endblock %}
 
@@ -35,33 +43,33 @@
 <main class="container-fluid edit-form">
   <form class="user-edit-form" method="POST" enctype="multipart/form-data">
     {% csrf_token %} 
+    
 
-    <div class="image-container">
+    <div class="image-container mb-5">
       
       <label for="id_avatar"  class="avatar-label" id="avatar-label">
       </label>
 
       <input type="file" name="avatar" accept="image/*" id="id_avatar" class="upload-avatar" />
-      <i class="fa-solid fa-pen-to-square text-light"></i>
+      <i class="fa-solid fa-pen-to-square text-light "></i>
     </div>
 
     <div class="info-fields">
 
+      <div class="d-name">
+      {{form.display_name.label_tag}}
+      {{ form.display_name}}
+      </div>
+
+      <div class="bio-form">
+        {{form.intro.label_tag}}
+        {{form.intro}}
+      </div>
+
 
     </div>
 
-    {{ form.as_p}}
-  <!--- <div>
-    <label for="">{{ form.display_name.label }}</label>
-     {{ form.display_name }}
-    </div>
-
-    <div>
-      {{ form.intro.label }}
-     {{ form.intro }}
-    </div>
-  -->
-    <button type="submit">Submit</button>
+    <button type="submit" class="mt-5 submit-button btn rounded-pill text-light">Submit</button>
   </form>
 </main>
 
