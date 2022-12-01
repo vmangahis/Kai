@@ -176,10 +176,6 @@ def personalList(request, pk):
 def catalog(request):
     context = {}
     
-    
-    
-    
-    
     if 'mangalist' in request.path:
         masterList = Manga.objects.all().order_by('id')
         userReadlistObject = UserReadlist.objects.filter(user=request.user.id)
@@ -189,8 +185,6 @@ def catalog(request):
 
         for counter in userReadlistObject:
             userReadlist.append(counter.manga)
-
-        
 
         page_object = mangaListPaginator.get_page(page_number)
         context = {'list' : page_object , 'user_list' : userReadlist, 'list_type' : 'manga'}
@@ -207,8 +201,6 @@ def catalog(request):
         for counter in userWatchListObject:
             userWatchlist.append(counter.anime)
         
-
-
         
         page_number = request.GET.get('page')
         page_object = animeListPaginator.get_page(page_number)
@@ -262,8 +254,11 @@ def fullResult(request, type):
 
 def profile(request):
     myUser = User.objects.get(id=request.user.id)
+
+    watchlist = UserWatchlist.objects.filter(user=request.user.id)
+    readlist = UserReadlist.objects.filter(user=request.user.id)
     
-    context =  {'userProfileObject' : myUser}
+    context =  {'userProfileObject' : myUser, 'watchlist' : watchlist, 'readlist': readlist}
     return render(request, "base/profile.html", context)
 
 def editProfile(request):
