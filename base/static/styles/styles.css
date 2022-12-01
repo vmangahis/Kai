@@ -342,7 +342,7 @@ main {
   flex-direction: row;
   gap:5%;
   justify-content: center;
-  align-content: flex-start ;
+  align-content: flex-start;
   flex-wrap: wrap;
 }
 
@@ -428,17 +428,50 @@ main {
   gap:50px;
 }
 
-.profile-layout{
+.profile-container{
   display:flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+  flex-direction: row;
+
 }
+
+.userlist-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.watchlist, .readlist{
+  min-width: 1100px;
+  min-height: 635px;
+  display:flex;
+  flex-direction:row;
+  justify-content: flex-start;
+  gap:5%;
+  align-content:flex-start;
+  flex-wrap: wrap;
+}
+
+.list-thumbnail{
+  width:300px;
+  height:300px;
+  object-fit:cover;
+}
+
 
 .user-profile-photo{
   border-radius:50%;
   width:200px;
   height:200px;
+}
+
+
+
+.main-profile-section{
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  gap:5%;
+  
 }
 
 .user-edit-form{

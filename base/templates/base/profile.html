@@ -2,11 +2,52 @@
 
 {% block content %}
 
-<main class="container-fluid profile-layout">
-<img src="{{userProfileObject.avatar_url}}" class="user-profile-photo"/>
-<h1 class="text-light">{{ userProfileObject.display_name }}</h1>
-<p class="text-light">{{ userProfileObject.intro }}</p>
-<a href="{% url 'EditProfile' %}">Edit Profile</a>
+<main class="container-fluid profile-container mt-5">
+    <section class="col-3 main-profile-section">
+        <img src="{{userProfileObject.avatar_url}}" class="user-profile-photo"/>
+        <h1 class="text-light">{{ userProfileObject.display_name }}</h1>
+        <p class="text-light">{{ userProfileObject.intro }}</p>
+        <a href="{% url 'EditProfile' %}">Edit Profile</a>
+    </section>
+
+    <section class="col-7 userlist-container">
+
+        <div class="watchlist-container">
+            <h4 class="text-light">
+                {{ userProfileObject.display_name}}'s Watchlist
+            </h4>
+            
+            <div class="watchlist">
+                {% for wl in watchlist%}
+                <figure>
+                    <img src={{ wl.anime.large_image}}  class="list-thumbnail" />
+                </figure>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="readlist-container">
+            <h4 class="text-light">
+                {{ userProfileObject.display_name}}'s Readlist
+            </h4>
+
+            <div class="readlist">
+                <figure>
+                    
+                </figure>
+            </div>
+        </div>
+
+    
+    </section>
+
+    <aside class="col-2 activities-container">
+        <div class="activities">
+            <h4 class="text-light text-center">Recent Activities
+            </h4>
+        </div>
+
+    </aside>
 </main>
 
 
