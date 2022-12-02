@@ -32,9 +32,11 @@
             </h4>
 
             <div class="readlist">
+                {% for rl in readlist %}
                 <figure>
-                    
+                    <img src={{ rl.manga.large_image}} class="list-thumbnail" />
                 </figure>
+                {% endfor %}
             </div>
         </div>
 
