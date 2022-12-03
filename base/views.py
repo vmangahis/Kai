@@ -276,17 +276,19 @@ def editProfile(request):
 
         #Validation of edit form
         if formObject.is_valid():
-            upload = cloudinary.uploader.upload(formObject.cleaned_data['avatar'],folder=f"user/{userProfile.id}/", unique_filename=True)
+
+            if len(request.FILES) != 0:
+                upload = cloudinary.uploader.upload(formObject.cleaned_data['avatar'],folder=f"user/{userProfile.id}/", unique_filename=True)
 
             #Check if user has previous image
-            if userProfile.avatar_public_id is not None:
-                delete_image_id = userProfile.avatar_public_id
-                deleteimage = cloudinary.uploader.destroy(delete_image_id, invalidate=True)
+                if userProfile.avatar_public_id is not None:
+                    delete_image_id = userProfile.avatar_public_id
+                    deleteimage = cloudinary.uploader.destroy(delete_image_id, invalidate=True)
                 
 
-            userProfile.avatar_url = upload['secure_url']
-            userProfile.avatar_public_id = upload['public_id']
-            userProfile.avatar = f'/{upload["public_id"]}.{upload["format"]}'
+                userProfile.avatar_url = upload['secure_url']
+                userProfile.avatar_public_id = upload['public_id']
+                userProfile.avatar = f'/{upload["public_id"]}.{upload["format"]}'
             formObject.save()
             
             
@@ -298,11 +300,11 @@ def editProfile(request):
     context = {'user' : userProfile , 'form' : formObject}
     return render(request, 'base/edit_profile.html', context)
 
+#Adding entry (Default "Watch Status")
 def addtoMyList(request,type,pk):
     if request.user.is_authenticated:
         if request.method == 'POST':
             
-
             if type == 'anime':
                 userObject, alreadyExists = UserWatchlist.objects.get_or_create(user=User.objects.get(id=request.user.id), anime=Anime.objects.get(id=pk))
                 userObject.status = WatchlistStatus.objects.get(id=2)
@@ -330,6 +332,7 @@ def addtoMyList(request,type,pk):
     else:
         return redirect('Login')
 
+#Deleting entry
 def dropEntry(request, type, pk):
     if request.user.is_authenticated:
         if request.method == 'POST':
