@@ -78,6 +78,17 @@ class WatchlistStatus(models.Model):
     def __str__(self):
         return f'{self.id} ->  {self.status_type}'
 
+class Activities(models.Model):
+    user = models.ForeignKey('User', on_delete=models.CASCADE)
+    activity_type = models.ForeignKey('ActivityType', on_delete=models.CASCADE, default=None)
+
+
+
+class ActivityType(models.Model):
+    type = models.CharField(max_length=50, default=None)
+
+    def __str__(self):
+        return self.type
 
 class Friendship(models.Model):
     pass
@@ -97,9 +108,6 @@ class Author(models.Model):
 
 
 class User(AbstractUser):
-
-    
-
     display_name = models.CharField(max_length=100)
     username = models.CharField(max_length=50, unique=True)
     email = models.EmailField(unique=False)
