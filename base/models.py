@@ -81,14 +81,15 @@ class WatchlistStatus(models.Model):
 class Activities(models.Model):
     user = models.ForeignKey('User', on_delete=models.CASCADE)
     activity_type = models.ForeignKey('ActivityType', on_delete=models.CASCADE, default=None)
+    title= models.CharField(max_length=255, default=None)
     timestamp = models.DateTimeField(auto_now_add=True, editable=False)
 
-
+#2 anime
 class ActivityType(models.Model):
     type = models.CharField(max_length=50, default=None)
 
     def __str__(self):
-        return self.type
+        return str(self.id)
 
 class Friendship(models.Model):
     pass
@@ -111,14 +112,14 @@ class User(AbstractUser):
     display_name = models.CharField(max_length=100)
     username = models.CharField(max_length=50, unique=True)
     email = models.EmailField(unique=False)
-    intro = models.TextField(null=True)
+    intro = models.TextField(null=True, blank=True, default='No intro.')
     
     
     
 
     avatar = models.ImageField(null=True, default='blank-avatar.jpg')
-    avatar_url = models.URLField(null=True)
-    avatar_public_id = models.CharField(default=None, null=True, max_length=100)
+    avatar_url = models.URLField(null=True, default='https://res.cloudinary.com/dg1bym3ax/image/upload/v1669651547/blank-avatar.jpg')
+    avatar_public_id = models.CharField(default=None, null=True, max_length=100, blank=True)
 
 
     USERNAME_FIELD = 'username'
