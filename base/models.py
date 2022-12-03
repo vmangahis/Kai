@@ -81,7 +81,7 @@ class WatchlistStatus(models.Model):
 class Activities(models.Model):
     user = models.ForeignKey('User', on_delete=models.CASCADE)
     activity_type = models.ForeignKey('ActivityType', on_delete=models.CASCADE, default=None)
-
+    timestamp = models.DateTimeField(auto_now_add=True, editable=False)
 
 
 class ActivityType(models.Model):
