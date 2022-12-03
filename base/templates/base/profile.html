@@ -3,14 +3,14 @@
 {% block content %}
 
 <main class="container-fluid profile-container mt-5">
-    <section class="col-3 main-profile-section">
+    <section class="col main-profile-section">
         <img src="{{userProfileObject.avatar_url}}" class="user-profile-photo"/>
         <h1 class="text-light">{{ userProfileObject.display_name }}</h1>
         <p class="text-light">{{ userProfileObject.intro }}</p>
         <a href="{% url 'EditProfile' %}">Edit Profile</a>
     </section>
 
-    <section class="col-7 userlist-container">
+    <section class="col userlist-container">
 
         <div class="watchlist-container">
             <h4 class="text-light">
@@ -19,7 +19,7 @@
             
             <div class="watchlist">
                 {% for wl in watchlist%}
-                <figure>
+                <figure class="mb-5">
                     <img src={{ wl.anime.large_image}}  class="list-thumbnail" />
                 </figure>
                 {% endfor %}
@@ -33,7 +33,7 @@
 
             <div class="readlist">
                 {% for rl in readlist %}
-                <figure>
+                <figure class="mb-5">
                     <img src={{ rl.manga.large_image}} class="list-thumbnail" />
                 </figure>
                 {% endfor %}
@@ -43,11 +43,23 @@
     
     </section>
 
-    <aside class="col-2 activities-container">
-        <div class="activities">
-            <h4 class="text-light text-center">Recent Activities
-            </h4>
+    <aside class="col-3 activities-container">
+        <h4 class="text-light text-center p-3">Recent Activities</h4>
+        
+        {% for act in activities%}
+        <div class="activities-card m-5">
+
+            <figure>
+                <img src="https://via.placeholder.com/150"  class="m-2" />
+            </figure>
+
+            <div class="activities-text text-light my-auto">
+                <h5>{{userProfileObject.display_name}}</h5>
+                <span></span>
+            </div>
+
         </div>
+        {% endfor %}
 
     </aside>
 </main>
