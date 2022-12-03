@@ -11,7 +11,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.urls import resolve
 from django.db.models import Q
 from .forms import UserCreation
-from .models import Anime, Manga, User, UserWatchlist, UserReadlist, WatchlistStatus, ReadlistStatus
+from .models import Activities,ActivityType,Anime, Manga, User, UserWatchlist, UserReadlist, WatchlistStatus, ReadlistStatus
 from .forms import UserEditForm
 
 
@@ -257,8 +257,9 @@ def profile(request):
 
     watchlist = UserWatchlist.objects.filter(user=request.user.id)
     readlist = UserReadlist.objects.filter(user=request.user.id)
+    activities = Activities.objects.filter(user=request.user.id)
     
-    context =  {'userProfileObject' : myUser, 'watchlist' : watchlist, 'readlist': readlist}
+    context =  {'userProfileObject' : myUser, 'watchlist' : watchlist, 'readlist': readlist, 'activities': activities}
     return render(request, "base/profile.html", context)
 
 def editProfile(request):
@@ -300,7 +301,7 @@ def editProfile(request):
     context = {'user' : userProfile , 'form' : formObject}
     return render(request, 'base/edit_profile.html', context)
 
-#Adding entry (Default "Watch Status")
+#Adding entry (Default "Watching/Reading Status")
 def addtoMyList(request,type,pk):
     if request.user.is_authenticated:
         if request.method == 'POST':
@@ -308,6 +309,8 @@ def addtoMyList(request,type,pk):
             if type == 'anime':
                 userObject, alreadyExists = UserWatchlist.objects.get_or_create(user=User.objects.get(id=request.user.id), anime=Anime.objects.get(id=pk))
                 userObject.status = WatchlistStatus.objects.get(id=2)
+                activitiesObject = Activities.objects.create(user=User.objects.get(id=request.user.id), activity_type=ActivityType.objects.get(id=2), title=Anime.objects.get(id=pk).title)
+                activitiesObject.save()
                 userObject.save()
 
                 if alreadyExists:
@@ -318,8 +321,11 @@ def addtoMyList(request,type,pk):
                 
 
             elif type == 'manga':
+
                 userObject, alreadyExists = UserReadlist.objects.get_or_create(user=User.objects.get(id=request.user.id), manga=Manga.objects.get(id=pk))
                 userObject.status = ReadlistStatus.objects.get(id=1)
+                activitiesObject = Activities.objects.create(user=User.objects.get(id=request.user.id), activity_type=ActivityType.objects.get(id=1), title=Manga.objects.get(id=pk).title)
+                activitiesObject.save()
                 userObject.save()
                 if alreadyExists:
                     return redirect('ReadList', pk=request.user.id)
