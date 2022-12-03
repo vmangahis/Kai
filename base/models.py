@@ -55,6 +55,8 @@ class UserWatchlist(models.Model):
     user = models.ForeignKey('User', on_delete=models.CASCADE)
     anime = models.ForeignKey(Anime, on_delete=models.CASCADE)
     status = models.ForeignKey('WatchlistStatus', on_delete=models.CASCADE, null=True)
+    created = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return str(self.user.username + ' ' + self.anime.title + ' STATUS:' + self.status.status_type)
@@ -63,6 +65,8 @@ class UserReadlist(models.Model):
     user = models.ForeignKey('User', on_delete=models.CASCADE)
     manga = models.ForeignKey(Manga, on_delete=models.CASCADE)
     status = models.ForeignKey('ReadlistStatus', on_delete=models.CASCADE, null=True)
+    created = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return str(self.user.username + ' ' + self.manga.title + ' STATUS:' + self.status.status_type)
