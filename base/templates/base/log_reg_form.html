@@ -46,9 +46,16 @@
     <a href="{% url 'Register' %}" class="register-text d-block mx-auto text-center">Don't have an account?</a>
 
 
+    
 
+ <script type="text/javascript" src={% static 'js/login.js'%}></script>
 
 {% else %}
+
+
+
+
+
 
 <h1 class="text-light text-center">Register an Account</h1>
 
@@ -98,6 +105,3 @@
 </main>
 {% endblock %}
 
-{% block page_script %}
-<script type="text/javascript" src={% static 'js/login.js'%}></script>
-{% endblock %}
