@@ -1,7 +1,11 @@
 from django.contrib import admin
+from django.db import models
 from .models import StudioCompany, User, Anime, AnimeGenre, Manga, MangaGenre, Author, UserWatchlist, WatchlistStatus, ReadlistStatus, UserReadlist
 from import_export.admin import ImportExportModelAdmin
 from import_export import resources
+
+
+
 
 
 
@@ -10,6 +14,8 @@ class AnimeResource(resources.ModelResource):
     class Meta:
         model = Anime
         exclude = ('premiere_date', 'genre')
+
+
 
 class  AnimeGenreResource(resources.ModelResource):
     class Meta:
@@ -28,6 +34,7 @@ class MangaResource(resources.ModelResource):
         
 
 class AnimeResourceAdmin(ImportExportModelAdmin):
+    list_display = ['title', 'premiere_date']
     resource_class = AnimeResource
 
 
@@ -41,19 +48,26 @@ class AnimeGenreResourceAdmin(ImportExportModelAdmin):
 class MangaGenreResourceAdmin(ImportExportModelAdmin):
     resource_class = MangaGenreResource
 
+class UserWatchlistAdmin(admin.ModelAdmin):
+    list_display = ['get_user', 'created', 'updated_at']
+    
+    def get_user(self, obj):
+        return obj.user.username
 
+    get_user.short_description = "Username"
 
 
 
 
 admin.site.register(User)
 admin.site.register(Anime, AnimeResourceAdmin)
+
 admin.site.register(AnimeGenre, AnimeGenreResourceAdmin)
 admin.site.register(MangaGenre, MangaGenreResourceAdmin)
 admin.site.register(Manga, MangaResourceAdmin)
 admin.site.register(Author)
 admin.site.register(StudioCompany)
-admin.site.register(UserWatchlist)
+admin.site.register(UserWatchlist, UserWatchlistAdmin)
 admin.site.register(WatchlistStatus)
 admin.site.register(ReadlistStatus)
 admin.site.register(UserReadlist)

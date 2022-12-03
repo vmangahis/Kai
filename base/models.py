@@ -1,6 +1,7 @@
 from django.db import models
 from import_export import resources
 from django.contrib.auth.models import AbstractUser
+from django.utils import timezone
 
 
 
@@ -30,11 +31,10 @@ class Anime(models.Model):
     title = models.CharField(max_length=100, default=None, unique=True, null=True)
     premiere_date = models.DateField(default=None, blank=True, null=True)
     summary = models.TextField(default="No summary")
-    genre = models.ManyToManyField(AnimeGenre)
     thumbnail = models.URLField(max_length=200, default="https://picsum.photos/seed/picsum/300/500", null=True)
     large_image = models.URLField(max_length=200, default="https://picsum.photos/seed/picsum/500/500", null=True)
     
-    watchers = models.ForeignKey('User', on_delete=models.CASCADE, blank=True, default=None, null=True)
+    
 
     def __str__(self):
         return str(self.title)
@@ -55,7 +55,7 @@ class UserWatchlist(models.Model):
     user = models.ForeignKey('User', on_delete=models.CASCADE)
     anime = models.ForeignKey(Anime, on_delete=models.CASCADE)
     status = models.ForeignKey('WatchlistStatus', on_delete=models.CASCADE, null=True)
-    created = models.DateTimeField(auto_now_add=True)
+    created = models.DateTimeField(auto_now_add=True, editable=False)
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
@@ -65,7 +65,7 @@ class UserReadlist(models.Model):
     user = models.ForeignKey('User', on_delete=models.CASCADE)
     manga = models.ForeignKey(Manga, on_delete=models.CASCADE)
     status = models.ForeignKey('ReadlistStatus', on_delete=models.CASCADE, null=True)
-    created = models.DateTimeField(auto_now_add=True)
+    created = models.DateTimeField(auto_now_add=True, editable=False)
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
