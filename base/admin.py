@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.db import models
-from .models import Activities, ActivityType, StudioCompany, User, Anime, AnimeGenre, Manga, MangaGenre, Author, UserWatchlist, WatchlistStatus, ReadlistStatus, UserReadlist
+from .models import Activities,ActivityStatus, ActivityType, StudioCompany, User, Anime, AnimeGenre, Manga, MangaGenre, Author, UserWatchlist, WatchlistStatus, ReadlistStatus, UserReadlist
 from import_export.admin import ImportExportModelAdmin
 from import_export import resources
 
@@ -61,7 +61,7 @@ class UserWatchlistAdmin(admin.ModelAdmin):
 
 admin.site.register(User)
 admin.site.register(Anime, AnimeResourceAdmin)
-
+admin.site.register(ActivityStatus)
 admin.site.register(AnimeGenre, AnimeGenreResourceAdmin)
 admin.site.register(MangaGenre, MangaGenreResourceAdmin)
 admin.site.register(Manga, MangaResourceAdmin)
