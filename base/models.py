@@ -92,6 +92,7 @@ class Activities(models.Model):
     title= models.CharField(max_length=255, default=None)
     title_id = models.PositiveIntegerField(default=None)
     activity_status = models.ForeignKey(ActivityStatus, on_delete=models.CASCADE, default=None, null=True, blank=True)
+    activity_thumbnail = models.URLField(default='https://via.placeholder.com/150')
     timestamp = models.DateTimeField(auto_now_add=True, editable=False)
 
     def __str__(self):

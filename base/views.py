@@ -309,7 +309,7 @@ def addtoMyList(request,type,pk):
             if type == 'anime':
                 userObject, alreadyExists = UserWatchlist.objects.get_or_create(user=User.objects.get(id=request.user.id), anime=Anime.objects.get(id=pk))
                 userObject.status = WatchlistStatus.objects.get(id=2)
-                activitiesObject = Activities.objects.create(user=User.objects.get(id=request.user.id), activity_type=ActivityType.objects.get(id=2), title=Anime.objects.get(id=pk).title, title_id=pk, activity_status=ActivityStatus.objects.get(status="ACTIVE"))
+                activitiesObject = Activities.objects.create(user=User.objects.get(id=request.user.id), activity_type=ActivityType.objects.get(id=2), title=Anime.objects.get(id=pk).title, title_id=pk, activity_status=ActivityStatus.objects.get(status="ACTIVE"), activity_thumbnail=Anime.objects.get(id=pk).thumbnail)
                 activitiesObject.save()
                 userObject.save()
 
@@ -324,7 +324,7 @@ def addtoMyList(request,type,pk):
 
                 userObject, alreadyExists = UserReadlist.objects.get_or_create(user=User.objects.get(id=request.user.id), manga=Manga.objects.get(id=pk))
                 userObject.status = ReadlistStatus.objects.get(id=1)
-                activitiesObject = Activities.objects.create(user=User.objects.get(id=request.user.id), activity_type=ActivityType.objects.get(id=1), title=Manga.objects.get(id=pk).title, title_id=pk, activity_status=ActivityStatus.objects.get(status="ACTIVE"))
+                activitiesObject = Activities.objects.create(user=User.objects.get(id=request.user.id), activity_type=ActivityType.objects.get(id=1), title=Manga.objects.get(id=pk).title, title_id=pk, activity_status=ActivityStatus.objects.get(status="ACTIVE"), activity_thumbnail=Manga.objects.get(id=pk).thumbnail)
                 activitiesObject.save()
                 userObject.save()
                 if alreadyExists:
@@ -361,7 +361,7 @@ def movetoPlan(request,type, pk):
     if type == "manga":
         current_user = UserReadlist.objects.get(user=request.user.id, manga=pk)
         current_user.status = ReadlistStatus.objects.get(id=2)
-        activitiesObject = Activities.objects.create(user=User.objects.get(id=request.user.id), activity_type=ActivityType.objects.get(id=1), title=Manga.objects.get(id=pk).title, title_id=pk, activity_status=ActivityStatus.objects.get(status="PLAN"))
+        activitiesObject = Activities.objects.create(user=User.objects.get(id=request.user.id), activity_type=ActivityType.objects.get(id=1), title=Manga.objects.get(id=pk).title, title_id=pk, activity_status=ActivityStatus.objects.get(status="PLAN"), activity_thumbnail=Manga.objects.get(id=pk).thumbnail)
         activitiesObject.save()
         current_user.save()
         return redirect('ReadList', pk=request.user.id)
@@ -369,7 +369,7 @@ def movetoPlan(request,type, pk):
     elif type == "anime":
         current_user = UserWatchlist.objects.get(user=request.user.id, anime=pk)
         current_user.status = WatchlistStatus.objects.get(id=3)
-        activitiesObject = Activities.objects.create(user=User.objects.get(id=request.user.id), activity_type=ActivityType.objects.get(id=2), title=Anime.objects.get(id=pk).title, title_id=pk, activity_status=ActivityStatus.objects.get(status="PLAN"))
+        activitiesObject = Activities.objects.create(user=User.objects.get(id=request.user.id), activity_type=ActivityType.objects.get(id=2), title=Anime.objects.get(id=pk).title, title_id=pk, activity_status=ActivityStatus.objects.get(status="PLAN"), activity_thumbnail=Anime.objects.get(id=pk).thumbnail)
         activitiesObject.save()
         current_user.save()
         return redirect('WatchList', pk=request.user.id)
@@ -381,6 +381,8 @@ def movetoFinish(request, type, pk):
     if type == "manga":
         current_user = UserReadlist.objects.get(user=request.user.id, manga=pk)
         current_user.status = ReadlistStatus.objects.get(id=3)
+        activitiesObject = Activities.objects.create(user=User.objects.get(id=request.user.id), activity_type=ActivityType.objects.get(id=1), title=Manga.objects.get(id=pk).title, title_id=pk, activity_status=ActivityStatus.objects.get(status="COMPLETED"), activity_thumbnail=Manga.objects.get(id=pk).thumbnail)
+        activitiesObject.save()
         current_user.save()
 
         return redirect('ReadList', pk=request.user.id)
@@ -388,6 +390,8 @@ def movetoFinish(request, type, pk):
     elif type == "anime":
         current_user = UserWatchlist.objects.get(user=request.user.id, anime=pk)
         current_user.status = WatchlistStatus.objects.get(id=1)
+        activitiesObject = Activities.objects.create(user=User.objects.get(id=request.user.id), activity_type=ActivityType.objects.get(id=2), title=Anime.objects.get(id=pk).title, title_id=pk, activity_status=ActivityStatus.objects.get(status="COMPLETED"), activity_thumbnail=Anime.objects.get(id=pk).thumbnail)
+        activitiesObject.save()
         current_user.save()
 
         return redirect('WatchList', pk=request.user.id)
