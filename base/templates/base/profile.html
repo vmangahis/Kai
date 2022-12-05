@@ -66,7 +66,7 @@
                     finished {% if act.activity_type.type == 'anime' %}watching {%else%}reading {%endif%}
                     {% endif %}</p>
 
-                    {{ act.title }}
+                    <a href={% if act.activity_type.type == "anime" %}"{% url 'AnimPage' act.title_id %}"{% elif act.activity_type.type == 'manga'%}"{% url 'MangPage' act.title_id %}"{% endif %}>{{ act.title }}</a>
             </div>
 
         </div>
