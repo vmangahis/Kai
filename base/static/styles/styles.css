@@ -535,7 +535,11 @@ main {
   
 }
 
-
+.activity-thumbnail{
+  width:150px;
+  height:150px;
+  object-fit: cover;
+}
 
 @media (max-width:1140px){
   .form-container input[type=text], .form-container input[type=password]{
