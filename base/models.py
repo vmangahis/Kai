@@ -88,7 +88,10 @@ class ActivityStatus(models.Model):
 class Activities(models.Model):
     user = models.ForeignKey('User', on_delete=models.CASCADE)
     activity_type = models.ForeignKey('ActivityType', on_delete=models.CASCADE, default=None)
+
     title= models.CharField(max_length=255, default=None)
+    title_id = models.PositiveIntegerField(default=None)
+    activity_status = models.ForeignKey(ActivityStatus, on_delete=models.CASCADE, default=None, null=True, blank=True)
     timestamp = models.DateTimeField(auto_now_add=True, editable=False)
 
     def __str__(self):

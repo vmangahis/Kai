@@ -11,7 +11,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.urls import resolve
 from django.db.models import Q
 from .forms import UserCreation
-from .models import Activities,ActivityType,Anime, Manga, User, UserWatchlist, UserReadlist, WatchlistStatus, ReadlistStatus
+from .models import Activities,ActivityStatus, ActivityType,Anime, Manga, User, UserWatchlist, UserReadlist, WatchlistStatus, ReadlistStatus
 from .forms import UserEditForm
 
 
@@ -257,7 +257,7 @@ def profile(request):
 
     watchlist = UserWatchlist.objects.filter(user=request.user.id)
     readlist = UserReadlist.objects.filter(user=request.user.id)
-    activities = Activities.objects.filter(user=request.user.id)
+    activities = Activities.objects.filter(user=request.user.id).order_by('-timestamp')
     
     context =  {'userProfileObject' : myUser, 'watchlist' : watchlist, 'readlist': readlist, 'activities': activities}
     return render(request, "base/profile.html", context)
@@ -309,7 +309,7 @@ def addtoMyList(request,type,pk):
             if type == 'anime':
                 userObject, alreadyExists = UserWatchlist.objects.get_or_create(user=User.objects.get(id=request.user.id), anime=Anime.objects.get(id=pk))
                 userObject.status = WatchlistStatus.objects.get(id=2)
-                activitiesObject = Activities.objects.create(user=User.objects.get(id=request.user.id), activity_type=ActivityType.objects.get(id=2), title=Anime.objects.get(id=pk).title)
+                activitiesObject = Activities.objects.create(user=User.objects.get(id=request.user.id), activity_type=ActivityType.objects.get(id=2), title=Anime.objects.get(id=pk).title, title_id=pk, activity_status=ActivityStatus.objects.get(status="ACTIVE"))
                 activitiesObject.save()
                 userObject.save()
 
@@ -324,7 +324,7 @@ def addtoMyList(request,type,pk):
 
                 userObject, alreadyExists = UserReadlist.objects.get_or_create(user=User.objects.get(id=request.user.id), manga=Manga.objects.get(id=pk))
                 userObject.status = ReadlistStatus.objects.get(id=1)
-                activitiesObject = Activities.objects.create(user=User.objects.get(id=request.user.id), activity_type=ActivityType.objects.get(id=1), title=Manga.objects.get(id=pk).title)
+                activitiesObject = Activities.objects.create(user=User.objects.get(id=request.user.id), activity_type=ActivityType.objects.get(id=1), title=Manga.objects.get(id=pk).title, title_id=pk, activity_status=ActivityStatus.objects.get(status="ACTIVE"))
                 activitiesObject.save()
                 userObject.save()
                 if alreadyExists:
@@ -361,14 +361,16 @@ def movetoPlan(request,type, pk):
     if type == "manga":
         current_user = UserReadlist.objects.get(user=request.user.id, manga=pk)
         current_user.status = ReadlistStatus.objects.get(id=2)
-        
+        activitiesObject = Activities.objects.create(user=User.objects.get(id=request.user.id), activity_type=ActivityType.objects.get(id=1), title=Manga.objects.get(id=pk).title, title_id=pk, activity_status=ActivityStatus.objects.get(status="PLAN"))
+        activitiesObject.save()
         current_user.save()
         return redirect('ReadList', pk=request.user.id)
 
     elif type == "anime":
         current_user = UserWatchlist.objects.get(user=request.user.id, anime=pk)
         current_user.status = WatchlistStatus.objects.get(id=3)
-        
+        activitiesObject = Activities.objects.create(user=User.objects.get(id=request.user.id), activity_type=ActivityType.objects.get(id=2), title=Anime.objects.get(id=pk).title, title_id=pk, activity_status=ActivityStatus.objects.get(status="PLAN"))
+        activitiesObject.save()
         current_user.save()
         return redirect('WatchList', pk=request.user.id)
 

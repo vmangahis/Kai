@@ -55,7 +55,17 @@
 
             <div class="activities-text text-light my-auto">
                 <h5>{{userProfileObject.display_name}}</h5>
-                <span></span>
+                <p>{% if act.activity_type.type == "anime"%}anime{% elif act.activity_type.type == 'manga' %}manga{% endif %}</p>
+
+                <p>{% if act.activity_status.status == "ACTIVE" and act.activity_type.type == "anime" %}watching 
+                    {% elif act.activity_status.status == "ACTIVE" and act.activity_type.type == 'manga' %}reading
+
+                    {% elif act.activity_status.status == "PLAN"%}
+                    plan
+
+                    {% elif act.activity_status.status == "COMPLETED"%}
+                    completed
+                    {% endif %}</p>
             </div>
 
         </div>
