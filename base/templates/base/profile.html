@@ -47,7 +47,7 @@
         <h4 class="text-light text-center p-3">Recent Activities</h4>
         
         {% for act in activities%}
-        <div class="activities-card m-5">
+        <div class="activities-card m-4">
 
             <figure>
                 <img src="{{ act.activity_thumbnail }}"  class="m-2 activity-thumbnail" />
@@ -55,8 +55,7 @@
 
             <div class="activities-text text-light my-auto">
                 <h5>{{userProfileObject.display_name}}</h5>
-                {% comment %} <p>{% if act.activity_type.type == "anime"%}anime{% elif act.activity_type.type == 'manga' %}manga{% endif %}</p> {% endcomment %}
-
+                
                 <p>{% if act.activity_status.status == "ACTIVE" and act.activity_type.type == "anime" %}starts watching 
                     {% elif act.activity_status.status == "ACTIVE" and act.activity_type.type == 'manga' %}starts reading
                     {% elif act.activity_status.status == "PLAN" %}
