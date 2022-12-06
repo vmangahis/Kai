@@ -525,7 +525,7 @@ main {
 
 .activities-container{
  border:3px solid white; 
- 
+ height:100%;
 }
 
 .activities-card{
