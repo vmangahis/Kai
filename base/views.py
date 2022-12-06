@@ -257,7 +257,7 @@ def profile(request):
 
     watchlist = UserWatchlist.objects.filter(user=request.user.id)
     readlist = UserReadlist.objects.filter(user=request.user.id)
-    activities = Activities.objects.filter(user=request.user.id).order_by('-timestamp')
+    activities = Activities.objects.filter(user=request.user.id).order_by('-timestamp')[:5]
     
     context =  {'userProfileObject' : myUser, 'watchlist' : watchlist, 'readlist': readlist, 'activities': activities}
     return render(request, "base/profile.html", context)
