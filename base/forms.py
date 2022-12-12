@@ -5,6 +5,16 @@ from django.utils.safestring import mark_safe
 
 from .models import User
 
+
+
+def val_username_char(username):
+        for ch in username:
+            if not ch.isdigit() and not ch.isalpha():
+                return False
+                
+        return True
+
+
 class UserCreation(UserCreationForm):
 
 
@@ -12,6 +22,10 @@ class UserCreation(UserCreationForm):
     class Meta:
         model = User
         fields = ['display_name', 'username', 'email', 'password1', 'password2', 'tos']
+
+    
+
+
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -35,6 +49,9 @@ class UserCreation(UserCreationForm):
         self.fields['password2'].widget.attrs['class']="form-control"
         self.fields['password2'].widget.attrs['placeholder']="Confirm Password"
 
+    
+
+
     def clean_password2(self):
         password_a = self.cleaned_data.get('password1')
         password_b = self.cleaned_data.get('password2')
@@ -50,6 +67,14 @@ class UserCreation(UserCreationForm):
             raise forms.ValidationError('Email already exists.')
 
         return email
+
+    def clean_username(self):
+        user = self.cleaned_data['username']
+
+        if not val_username_char(user):
+            raise forms.ValidationError("Username must only numbers and letters.")
+
+        return user
 
     def clean_tos(self):
         tosCheck = self.cleaned_data['tos']
@@ -82,6 +107,7 @@ class UserEditForm(ModelForm):
             'class': 'form-control bio-textarea'
         })
         
+    
 
     def clean_display_name(self):
         dName = self.cleaned_data['display_name']
