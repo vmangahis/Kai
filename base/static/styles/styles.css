@@ -542,6 +542,58 @@ main {
   object-fit: cover;
 }
 
+.paginator-nav, .page-links{
+  display:flex;
+
+}
+
+.paginator-nav{
+  justify-content: space-between;
+  width:80%;
+}
+
+.page-links{
+  gap:50px;
+}
+
+
+
+.page-links li > a{  
+   border-radius: 50%;
+   
+}
+
+.page-links li > a{
+  padding:20px 25px;
+}
+
+.active-page{
+  background-color: #4A4488;
+}
+
+.arrow-nav-link{
+  padding:20px 30px;
+  border-radius: 50%;
+}
+
+
+
+
+.paginator-nav > *{
+  font-size:1.953rem;
+  color:#ffff;
+  padding:10px;
+}
+
+.paginator-nav a:hover{
+  background-color: #4A4488;
+}
+
+
+
+
+
+
 @media (max-width:1140px){
   .form-container input[type=text], .form-container input[type=password]{
     max-width:182px;

@@ -190,8 +190,8 @@ def catalog(request):
         context = {'list' : page_object , 'user_list' : userReadlist, 'list_type' : 'manga'}
 
     elif 'animelist' in request.path:
-        masterList = Anime.objects.all()[:100]
-        animeListPaginator = Paginator(masterList, 20)
+        masterList = Anime.objects.all().order_by('id')
+        animeListPaginator = Paginator(masterList, 10)
         
         userWatchListObject = UserWatchlist.objects.filter(user=request.user.id)
         userWatchlist = []

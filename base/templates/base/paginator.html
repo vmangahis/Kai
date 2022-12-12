@@ -1,19 +1,47 @@
-<div class="pages">
 
-<span class="links">
-{% if list.has_previous %}
-<a href="?page={{ list.previous_page_number }}">previous</a>
+<nav class="mt-5 paginator-nav">
+    {% if list.has_previous  %}
+    <div class="arrow-nav"><a href="?page={{list.previous_page_number}}" class="arrow-nav-link">&laquo;</a></div>
 
-{% endif %}
+    {% else %}
+    <div></div>
+    
 
-<span class="current-page text-light">
-    Page {{ list.number }} of {{ list.paginator.num_pages }}
-</span>
+    {% endif %}
 
-{% if list.has_next %}
-    <a href="?page={{ list.next_page_number }}">next</a>
-{% endif %}
+    <ul class="page-links">
+    {% if list.number|add:'-4' > 1 %}
+    <li><a href="?page={{list.number|add:'-5'}}" class='page-link'><i class="bi bi-three-dots"></i></a></li>
+    {% endif %}
+
+    {% for page in list.paginator.page_range %}
+
+        {% if list.number == page %}
+        {% comment %} Active Page {% endcomment %}
+        <li><a class="active-page">{{page}}</a></li>
 
 
-</span>
-</div>
+        {% elif page > list.number|add:'-5' and page < list.number|add:'5' %}
+        <li><a class="page-link" href="?page={{page}}">{{ page }}</a></li>
+
+        {% endif %}
+
+        
+    {% endfor %}
+
+
+
+    {% if list.paginator.num_pages > list.number|add:'4' %}
+    <li><a href="?page={{list.number|add:'5'}}" class='page-link'><i class="bi bi-three-dots"></i></a></li>
+    {% endif %}
+
+    
+
+    </ul>
+    {% if list.has_next %}
+    <div class="arrow-nav"><a href="?page={{list.next_page_number}}" class="arrow-nav-link">&raquo;</a></div>
+
+    {% else %}
+    <div></div>
+    {% endif %}
+</nav>
