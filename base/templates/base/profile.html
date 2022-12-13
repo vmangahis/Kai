@@ -19,13 +19,30 @@
                 {{ userProfileObject.display_name}}'s Watchlist
             </h4>
             
+            {% if watchlist.count > 0 %}
             <div class="watchlist">
+
                 {% for wl in watchlist%}
                 <figure class="mb-5">
                     <img src={{ wl.anime.large_image}}  class="list-thumbnail" />
                 </figure>
                 {% endfor %}
+
+                
+                
+
+                
             </div>
+            {% else %}
+            <div class="empty-list-container">
+
+                <figure class="empty-list">
+                    <img src="{% static 'assets/empty.svg' %}" alt=""  class="empty-image" />
+                    <p class="text-light text-center mt-3">Nothing to watch at the moment.</p>
+                </figure>
+
+            </div>
+            {% endif %}
         </div>
 
         <div class="readlist-container">
@@ -33,6 +50,7 @@
                 {{ userProfileObject.display_name}}'s Readlist
             </h4>
 
+            {% if readlist.count > 0 %}
             <div class="readlist">
                 {% for rl in readlist %}
                 <figure class="mb-5">
@@ -40,6 +58,18 @@
                 </figure>
                 {% endfor %}
             </div>
+            {% else %}
+            <div class="empty-list-container">
+
+                <figure class="empty-list">
+                    <img src="{% static 'assets/empty.svg' %}" alt=""  class="empty-image" />
+                    <p class="text-light text-center mt-3">Nothing to read at the moment.</p>
+                </figure>
+
+            </div>
+
+            {% endif %}
+
         </div>
 
         <div class="friendlist-container">
@@ -47,9 +77,12 @@
             {{ userProfileObject.display_name}}'s Friend List
             </h4>
 
-            <div class="friendlist">
-                <figure class="mb-5">
-                    <img src="{% static 'assets/empty.svg' %}" alt="" srcset="">
+            <div class="empty-list-container">
+
+
+                <figure class="empty-list">
+                    <img src="{% static 'assets/empty.svg' %}" alt="" srcset="" class="empty-image">
+                    <p class="text-light text-center mt-3">Nothing to read at the moment.</p>
                 </figure>
 
             </div>

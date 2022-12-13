@@ -473,15 +473,44 @@ main {
   justify-content: space-between;
 }
 
+
+
+
 .watchlist, .readlist, .friendlist{
   min-width: 1100px;
   min-height: 635px;
+  
   display:flex;
   flex-direction:row;
   justify-content: flex-start;
   gap:5%;
-  align-content:flex-start;
+  align-content:flex-start; 
   flex-wrap: wrap;
+}
+
+
+.empty-list-container{
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1100px;
+  min-height: 635px;
+}
+
+
+
+.empty-list{
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  
+}
+
+.empty-list > img{
+  width:50%;
+  height:auto;
 }
 
 .list-thumbnail{
