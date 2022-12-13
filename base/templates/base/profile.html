@@ -27,12 +27,9 @@
                     <img src={{ wl.anime.large_image}}  class="list-thumbnail" />
                 </figure>
                 {% endfor %}
-
-                
-                
-
                 
             </div>
+            
             {% else %}
             <div class="empty-list-container">
 
@@ -82,7 +79,7 @@
 
                 <figure class="empty-list">
                     <img src="{% static 'assets/empty.svg' %}" alt="" srcset="" class="empty-image">
-                    <p class="text-light text-center mt-3">Nothing to read at the moment.</p>
+                    <p class="text-light text-center mt-3">No fellow otakus at the moment.</p>
                 </figure>
 
             </div>
@@ -92,7 +89,7 @@
     </section>
 
     <aside class="col-3 activities-container">
-        <h4 class="text-light text-center p-3">Recent Activities</h4>
+        <h4 class="text-light text-center mb-2 mt-2">Recent Activities</h4>
         
         {% for act in activities %}
         <div class="activities-card m-4">
@@ -104,16 +101,17 @@
             <div class="activities-text text-light my-auto">
                 <h5>{{userProfileObject.display_name}}</h5>
                 
-                <p>{% if act.activity_status.status == "ACTIVE" and act.activity_type.type == "anime" %}starts watching 
+                <span>{% if act.activity_status.status == "ACTIVE" and act.activity_type.type == "anime" %}starts watching 
                     {% elif act.activity_status.status == "ACTIVE" and act.activity_type.type == 'manga' %}starts reading
                     {% elif act.activity_status.status == "PLAN" %}
                     plans to {% if act.activity_type.type ==  'anime' %}watch {%else%}read {%endif%}
 
                     {% elif act.activity_status.status == "COMPLETED"%}
                     finished {% if act.activity_type.type == 'anime' %}watching {%else%}reading {%endif%}
-                    {% endif %}</p>
+                    {% endif %}</span>
 
                     <a href={% if act.activity_type.type == "anime" %}"{% url 'AnimPage' act.title_id %}"{% elif act.activity_type.type == 'manga'%}"{% url 'MangPage' act.title_id %}"{% endif %}>{{ act.title }}</a>
+                    <span class="timestamp">({{ act.timestamp|timesince }} ago)</span>
             </div>
 
         </div>

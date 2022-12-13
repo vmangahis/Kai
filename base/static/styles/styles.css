@@ -63,7 +63,9 @@ body {
   background-color: #171529;
   margin: 0;
   min-height: 100vh;
+  position:relative;
 }
+
 
 input[type="checkbox"] {
   width: 15px;
@@ -108,6 +110,7 @@ main {
 .main-footer {
   flex: 0 0 50px;
   margin-top: auto;
+  
 }
 
 .navbar .nav-item {
@@ -581,22 +584,38 @@ main {
 }
 
 .activities-container{
- border:3px solid white; 
- height:50vh;
+ 
+ height:75vh;
+ position: sticky;
+ content: '';
+ top:18%;
+ border-radius:10%;
+ /* background-color: #131221; */
+}
+
+.activities-text{
+  font-size:.7vw;
+  
 }
 
 .activities-card{
   border: 3px solid white;
-  min-height: 150px;
+  min-height: 90px;
+  border-radius:5%;
+  background-color:#262343;
+  /* height:90px; */
   display:flex;
   flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
   
 }
 
 .activity-thumbnail{
-  width:150px;
-  height:150px;
+  width:50px;
+  height:50px;
   object-fit: cover;
+  border-radius: 50%;
 }
 
 .paginator-nav, .page-links{
