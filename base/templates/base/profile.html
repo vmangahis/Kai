@@ -1,5 +1,5 @@
 {% extends 'main.html' %}
-
+{% load static %}
 {% block content %}
 
 <main class="container-fluid profile-container mt-5">
@@ -7,7 +7,9 @@
         <img src="{{userProfileObject.avatar_url}}" class="user-profile-photo"/>
         <h1 class="text-light">{{ userProfileObject.display_name }}</h1>
         <p class="text-light">{{ userProfileObject.intro }}</p>
-        <a href="{% url 'EditProfile' %}">Edit Profile</a>
+
+        <a href="{% url 'EditProfile' %}" class="edit-profile">Edit Profile</a>
+
     </section>
 
     <section class="col userlist-container">
@@ -37,6 +39,19 @@
                     <img src={{ rl.manga.large_image}} class="list-thumbnail" />
                 </figure>
                 {% endfor %}
+            </div>
+        </div>
+
+        <div class="friendlist-container">
+            <h4 class="text-light">
+            {{ userProfileObject.display_name}}'s Friend List
+            </h4>
+
+            <div class="friendlist">
+                <figure class="mb-5">
+                    <img src="{% static 'assets/empty.svg' %}" alt="" srcset="">
+                </figure>
+
             </div>
         </div>
 
