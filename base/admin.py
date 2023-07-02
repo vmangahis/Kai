@@ -1,5 +1,4 @@
 from django.contrib import admin
-from django.db import models
 from .models import Activities,ActivityStatus, ActivityType, StudioCompany, User, Anime, AnimeGenre, Manga, MangaGenre, Author, UserWatchlist, WatchlistStatus, ReadlistStatus, UserReadlist
 from import_export.admin import ImportExportModelAdmin
 from import_export import resources
