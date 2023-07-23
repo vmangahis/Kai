@@ -584,7 +584,7 @@ main {
 }
 
 .activities-container{
- 
+
  height:75vh;
  position: sticky;
  content: '';
@@ -599,7 +599,8 @@ main {
 }
 
 .activities-card{
-  border: 3px solid white;
+  border-color: #4A4488;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px #4A4488;
   min-height: 90px;
   border-radius:5%;
   background-color:#262343;

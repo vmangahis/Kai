@@ -25,7 +25,6 @@ def home(request):
     return render(request, 'base/home.html', context)
 
 
-#implement manga 
 def infoAnimeManga(request, pk):
     pageUrl = resolve(request.path_info).url_name
     alreadyinList = False
