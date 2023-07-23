@@ -3,16 +3,16 @@
 {% block content %}
 
 <main class="container-fluid profile-container mt-5">
-    <section class="col main-profile-section">
+    <section class=" main-profile-section">
         <img src="{{userProfileObject.avatar_url}}" class="user-profile-photo"/>
-        <h1 class="text-light">{{ userProfileObject.display_name }}</h1>
-        <p class="text-light">{{ userProfileObject.intro }}</p>
+        <h1 class="text-light profile-name">{{ userProfileObject.display_name }}</h1>
+        <p class="text-light profile-intro">{{ userProfileObject.intro }}</p>
 
         <a href="{% url 'EditProfile' %}" class="edit-profile">Edit Profile</a>
 
     </section>
 
-    <section class="col userlist-container">
+    <section class="userlist-container">
 
         <div class="watchlist-container">
             <h4 class="text-light">
@@ -88,7 +88,7 @@
     
     </section>
 
-    <aside class="col-3 activities-container">
+    <aside class=" activities-container">
         <h4 class="text-light text-center mb-2 mt-2">Recent Activities</h4>
         
         {% for act in activities %}

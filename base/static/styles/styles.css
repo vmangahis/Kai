@@ -529,7 +529,13 @@ main {
   height:200px;
 }
 
+.profile-name{
+  margin-bottom:20px;
+}
 
+.profile-intro, .profile-name{
+  text-align: center;
+}
 
 .main-profile-section{
   display:flex;
@@ -540,6 +546,7 @@ main {
   top:20%;
   height:auto;
   align-self:flex-start;
+  padding:50px;
 }
 
 .user-edit-form{
@@ -588,8 +595,9 @@ main {
  height:75vh;
  position: sticky;
  content: '';
- top:18%;
+  
  border-radius:10%;
+  
  /* background-color: #131221; */
 }
 
