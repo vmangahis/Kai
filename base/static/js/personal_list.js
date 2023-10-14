@@ -81,17 +81,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
     reinvokeButtonListeners(controller_button);
 
-    
-    
-
-    
-    
-
-
-
-
-    
-
     if (window_location == 'readlist') {
         document.getElementById('readlist-button').classList.add('mode-choice');
         document.getElementById('watchlist-button').classList.remove('mode-choice');
@@ -147,25 +136,33 @@ document.addEventListener("DOMContentLoaded", (event) => {
                         <button id="boot-icon" class="bi bi-three-dots-vertical list-controller" style="font-size: 2rem; color: rgb(255, 0, 0);">
                         </button>
                         <div class="edit-watchlist-controller">
-                            <ul class="edit-watchlist-menu">
+                            <ul class="edit-watchlist-menu">` +
+
+                                `<li>` + 
                                 
-                                <li>
-                                <form method="POST" action="http://${window.location.host}/plan/anime/${elem.id}" >
-                                <input type="hidden" name=csrfmiddlewaretoken value=${document.getElementsByName('csrf-token')[0].content} />
-                                <button type="submit" class="list-controller-button text-light">Move to plan to watch</button>
-                                </form>
-                                </li>
+                                ((elem.status == "WATCHING") ? '<h5 class="text-light">You are currently watching this.</h5>':`<form method='POST' action='http://${window.location.host}/addtolist/anime/${elem.id}'>
+                                <input type='hidden' name=csrfmiddlewaretoken value=${document.getElementsByName('csrf-token')[0].content} />
+                                <button type='submit' class='list-controller-button text-light'>Add to currently watching</button>
+                                </form>`)
+                                
+                                + `</li>` +
+                                
+                                `<li>` + ((elem.status == "PLAN TO WATCH" ? "<h5 class='text-light text-center'>Already in your plan list</h5>" : `<form method='POST' action="http://${window.location.host}/plan/anime/${elem.id}">
+                                <input type='hidden' name=csrfmiddlewaretoken value=${document.getElementsByName('csrf-token')[0].content} />
+                                <button type='submit' class='list-controller-button text-light'>Move to plan List</button>
+                                </form>`))
+                            
+                                +
+                               `</li>` +
 
-                                <li>
-                                <form method="POST" action="http://${window.location.host}/finish/anime/${elem.id}">
-                                <input type="hidden" name=csrfmiddlewaretoken value=${document.getElementsByName('csrf-token')[0].content} />
-                                    <button type="submit" class="list-controller-button text-light">Move to completed list</button>
-                                </form>
-                                </li>
-
-
-
-                                <li>
+                                `<li>` +
+                                ((elem.status == "COMPLETED") ? '<h5 class="text-light text-center">You already completed this anime</h5>'
+                                 : `<form method='POST' action='http://${window.location.host}/finish/anime/${elem.id}'>
+                                 <input type='hidden' name=csrfmiddlewaretoken value=${document.getElementsByName('csrf-token')[0].content} />
+                                 <button type='submit' class='list-controller-button text-light'>Move to completed list</button>
+                                 </form>`)
+                                 +`</li>`+
+                                `<li>
                                 
                                 <form method="POST" action="http://${window.location.host}/drop/anime/${elem.id}">
                                 <input type="hidden" name=csrfmiddlewaretoken value=${document.getElementsByName('csrf-token')[0].content} />
@@ -189,19 +186,35 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
                             <ul class="edit-watchlist-menu">
 
-                                 <li>
-                                <form method="POST" action="http://${window.location.host}/plan/manga/${elem.id}" >
-                                <input type="hidden" name=csrfmiddlewaretoken value=${document.getElementsByName('csrf-token')[0].content} />
-                                <button type="submit" class="list-controller-button text-light">Move to plan to watch</button>
-                                </form>
-                                </li>
+                                 <li>` + 
+                                 ((elem.status == "READING") ? '<h5 class="text-light">You are already reading this</h5>' 
+                                 : `<form method='POST' action=http://${window.location.host}/addtolist/manga/${elem.id}>
+                                 <input type='hidden' name=csrfmiddlewaretoken value=${document.getElementsByName('csrf-token')[0].content} />
+                                 <button type='submit' class='list-controller-button text-light'>Add to currently reading</button>
+                                 </form>`)
+                            
+                                +
+                                '</li>'+
+                                '<li>'+
+                                ((elem.status == "PLAN TO READ") ? '<h5 class="text-light">Already in your plan list</h5>' 
+                                : 
+                                `<form method='POST' action='http://${window.location.host}/plan/manga/${elem.id}'>
+                                <input type='hidden' name=csrfmiddlewaretoken value=${document.getElementsByName('csrf-token')[0].content} />
+                                <button type='submit' class='list-controller-button text-light'>Move to plan to read</button>
+                                </form>`)
+                                +
+                                `</li>
+                                <li>` +
 
-                                <li>
-                                <form method="POST" action="http://${window.location.host}/finish/manga/${elem.id}">
-                                <input type="hidden" name=csrfmiddlewaretoken value=${document.getElementsByName('csrf-token')[0].content} />
-                                    <button type="submit" class="list-controller-button text-light">Move to completed list</button>
+                                ((elem.status == "COMPLETED") ? '<h5 class="text-light text-center">You already completed this manga</h5>'
+                                : `<form method='POST' action='http://${window.location.host}/finish/manga/${elem.id}'>
+                                <input type='hidden' name=csrfmiddlewaretoken value=${document.getElementsByName('csrf-token')[0].content} />
+                                <button type='submit' class="list-controller-button text-light">Move to completed list</button>
                                 </form>
-                                </li>   
+                                `)
+
+                                +
+                                `</li>   
 
                                 <li>
                                 <form method="POST" action="http://${window.location.host}/drop/manga/${elem.id}">

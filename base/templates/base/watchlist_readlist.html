@@ -123,7 +123,7 @@
 
                         {% elif 'readlist' in request.path %}
                         {% if lst.status.status_type == "COMPLETED" %}
-                        <h5 class="text-light">You already completed this manga</h5>
+                        <h5 class="text-light text-center">You already completed this manga</h5>
                         {% else %}
                         <form method="POST" action="{% url 'finish' 'manga' lst.manga.id %}">
                             {% csrf_token %}
