@@ -49,7 +49,7 @@
             
                 
             </a>
-            <button id="boot-icon" class="bi bi-three-dots-vertical list-controller" style="font-size: 2rem; color: rgb(255, 0, 0);">
+            <button id="boot-icon" class="bi bi-three-dots-vertical list-controller">
             </button>
             <div class="edit-watchlist-controller">
                 <!--- Menu -->
@@ -59,7 +59,7 @@
                         {% if 'watchlist' in request.path %}
 
                         {% if lst.status.status_type == "WATCHING"  %}
-                        <h5 class="text-light">You are currently watching this.</h5>
+                        <h5 class="text-light text-center list-controller-button">You are currently watching this.</h5>
 
                         {% else %}
                         <form method="POST" action="{% url 'addtolist' 'anime' lst.anime.id %}">
@@ -71,7 +71,7 @@
                         {% elif 'readlist' in request.path %}
 
                         {% if lst.status.status_type == "READING"  %}
-                        <h5 class="text-light">You are already reading this</h5>
+                        <h5 class="text-light text-center list-controller-button">You are already reading this</h5>
                         {% else %}
                         <form method="POST" action="{% url 'addtolist' 'manga' lst.manga.id %}">
                             {% csrf_token %}
@@ -87,7 +87,7 @@
                         {% if 'watchlist' in request.path %}
 
                         {% if lst.status.status_type == "PLAN TO WATCH"  %}
-                        <h5 class="text-light text-center">Already in your plan list</h5>
+                        <h5 class="text-light text-center list-controller-button">Already in your plan list</h5>
 
                         {% else %}
                         <form method="POST" action="{% url 'plan' 'anime' lst.anime.id %}">
@@ -99,7 +99,7 @@
                         {% elif 'readlist' in request.path %}
 
                         {% if lst.status.status_type == "PLAN TO READ"  %}
-                        <h5 class="text-light">Already in your plan list</h5>
+                        <h5 class="text-light text-center list-controller-button">Already in your plan list</h5>
                         {% else %}
                         <form method="POST" action="{% url 'plan' 'manga' lst.manga.id %}">
                             {% csrf_token %}
@@ -113,7 +113,7 @@
                         
                         {% if 'watchlist' in request.path %}
                         {% if lst.status.status_type == "COMPLETED" %}
-                        <h5 class="text-light text-center">You already completed this anime</h5>
+                        <h5 class="text-light text-center list-controller-button">You already completed this anime</h5>
                         {% else %}
                         <form method="POST" action="{% url 'finish' 'anime' lst.anime.id %}">
                             {% csrf_token %}
@@ -123,7 +123,7 @@
 
                         {% elif 'readlist' in request.path %}
                         {% if lst.status.status_type == "COMPLETED" %}
-                        <h5 class="text-light text-center">You already completed this manga</h5>
+                        <h5 class="text-light text-center list-controller-button">You already completed this manga</h5>
                         {% else %}
                         <form method="POST" action="{% url 'finish' 'manga' lst.manga.id %}">
                             {% csrf_token %}

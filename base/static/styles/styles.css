@@ -392,15 +392,31 @@ main {
 }
 
 .list-controller, .list-controller-close{
-  
+  font-size: 1.5em !important;
   position:absolute;
   top:0;
   right:0;
   z-index:10;
-  
+  color: #E2E6FF;  
   border-radius:50%;
-  background-color: black;
+  background-color: #171529;
   margin:15px 15px 0 0;
+}
+
+.edit-watchlist-menu{
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap:50px;
+  padding:10px;
+}
+
+.list-controller-button{
+  background-color: #171529;
+  padding:10px;
+  width:100%;
+  border-radius:30px;
 }
 
 .list-controller-close{
@@ -415,6 +431,7 @@ main {
 
 .personal-list:hover + .list-controller, .list-controller:hover{
   opacity: 1;
+
  }
 
 
@@ -455,14 +472,7 @@ main {
 
 
 
-.edit-watchlist-menu{
-  display:flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap:50px;
-  padding:0;
-}
+
 
 .profile-container{
   display:flex;
